@@ -26,13 +26,35 @@
       
         <section>
         <!-- any future site content goes here -->
-		<p><h1>Optimal Shore-based Agate Picking Areas of NE MN</h1></p>
-		<p>The Lake Superior Agate is a semiprecious gemstone and the state gemstone of Minnesota, characterized by red, orange, or yellow bands of jasper and chalcedony with variable coarse quartz crystals. While found throughout the Lake Superior basin, the Minnesota's North Shore is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?"
+		<h1>Optimal Shore-based Agate Picking Areas of NE MN</h1>
+		<p>The Lake Superior Agate is a semiprecious gemstone and the state gemstone of Minnesota, characterized by red, orange, or yellow bands of jasper and chalcedony with variable coarse quartz crystals. While found throughout the Lake Superior basin, the Minnesota's North Shore is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?"</p>
 		
-		The answer to their question is gravel pits, but that's not the answer they're looking for. This project aims to identify the best locations for agate hunting on the North Shore from a quantitative geologic viewpoint, taking into account hard data <!-- please make this better --></p>
+		<p>The answer to their question is gravel pits, but that's not the answer they're looking for. This project identifies the best locations for agate picking on the North Shore from a quantitative geologic viewpoint, taking into account hard data <!-- please make this better --></p>
+		
 		<p><h2>Data acquisition</h2></p>
-		<p>This project relied primarily on data created and hosted by the State of Minnesota, with lesser amounts from the Minnesota Geological Survey and private persons. </p>
-		quadrangles to 1m rasters: 
+		<p>This project relied primarily on data created and hosted by the State of Minnesota, with lesser amounts from the Minnesota Geological Survey (MGS) and third parties.</p>
+		
+		<p><h3>State data</h3></p>
+		<ul>
+		    <li><a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a></li>
+		    <li><a href="https://gisdata.mn.gov/dataset/water-lake-superior-basin">Lake Superior outline</a></li>
+			<li><a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image service</a></li>
+		    <li><a href="https://gisdata.mn.gov/dataset/trans-roads-mndot-tis">Roads</a></li>
+		    <li><a href="https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas">Scientific and Natural Areas (SNAs)</a></li>
+			<li><a href="https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk">State Parks</a></li>
+		</ul>
+		
+		<p><h3>MGS data</h3></p>
+		<ul>
+		    <li><a href="https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock">Bedrock quadrangles</a></li>
+		</ul>
+		
+		<p><h3>Third party data</h3></p>
+		<ul>
+		    <li><a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation border</a></li>
+		</ul>
+		
+		<!--quadrangles to 1m rasters: 
 		e00 to coverage
 		coverage to feature class
 		polygon to raster, using maplabel as the field, maximum_area, cellsize = 1</p>
@@ -45,7 +67,7 @@
         Digital Elevation Models - ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/<br/>
         Bedrock quadrangles - https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock - of 16 quadrangles downloaded, 3 had modern GIS layers (shapefiles), 11 had legacy GIS layers (e00) (7 requiring conversion from interchange to coverage), and the rest have scanned PDFs (650 DPI based on https://gis.stackexchange.com/a/41464, 1000 DPI caused issues with sections not being converted, rgb palette, no compression) silver bay control points "colinear"<br/>
         Grand Portage reservation boundary - http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg - georeferenced image based on the points in gp_georef_points.txt and traced the res/mn border when creating a polygon. attempted to follow the hash marks in the middle of the reservation boundary<br/>
-        Minnesota Composite Image service - http://www.mngeo.state.mn.us/chouse/wms/composite_image.html<br/></small>
+        Minnesota Composite Image service - http://www.mngeo.state.mn.us/chouse/wms/composite_image.html<br/></small>-->
         </section>
       
         <footer>
