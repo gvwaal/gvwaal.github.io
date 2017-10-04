@@ -26,40 +26,43 @@
       
         <section>
         <!-- any future site content goes here -->
-		<h1>Optimal Shore-based Agate Picking Areas of NE MN</h1>
-		<p>The Lake Superior Agate is a semiprecious gemstone and the state gemstone of Minnesota, characterized by red, orange, or yellow bands of jasper and chalcedony with variable coarse quartz crystals. While found throughout the Lake Superior basin, the Minnesota's North Shore is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?"</p>
-		
-		<p>The answer to their question is gravel pits, but that's not the answer they're looking for. This project identifies the best locations for agate picking on the North Shore from a quantitative geologic viewpoint, taking into account hard data <!-- please make this better --></p>
-		
-		<p><h2>Data acquisition</h2></p>
-		<p>This project relied primarily on data created and hosted by the State of Minnesota, with lesser amounts from the Minnesota Geological Survey (MGS) and third parties.</p>
-		
-		<p><h3>State data</h3></p>
-		<ul>
-		    <li><a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a></li>
-		    <li><a href="https://gisdata.mn.gov/dataset/water-lake-superior-basin">Lake Superior outline</a></li>
-			<li><a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image service</a></li>
-		    <li><a href="https://gisdata.mn.gov/dataset/trans-roads-mndot-tis">Roads</a></li>
-		    <li><a href="https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas">Scientific and Natural Areas (SNAs)</a></li>
-			<li><a href="https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk">State Parks</a></li>
-		</ul>
-		
-		<p><h3>MGS data</h3></p>
-		<ul>
-		    <li><a href="https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock">Bedrock quadrangles</a></li>
-		</ul>
-		
-		<p><h3>Third party data</h3></p>
-		<ul>
-		    <li><a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation border</a></li>
-		</ul>
-		
-		<!--quadrangles to 1m rasters: 
-		e00 to coverage
-		coverage to feature class
-		polygon to raster, using maplabel as the field, maximum_area, cellsize = 1</p>
-		
-		<p>Data used:</p>
+        <h1>Optimal Shore-based Agate Picking Areas of NE MN</h1>
+        <p>The Lake Superior Agate is a semiprecious gemstone and the state gemstone of Minnesota, characterized by red, orange, or yellow bands of jasper and chalcedony with variable coarse quartz crystals. While found throughout the Lake Superior basin, the Minnesota's North Shore (NS) is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?"</p>
+        
+        <p>The answer to their question is gravel pits, but that's not the answer they're looking for. This project identifies the best locations for agate picking on the North Shore from a quantitative geologic viewpoint, taking into account hard data <!-- please make this better --></p>
+        
+        <p><h2>Data acquisition</h2></p>
+        <p>This project relied primarily on data created and hosted by the State of Minnesota, with lesser amounts from the Minnesota Geological Survey (MGS) and third parties.</p>
+        
+        <p><h3>State data</h3></p>
+        <ul>
+            <li><a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a></li>
+            <li><a href="https://gisdata.mn.gov/dataset/water-lake-superior-basin">Lake Superior outline</a></li>
+            <li><a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image service</a></li>
+            <li><a href="https://gisdata.mn.gov/dataset/trans-roads-mndot-tis">Roads</a></li>
+            <li><a href="https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas">Scientific and Natural Areas (SNAs)</a></li>
+            <li><a href="https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk">State Parks</a></li>
+        </ul>
+        
+        <p><h3>MGS data</h3></p>
+        <ul>
+            <li><a href="https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock">Bedrock quadrangles</a></li>
+        </ul>
+        
+        <p><h3>Third party data</h3></p>
+        <ul>
+            <li><a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation border</a></li>
+        </ul>
+        
+		<p><h2>Processing</h2></p>
+		<p><h3>DEMs</h3></p>
+		<p>A <a href="https://github.com/gvwaal/misc-scripts/blob/master/dem_fetch.py">Python script</a> was created to automatically fetch the roughly 180 DEMs needed to cover the NS. While the Minnesota Department of Natural Resources (MnDNR)'s <a href="http://www.dnr.state.mn.us/maps/mntopo/index.html">MnTOPO application</a> allows the user to download elevation data clipped from a user-created polygon, I found that drawing a single non-overlapping polygon at sufficient scale covering the entire NS was too time consuming.</p>
+        <!--quadrangles to 1m rasters: 
+        e00 to coverage
+        coverage to feature class
+        polygon to raster, using maplabel as the field, maximum_area, cellsize = 1</p>
+        
+        <p>Data used:</p>
         <small>Scientific and Natural Areas - https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas<br/>
         State Parks - https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk<br/>
         Roads - https://gisdata.mn.gov/dataset/trans-roads-mndot-tis<br/>
