@@ -1,11 +1,14 @@
 <!doctype html>
 <html>
     <head>
+		<html lang="en-US">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="description" content="Gerrit VanderWaal: Geology, GIS, Python, cooking, sushi.">
         <title>Optimal Shore-based Agate Picking Areas of NE MN</title>
 
-        <link rel="stylesheet" href="/assets/css/style.css?v=">
+        <link rel="stylesheet" href="assets/css/style.css?v=">
+		<link rel="icon" type="image/x-icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width">
         <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,27 +30,32 @@
         <section>
         <!-- any future site content goes here -->
         <h1>Optimal Shore-based Agate Picking Areas of NE MN</h1>
-        <p>The Lake Superior Agate is a semiprecious gemstone and the state gemstone of Minnesota, characterized by red, orange, or yellow bands of jasper and chalcedony with variable coarse quartz crystals. While found throughout the Lake Superior basin, the Minnesota's North Shore (NS) is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?"</p>
+        <p>The Lake Superior Agate is a semiprecious gemstone and the state gemstone of Minnesota, characterized by red, orange, or yellow bands of jasper and chalcedony
+		with variable coarse quartz crystals. While found throughout the Lake Superior basin, the Minnesota's North Shore (NS) is a frequent destination for those in
+		search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look
+		for agates?"</p>
         
-        <p>The answer to their question is gravel pits, but that's not the answer they're looking for. This project identifies the best locations for agate picking on the North Shore from a quantitative viewpoint using ArcMap 10.4 and its Spatial Analyst license. <!-- please make this better --></p>
+        <p>The answer to their question is gravel pits, but these often do not make for the most scenic destinations. This project identifies the best locations for
+		agate picking on the North Shore from a quantitative viewpoint, using ArcMap 10.4 and its Spatial Analyst license to do a bunch of <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a> math. <!-- please make this better --></p>
         
         <h2>Data acquisition</h2>
-        <p>This project relied primarily on data created and hosted by the State of Minnesota and the Minnesota Geological Survey (MGS), with a small contribution from third parties.</p>
+        <p>This project relied primarily on data created and hosted by the State of Minnesota and the Minnesota Geological Survey (MGS), with a small contribution
+		from third parties.</p>
         
 		<!-- <summary>/<detail> toggle: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details -->
         <details>
 			<summary>State data</summary>
-			<a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a><br>
-			<a href="https://gisdata.mn.gov/dataset/water-lake-superior-basin">Lake Superior outline</a><br>
-			<a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image service</a><br>
-			<a href="https://gisdata.mn.gov/dataset/trans-roads-mndot-tis">Roads</a><br>
-			<a href="https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas">Scientific and Natural Areas (SNAs)</a><br>
-			<a href="https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk">State Parks</a><br>
+			<a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a><br> - slope
+			<a href="https://gisdata.mn.gov/dataset/water-lake-superior-basin">Lake Superior outline</a><br> - proximity to shoreline
+			<a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image Service (MCIS)</a><br> - reference for georeferencing
+			<a href="https://gisdata.mn.gov/dataset/trans-roads-mndot-tis">Roads</a><br> - proximity to roads
+			<a href="https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas">Scientific and Natural Areas (SNAs)</a><br> - prohibited areas
+			<a href="https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk">State Parks</a><br> - prohibited areas
         </details>
 		
 		<details>
 			<summary>MGS data</summary>
-			<h4>Bedrock quadrangles</h4>
+			<h4>Bedrock quadrangles</h4> - agate host rock restriction
 			<a href="http://hdl.handle.net/11299/60004">M-065: Silver Bay and Split Rock Point NE</a><br>
 			<a href="http://hdl.handle.net/11299/60005">M-066: Illgen City</a><br>
 			<a href="http://hdl.handle.net/11299/712">M-128: French River and Lakewood</a><br>
@@ -68,28 +76,52 @@
 		
 		<details>
 			<summary>Third party data</summary>
-			<a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation border</a><br>
+			<a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation (GPR ) border</a><br> - prohibited areas
 		</details>
         
-		<h2>Processing</h2>
+		<h2>Processing</h2> <!--make sure python commands are syntactically correct-->
 		<h3>DEMs</h3>
-		<p>A <a href="https://github.com/gvwaal/misc-scripts/blob/master/dem_fetch.py">Python script</a> was created to automatically fetch the roughly 180 DEM tiles needed to cover the NS. While the Minnesota Department of Natural Resources (MnDNR)'s <a href="http://www.dnr.state.mn.us/maps/mntopo/index.html">MnTOPO application</a> allows the user to download elevation data clipped from a user-created polygon, I found that drawing a single non-overlapping polygon at sufficient scale covering the entire NS was too time consuming.</p>
+		<p>A <a href="https://github.com/gvwaal/misc-scripts/blob/master/dem_fetch.py">Python script</a> was created to automatically fetch the roughly 180
+		DEM tiles needed to cover the NS. While the Minnesota Department of Natural Resources (MnDNR)'s <a href="http://www.dnr.state.mn.us/maps/mntopo/index.html">MnTOPO application</a> allows the user to download elevation data clipped from a user-created polygon, I found that drawing a single non-overlapping polygon
+		at sufficient scale covering the entire NS was too time consuming.</p>
 		
-		<p>The tiles were then mosaiced together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a>, also to save some time.</p>
+		<p>The tiles were then mosaiced together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a> to save time. A slope raster was created from this data using the Slope tool <!-- -->, and the result was converted from a floating point raster to an integer
+		raster using the Raster Calculator tool <!--RasterCalculator (Int("slope_rast" + 0.5,"slope_rast",), "slope_rast_int"-->. The Reclassify tool was used
+		to change the cell values to desired weights (note: this can also be done in the Weighted Overlay tool).</p>
+		
+		<h3>Lake Superior outline</h3>
+		<p>The Euclidean Distance tool provides an easy way to get a "raster Buffer" to assess proximity to shoreline. Unfortunately, this layer was deemed
+		unsuitable due to low resolution. <!--image to illustrate--></p>
+		
+		<p>A higher resolution shore line was created by using the Con tool to divide the slope raster into two values: 0 and all cells not 0 <!--RasterCalculator (Con("slope_rast" > 0,1,0), "LS_shore_rast")-->. The product raster was converted into a polygon <!--RasterToPolygon_conversion("slope_float",
+		"LS_shore_poly", "SIMPLIFY", "VALUE")--> and all polygons not the Lake Superior shore line were deleted using the Editor toolbar. Euclidean
+		Distance <!--EucDistance ("LS_shore_poly", 100, 1, "LS_shore_euc")--> was used to create cells whose values denoted distance from the polygon, Reclassified
+		to desired weights, and converted to an integer raster.<p><!--make sure this paragraph is logically consistent-->
+		
+		<h3>Roads</h3>
+		<p>The downloaded data was clipped to an area roughly the size of the NS . euc dist.
+		
+		<h3>SNAs<h3>
+		<p>The downloaded shapefile was converted into a raster<!--PolygonToRaster_conversion ("SNAs_shp", "<field with value shared by all polygons, e.g. "MN">", "SNAs_rast", "MAXIMUM_AREA", , 1)--> for use in the Weighted Overlay tool.</p>
+		
+		<h3>State parks</h3>
+		<p>Processing similar to SNAs<!--PolygonToRaster_conversion ("SPs_shp", "<field with value shared by all polygons, e.g. "MN">", "SPs_rast", "MAXIMUM_AREA", , 1)-->.</p>
+		
+		
+		
+		
+		
+		<h3>GPR border</h3>
+		<p>It was a surprising challenge to find open, recently created GIS data for the GPR (or any reservation, for that matter). I was expecting to find something on the Minnesota Geospatial Commons (MGC), a different state government website, or even the GPR website, but I had to settle for an image of a map created in 2012 by Andrew Munsch of deadpioneer.com.</p>
+		
+		<p>The image was georeferenced using MCIS as a reference. Seven <a href="assets/gis/agates/gpr_points.txt">control points</a> were used with the 1st Order Polynomial (Affine) transformation. For the portion of the reservation that consisted of the state border, a state outline was found on MGS and was traced with the Editor toolbar. The portion of the reservation within Cook County was traced using the georeferenced map as a reference.</p>
         <!--quadrangles to 1m rasters: 
         e00 to coverage
         coverage to feature class
         polygon to raster, using maplabel as the field, maximum_area, cellsize = 1</p>
         
         <p>Data used:</p>
-        <small>Scientific and Natural Areas - https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas<br/>
-        State Parks - https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk<br/>
-        Roads - https://gisdata.mn.gov/dataset/trans-roads-mndot-tis<br/>
-        Lake Superior - https://gisdata.mn.gov/dataset/water-lake-superior-basin<br/>
-        Digital Elevation Models - ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/<br/>
-        Bedrock quadrangles - https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock - of 16 quadrangles downloaded, 3 had modern GIS layers (shapefiles), 11 had legacy GIS layers (e00) (7 requiring conversion from interchange to coverage), and the rest have scanned PDFs (650 DPI based on https://gis.stackexchange.com/a/41464, 1000 DPI caused issues with sections not being converted, rgb palette, no compression) silver bay control points "colinear"<br/>
-        Grand Portage reservation boundary - http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg - georeferenced image based on the points in gp_georef_points.txt and traced the res/mn border when creating a polygon. attempted to follow the hash marks in the middle of the reservation boundary<br/>
-        Minnesota Composite Image service - http://www.mngeo.state.mn.us/chouse/wms/composite_image.html<br/></small>-->
+        Bedrock quadrangles - https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock - of 16 quadrangles downloaded, 3 had modern GIS layers (shapefiles), 11 had legacy GIS layers (e00) (7 requiring conversion from interchange to coverage), and the rest have scanned PDFs (650 DPI based on https://gis.stackexchange.com/a/41464, 1000 DPI caused issues with sections not being converted, rgb palette, no compression) silver bay control points "colinear"<br/>-->
         </section>
       
         <footer>
