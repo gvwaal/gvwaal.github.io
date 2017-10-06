@@ -19,7 +19,7 @@
     <div class="wrapper">
         <header>
             <h1><a href="http://vwaal.com" style="color:#222;">Gerrit VanderWaal</a></h1>
-            <p>I'm a recent graduate with background in economic geology and GIS, with a strong interest in Python and different web mapping technologies.</p>
+            <p>I'm a recent graduate with background in economic geology and GIS, with a strong interest in Python and web mapping technologies.</p>
             <p>In my free time I enjoy reading about mining and economic geology, biking, and making locations accessible via Google Maps' Photo Sphere feature.</p>
             <a href="mailto:gerrit.vwaal@gmail.com">email</a><br>
             <a href="https://www.linkedin.com/in/gvwaal">linkedin</a><br>
@@ -95,9 +95,9 @@
 		<p>A higher resolution shore line was created by using the Con tool to divide the slope raster into two values: 0 and not 0 <!--RasterCalculator (Con("slope_rast" > 0,1,0), "LS_shore_rast")-->. The product raster was converted into a polygon <!--RasterToPolygon_conversion("slope_float",
 		"LS_shore_poly", "SIMPLIFY", "VALUE")--> and all polygons not the Lake Superior shore line were deleted using the Editor toolbar. Euclidean
 		Distance <!--EucDistance ("LS_shore_poly", 100, 1, "LS_shore_euc")--> was used to create cells whose values denoted distance from the polygon, Reclassified
-		to desired weights, and converted to an integer raster.<p><!--make sure this paragraph is logically consistent-->
+		to desired weights, and converted to an integer raster.</p><!--make sure this paragraph is logically consistent-->
 		
-		<h3>SNAs<h3>
+		<h3>SNAs</h3>
 		<p>The downloaded shapefile was converted into a raster<!--PolygonToRaster_conversion ("SNAs_shp", "<field with value shared by all polygons, e.g. "MN">", "SNAs_rast", "MAXIMUM_AREA", , 1)--> for use in the Weighted Overlay tool.</p>
 		
 		<h3>State parks</h3>
@@ -108,23 +108,21 @@
 		
 		<p>The bedrock feature classes were converted to rasters using Polygon to Raster<!--PolygonToRaster_conversion ("bedrock_fc", "<geologic unit code on map>", "bedrock_rast", , , 1)-->. A field was added as a means of weighting to denote whether the rock was suitable as an agate host, following information from <!-- find that thesis from gustavus(?)-->.</p>
 		
-		<p>The map .tif were georeferenced using the MCIs with </p>
+		<p>The map .tif were georeferenced using the MCIs with </p><!--finish if you can figure out how to re-rasterize them-->
 		
 		<h3>GPR border</h3>
 		<p>It was surprisingly challenging to find open, recently created GIS data for the GPR (or any reservation, for that matter). I was expecting to find something on the Minnesota Geospatial Commons (MGC), a different state government website, or even the GPR website, but I had to settle for an image of a map created in 2012 by Andrew Munsch of deadpioneer.com.</p>
 		
 		<p>The image was georeferenced using MCIS as a reference. Seven <a href="assets/gis/agates/gpr_points.txt">control points</a> were used with the 1st Order Polynomial (Affine) transformation. For the portion of the reservation that consisted of the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation within Cook County was traced using the georeferenced map as a reference.</p>
-        <!--quadrangles to 1m rasters: 
-        polygon to raster, using maplabel as the field, maximum_area, cellsize = 1</p>
-        
-        <p>Data used:</p>
-        Bedrock quadrangles - https://conservancy.umn.edu/handle/11299/708/discover?query=m-&filter=bedrock - of 16 quadrangles downloaded, 3 had modern GIS layers (shapefiles), 11 had legacy GIS layers (e00) (7 requiring conversion from interchange to coverage), and the rest have scanned PDFs (650 DPI based on https://gis.stackexchange.com/a/41464, 1000 DPI caused issues with sections not being converted, rgb palette, no compression) silver bay control points "colinear"<br/>-->
-        </section>
 
 		<h2>Products</h2>
+
+        </section>
+
         <footer>
         <p><small>Theme from <a href="https://github.com/orderedlist/minimal">Minimal</a></small></p>
         </footer>
+		
     </div>
     <script src="/assets/js/scale.fix.js"></script>
     </body>
