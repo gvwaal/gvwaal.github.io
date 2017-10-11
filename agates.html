@@ -29,11 +29,19 @@
       
         <section>
         <!-- any future site content goes here -->
-        <h1>Optimal Shore-based Agate Picking Areas of Minnesota's North Shore</h1>
+        <h1 id="top">Optimal Shore-based Agate Picking Areas of Minnesota's North Shore</h1>
         
         <ol>
             <li><a href="#background">Background</a></li>
             <li><a href="#processing">Processing</a></li>
+            <ol>
+                <li><a href="#proc_dems">DEMs</a></li>
+                <li><a href="#proc_outline">Lake Superior outline</a></li>
+                <li><a href="#proc_snas">SNAs</a></li>
+                <li><a href="#proc_parks">State parks</a></li>
+                <li><a href="#proc_bedrock">Bedrock quadrangles</a></li>
+                <li><a href="#proc_gpr">GPR</a></li>
+            </ol>
             <li><a href="#data">Data used</a></li>
             <li><a href="#results">Results</a></li>
         </ol>
@@ -105,7 +113,7 @@
         </p>
         
         <h2 id="processing">Processing</h2> <!--make sure python commands are syntactically correct-->
-        <h3>DEMs</h3>
+        <h3 id="proc_dems">DEMs</h3>
         <p>
             A <a href="https://github.com/gvwaal/misc-scripts/blob/master/dem_fetch.py">Python script</a> was created
             to quickly download around 180 1-meter DEM tiles needed to cover the NS. While the Minnesota Department of
@@ -122,7 +130,7 @@
             the Weighted Overlay tool).
         </p>
         
-        <h3>Lake Superior outline</h3>
+        <h3 id="proc_outline">Lake Superior outline</h3>
         <p>
             The Euclidean Distance tool provides an easy way to get a "raster Buffer" to assess proximity to shoreline.
             Unfortunately, this layer was deemed unsuitable due to low resolution. <!--image to illustrate-->
@@ -138,17 +146,19 @@
             and converted to an integer raster.
         </p><!--make sure this paragraph is logically consistent-->
         
-        <h3>SNAs</h3>
+        <h3 id="proc_snas">SNAs</h3>
         <p>
-            The downloaded shapefile was converted into a raster<!--PolygonToRaster_conversion ("SNAs_shp", "<field with value shared by all polygons, e.g. "MN">", "SNAs_rast", "MAXIMUM_AREA", , 1)--> for use in the Weighted Overlay tool.
+            The downloaded shapefile was edited to remove all SNAs with portions of the NS within them. The remaining
+            polygons were rasterized <!--PolygonToRaster_conversion ("SNAs_shp", "<field with value shared by all 
+            polygons, e.g. "MN">", "SNAs_rast", "MAXIMUM_AREA", , 1)--> for use in the Weighted Overlay tool.
         </p>
         
-        <h3>State parks</h3>
+        <h3 id="proc_parks">State parks</h3>
         <p>
             Processing similar to SNAs<!--PolygonToRaster_conversion ("SPs_shp", "<field with value shared by all polygons, e.g. "MN">", "SPs_rast", "MAXIMUM_AREA", , 1)-->.
         </p>
         
-        <h3>Bedrock quadrangles</h3>
+        <h3 id="proc_bedrock">Bedrock quadrangles</h3>
         <p>
             Of the 16 quadrangles gathered for use in this project, 11 were in legacy GIS formats (seven of which
             required <a href="http://support.esri.com/en/technical-article/000004705">conversion</a> from ArcInfo Interchange
@@ -161,12 +171,12 @@
         
         <p>The map .tif were georeferenced using the MCIS with </p><!--finish if you can figure out how to re-rasterize them-->
         
-        <h3>GPR border</h3>
+        <h3 id="proc_gpr">GPR border</h3>
         <p>
             It was surprisingly challenging to find open, recently created GIS data for the GPR (or any reservation, for
             that matter). I was expecting to find something on the Minnesota Geospatial Commons (MGC), a different state
             government website, or even the GPR website, but I had to settle for an image of a map created in 2012 by
-            Andrew Munsch of deadpioneer.com.
+            Andrew Munsch of deadpioneer.com. Google Maps has a similar border on their map.
         </p>
         
         <!-- <p>The image was georeferenced using MCIS as a reference. Seven <a href="assets/gis/agates/gpr_points.txt">control points</a> were used with the 1st Order Polynomial (Affine) transformation. For the portion of the reservation that consisted of the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation within Cook County was traced using the georeferenced map as a reference.</p> -->
