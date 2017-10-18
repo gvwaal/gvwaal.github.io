@@ -101,7 +101,7 @@ th {
 }
 
 img {
-  max-width:100%;
+  max-width:60%;
 }
 
 header {
@@ -193,6 +193,11 @@ footer {
   position:fixed;
   bottom:50px;
   -webkit-font-smoothing:subpixel-antialiased;
+}
+
+figure {
+  display: block;
+  margin: auto;
 }
 
 @media print, screen and (max-width: 960px) {
