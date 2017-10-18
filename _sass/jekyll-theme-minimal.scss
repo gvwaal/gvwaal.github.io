@@ -197,7 +197,15 @@ footer {
 
 figure {
   display: block;
+}
+
+figure img {
+  vertical-align: top;
   margin: auto;
+}
+
+figure figcaption {
+  text-align: center;
 }
 
 @media print, screen and (max-width: 960px) {
