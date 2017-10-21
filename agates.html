@@ -1,6 +1,16 @@
 <!doctype html>
 <html>
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108391082-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-108391082-1');
+        </script>
+
         <html lang="en-US">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -50,12 +60,12 @@
         
         <h2 id="background">Background</h2>
         <p>
-            The Lake Superior agate is a semiprecious gemstone characterized by red, orange, yellow, white or translucent bands of chalcedony with variable amounts of coarse-grained quartz crystals. Around 1.1 billion years ago, flood basalts associated with the Midcontinent Rift quickly erupted forming vesicles in the lava. As time passed, siliceous fluids percolated through the rock, filling the vesicles with the concentric bands of chalcedony. Over time the weathering-resistant agates were released from their host rock and distributed throughout the Lake Superior basin. Beaster (2005) provides a good <a href="https://www.carleton.edu/departments/geol/resources/comps/compspdffiles/2005/beaster2005.pdf">summary</a> of these gems.
+            The Lake Superior agate is a semiprecious gemstone characterized by red, orange, yellow, white or translucent bands of chalcedony with variable amounts of coarse-grained quartz crystals. Around 1.1 billion years ago, flood basalts associated with the Midcontinent Rift quickly erupted forming vesicles in the lava. As time passed, siliceous fluids percolated through the rock, filling the vesicles with the concentric bands of chalcedony. Over time the weathering-resistant agates were released from their host rock and distributed throughout the Lake Superior basin. <a href="https://web.archive.org/web/20171021190641/https://www.carleton.edu/departments/geol/resources/comps/compspdffiles/2005/beaster2005.pdf">Beaster (2005)</a> provides a good summary of these gems.
         </p>
         
         <figure>
-            <img src="assets/images/agates.jpg" alt="A variety of Lake Superior agates. Samples with and without coarse-grained quartz present."><br>
-            <figcaption><small>A variety of Lake Superior agates, <a href="https://www.flickr.com/photos/43021860@N00/34182938466/">by Tim</a>.</small></figcaption>
+            <img src="assets/images/agates.jpg" alt="A variety of Lake Superior agate specimens. Samples with and without coarse-grained quartz present."><br>
+            <figcaption><small>A variety of Lake Superior agate specimens, <a href="https://www.flickr.com/photos/43021860@N00/34182938466/">by Tim</a>.</small></figcaption>
         </figure>
         
         <p>
@@ -102,9 +112,10 @@
             
             <p>
                 The tiles were then merged together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a>
-                to save time. A slope raster was created from this data using the Slope tool <!-- -->, and the result was converted
-                from a floating point raster to an integer raster using the Raster Calculator tool <!--RasterCalculator (Int("slope_rast" + 0.5,"slope_rast",), "slope_rast_int"-->.
-                The Reclassify tool was used to change the cell values to desired weights (note: this can also be done in
+                to save time. A slope raster was created from this data using the <code title="Slope(&quot;dem_1m_mn&quot;, &quot;DEGREE&quot;,)">Slope</code> tool and the result was converted from a floating point raster to an integer raster using the <code title="RasterCalculator (Int(&quot;slope_rast&quot; + 0.5,&quot;slope_rast&quot;,), &quot;slope_rast_int&quot;)">Raster Calculator</code> tool.
+                The Reclassify <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
+# The following inputs are layers or table views: "weighted raster components\slope_1m_int"
+arcpy.gp.Reclassify_sa("weighted raster components\slope_1m_int", "Value", "0 10 3;10 20 6;20 30 9;30 40 9;40 50 6;50 60 1;60 70 1;70 80 1;80 90 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/slope_reclass_final", "DATA")-->tool was used to change the cell values to desired weights (note: this can also be done in
                 the Weighted Overlay tool).
             </p>
             
@@ -120,15 +131,16 @@
                 raster was converted into a polygon <!--RasterToPolygon_conversion("slope_float",
                 "LS_shore_poly", "SIMPLIFY", "VALUE")--> and all polygons not the Lake Superior shoreline were deleted
                 using the Editor toolbar. Euclidean Distance <!--EucDistance ("LS_shore_poly", 100, 1, "LS_shore_euc")-->
-                was used to create cells whose values denoted distance from the polygon, Reclassified to desired weights,
+                was used to create cells whose values denoted distance from the polygon, Reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
+# The following inputs are layers or table views: "weighted raster components\Buffers\LS_border_rast_int"
+arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", "Value", "0 1 9;1 5 8;5 10 6;10 25 4;25 50 2;50 100 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass", "DATA")-->to desired weights,
                 and converted to an integer raster.
             </p><!--make sure this paragraph is logically consistent-->
             
             <h3 id="proc_snas">Scientific and Natural Areas</h3>
             <p>
-                The downloaded shapefile was edited to remove all SNAs with portions of the NS within them. The remaining
-                polygons were rasterized <!--PolygonToRaster_conversion ("SNAs_shp", "<field with value shared by all 
-                polygons, e.g. "MN">", "SNAs_rast", "MAXIMUM_AREA", , 1)--> for use in the Weighted Overlay tool.
+                The Scientific and Natural Areas that had some portion of the NS within their borders were exported to a new feature class. <code title="PolygonToRaster_conversion (&quot;SNAs_shp&quot;, &quot;&lt;field with value shared by all polygons, e.g. 'MN'&gt;&quot;, &quot;SNAs_rast&quot;, &quot;MAXIMUM_AREA&quot;, ,1)">Polygon to Raster</code> was then used to convert these areas to rasters for use in the Weighted Overlay tool. The remaining
+                polygons were rasterized for use in the Weighted Overlay tool.
             </p>
             
             <h3 id="proc_parks">State parks</h3>
@@ -138,7 +150,9 @@
             
             <h3 id="proc_roads">Roads</h3>
             <p>
-                Euclidean Distance was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and reclassified for use in Weighted Overlay.
+                Euclidean Distance was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
+# The following inputs are layers or table views: "Road_dist_int_16bit"
+arcpy.gp.Reclassify_sa("Road_dist_int_16bit", "Value", "0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks", "DATA")-->for use in Weighted Overlay.
             </p>
             
             <h3 id="proc_gpr">Grand Portage Reservation border</h3>

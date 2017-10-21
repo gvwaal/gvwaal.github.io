@@ -200,8 +200,8 @@ figure {
 }
 
 figure img {
-  vertical-align: top;
-  margin: auto;
+  position: relative;
+  left: 150px;
 }
 
 figure figcaption {
