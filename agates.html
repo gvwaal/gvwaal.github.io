@@ -28,7 +28,7 @@
     <body>
     <div class="wrapper">
         <header>
-            <h1><a href="http://vwaal.com" style="color:#222;">Gerrit VanderWaal</a></h1>
+            <h1><a href="/" style="color:#222;">Gerrit VanderWaal</a></h1>
             <p>I'm a recent graduate with background in economic geology and GIS, with a strong interest in Python and web mapping technologies.</p>
             <p>In my free time I enjoy reading about mining and economic geology, biking, and making locations accessible via Google Maps' Photo Sphere feature.</p>
             <a href="mailto:gerrit.vwaal@gmail.com">email</a><br>
@@ -51,21 +51,22 @@
                 <li><a href="#proc_snas">Scientific and Natural Areas</a></li>
                 <li><a href="#proc_parks">State parks</a></li>
                 <li><a href="#proc_roads">Roads</a></li>
-                <li><a href="#proc_gpr">Grand Portage Reservation border</a></li>
+                <li><a href="#proc_gpr">Grand Portage Reservation</a></li>
             </ul>
             <li><a href="#assumptions">Assumptions</a>
             <li><a href="#results">Results</a></li>
+            <li><a href="#groundtruthing">Groundtruthing</a><li>
             <li><a href="#data">Data sources</a></li>
         </ol>
         
         <h2 id="background">Background</h2>
         <p>
-            The Lake Superior agate is a semiprecious gemstone characterized by red, orange, yellow, white or translucent bands of chalcedony with variable amounts of coarse-grained quartz crystals. Around 1.1 billion years ago, flood basalts associated with the Midcontinent Rift quickly erupted forming vesicles in the lava. As time passed, siliceous fluids percolated through the rock, filling the vesicles with the concentric bands of chalcedony. Over time the weathering-resistant agates were released from their host rock and distributed throughout the Lake Superior basin. <a href="https://web.archive.org/web/20171021190641/https://www.carleton.edu/departments/geol/resources/comps/compspdffiles/2005/beaster2005.pdf">Beaster (2005)</a> provides a good summary of these gems.
+            The Lake Superior agate is a semiprecious gemstone characterized by red, orange, yellow, white or translucent bands of chalcedony with variable amounts of coarse-grained quartz crystals. Around 1.1 billion years ago, flood basalts associated with the Midcontinent Rift quickly erupted forming vesicles in the lava. As time passed, siliceous fluids percolated through the rock, filling the vesicles with the concentric bands of chalcedony. Over time the weathering-resistant agates were released from their host rock and distributed throughout the Lake Superior basin. <a href="https://web.archive.org/web/20171021190641/https://www.carleton.edu/departments/geol/resources/comps/compspdffiles/2005/beaster2005.pdf">Beaster (2005)</a> provides a good summary of these stones.
         </p>
         
         <figure>
             <img src="assets/images/agates.jpg" alt="A variety of Lake Superior agate specimens. Samples with and without coarse-grained quartz present."><br>
-            <figcaption><small>A variety of Lake Superior agate specimens, <a href="https://www.flickr.com/photos/43021860@N00/34182938466/">by Tim</a>.</small></figcaption>
+            <figcaption><small>A variety of Lake Superior agate specimens, by <a href="https://www.flickr.com/photos/43021860@N00/34182938466/">Tim</a>.</small></figcaption>
         </figure>
         
         <p>
@@ -74,10 +75,14 @@
             data. <!-- please make this better -->
         </p>
         
+        <p>
+            <code>Monospaced words</code> indicate tools utilized in ArcMap; Python snippets can be viewed by hovering over them.
+        </p>
+                
         <h2 id="assumptions">Assumptions</h2>
         <p>
             <ol>
-                <li>Beach formation, and therefore agate deposition, will occur on low-angle slopes, such as 30(find degree symbol at some point) and below. slopes of repose indicate angle of at least 30 for gravel</li>
+                <li>Beach formation, and therefore agate deposition, will occur on low-angle slopes, such as 30° and below. slopes of repose indicate angle of at least 30 for gravel</li>
                 <li>The most agates will be located closest to the lake (within 10m), since only the strongest (and therefore least common) wave action will be able to move agates inland.</li>
                 <li>The locations with the most agates will be those least visited by humans, and therefore most distant from roads.</li>
             </ol>
@@ -86,20 +91,19 @@
         <h2 id="processing">Processing</h2> <!--make sure python commands are syntactically correct-->
             <h3 id="proc_bedrock">Bedrock quadrangles</h3>
             <p>
-                Of the 16 quadrangles gathered for use in this project, 11 were in legacy GIS formats (seven of which
+                Of the 17 quadrangles gathered for use in this project, 11 were in legacy GIS formats (seven of which
                 required <a href="http://support.esri.com/en/technical-article/000004705">conversion</a> from ArcInfo Interchange
-                to a coverage), three had modern GIS formats, and two were scanned PDFs converted to .tif for use in ArcMap
-                <!--PDFToTIFF_conversion ("map_pdf", "map_tif", , , , , 650, "RGP_PALETTE", "NONE", )-->. All files were
+                to a coverage), three had modern GIS formats, and three were scanned PDFs <code title="PDFToTIFF_conversion (&quot;map_pdf&quot;, &quot;map_tif&quot;, , , , , 650, &quot;RGB_TRUE_COLOR&quot;, &quot;NONE&quot;, )">converted</code> to .tif for use in ArcMap. All files were
                 imported into a geodatabase to ensure compatability (coverages do not work with Polygon to Raster).
             </p>
             
             <p>
-                The bedrock feature classes were converted to rasters using <code title="PolygonToRaster_conversion (&quot;bedrock_fc&quot;, &quot;<geologic unit code on map>&quot;, &quot;bedrock_rast&quot;, , , 1)">Polygon to Raster</code><!--PolygonToRaster_conversion ("bedrock_fc", "<geologic unit code on map>", "bedrock_rast", , , 1)-->. A field was added as a means of weighting to denote whether the rock was suitable as an agate host, following information from <!-- find that thesis from gustavus(?)-->.
+                The bedrock feature classes were converted to rasters using <code title="PolygonToRaster_conversion (&quot;bedrock_fc&quot;, &quot;<geologic unit code on map>&quot;, &quot;bedrock_rast&quot;, , , 1)">Polygon to Raster</code>. The map PDFs were searched for words that would indicate suitability for being an agate host (agate, chalcedony, vug, amygdule, vesicle, basalt, aphyric, aphanitic) and a field was to the rasters added as a means of weighting. The formations containing "agate" were weighted most highly (regardless of chemical composition), those containing "basalt" and other semi-relevant words (amygdule, vesicle, vug, aphyric) rated middling, and the rest weighted lowest.
             </p>
             
             <p>
-                The map .tif were georeferenced using the MCIS with 
-            </p><!--finish if you can figure out how to re-rasterize them-->
+                For the map .tif, the green band was isolated, symbolized with a greyscale (stretched, Minimum-Maximum) color scheme, and exported. The exported band was classified into two classes split at an <em>n</em> value that assigns most of the extraneous lines to white pixels and the contacts to black pixels (M-066, 110; M-072, 110). The raster was exported again and the new raster clipped to the extent of the shoreline proximity raster. This was cleaned up using the Raster Painting toolbar and original .tif as a reference, then converted to polylines using ArcMap's ArcScan toolbar. The lines were converted to polygons <!--arcpy.FeatureToPolygon_management(in_features="M066_l", out_feature_class="C:/gistest/wr_components.gdb/polygons/M066_p", cluster_tolerance="", attributes="ATTRIBUTES", label_features="")--> and unit codes/agate-bearingness weights assigned to each polygon. These were converted to a raster for use in the weighted overlay.
+            </p>
             
         <h3 id="proc_dems">Digital Elevation Models</h3>
             <p>
@@ -113,25 +117,17 @@
             <p>
                 The tiles were then merged together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a>
                 to save time. A slope raster was created from this data using the <code title="Slope(&quot;dem_1m_mn&quot;, &quot;DEGREE&quot;,)">Slope</code> tool and the result was converted from a floating point raster to an integer raster using the <code title="RasterCalculator (Int(&quot;slope_rast&quot; + 0.5,&quot;slope_rast&quot;,), &quot;slope_rast_int&quot;)">Raster Calculator</code> tool.
-                The Reclassify <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
-# The following inputs are layers or table views: "weighted raster components\slope_1m_int"
-arcpy.gp.Reclassify_sa("weighted raster components\slope_1m_int", "Value", "0 10 3;10 20 6;20 30 9;30 40 9;40 50 6;50 60 1;60 70 1;70 80 1;80 90 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/slope_reclass_final", "DATA")-->tool was used to change the cell values to desired weights (note: this can also be done in
-                the Weighted Overlay tool).
+                The <code title="Reclassify_sa(&quot;slope_1m_int&quot;, &quot;Value&quot;, &quot;0 10 3;10 20 6;20 30 9;30 40 9;40 50 6;50 60 1;60 70 1;70 80 1;80 90 1&quot;, &quot;slope_reclass&quot;, &quot;DATA&quot;)">Reclassify</code> tool was used to change the cell values to desired weights (note: this can also be done in
+                the Weighted Overlay tool, but doing so is potentially time-consuming).
             </p>
             
             <h3 id="proc_outline">Lake Superior shoreline</h3>
             <p>
-                The Euclidean Distance tool provides an easy way to get a "raster Buffer" to assess proximity to shoreline.
-                Unfortunately, this layer was deemed unsuitable due to low resolution. <!--image to illustrate-->
-            </p>
-            
-            <p>
-                A higher resolution shoreline was created by using the Con tool to divide the slope raster into two
-                values: 0 and not 0 <!--RasterCalculator (Con("slope_rast" > 0,1,0), "LS_shore_rast")-->. The product
-                raster was converted into a polygon <!--RasterToPolygon_conversion("slope_float",
-                "LS_shore_poly", "SIMPLIFY", "VALUE")--> and all polygons not the Lake Superior shoreline were deleted
-                using the Editor toolbar. Euclidean Distance <!--EucDistance ("LS_shore_poly", 100, 1, "LS_shore_euc")-->
-                was used to create cells whose values denoted distance from the polygon, Reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
+                A high-resolution shoreline was created by using the <code title="Con(&quot;slope_rast&quot; > 0,1,0)">Con</code> tool to divide the slope raster into two
+                values: 0 and not 0. The product
+                raster was <code title="RasterToPolygon_conversion(&quot;slope_float&quot;,
+                &quot;LS_shore_poly&quot;, &quot;SIMPLIFY&quot;, &quot;VALUE&quot;)">converted</code> into a polygon and all polygons not the Lake Superior shoreline were deleted
+                using the Editor toolbar. <code title="EucDistance (&quot;LS_shore_poly&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code>     <!--actually 20 m instead of 100?-->           was used to create cells whose values denoted distance from the polygon, Reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
 # The following inputs are layers or table views: "weighted raster components\Buffers\LS_border_rast_int"
 arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", "Value", "0 1 9;1 5 8;5 10 6;10 25 4;25 50 2;50 100 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass", "DATA")-->to desired weights,
                 and converted to an integer raster.
@@ -139,38 +135,34 @@ arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", 
             
             <h3 id="proc_snas">Scientific and Natural Areas</h3>
             <p>
-                The Scientific and Natural Areas that had some portion of the NS within their borders were exported to a new feature class. <code title="PolygonToRaster_conversion (&quot;SNAs_shp&quot;, &quot;&lt;field with value shared by all polygons, e.g. 'MN'&gt;&quot;, &quot;SNAs_rast&quot;, &quot;MAXIMUM_AREA&quot;, ,1)">Polygon to Raster</code> was then used to convert these areas to rasters for use in the Weighted Overlay tool. The remaining
-                polygons were rasterized for use in the Weighted Overlay tool.
+                The Scientific and Natural Areas that had some portion of the NS within their borders were exported to a new feature class. <code title="PolygonToRaster_conversion (&quot;SNAs_shp&quot;, &quot;&lt;field with value shared by all polygons, e.g. 'MN'&gt;&quot;, &quot;SNAs_rast&quot;, &quot;MAXIMUM_AREA&quot;, ,1)">Polygon to Raster</code> was then used to convert these areas to rasters for use in the Weighted Overlay tool.
             </p>
             
             <h3 id="proc_parks">State parks</h3>
             <p>
-                Processing similar to SNAs<!--PolygonToRaster_conversion ("SPs_shp", "<field with value shared by all polygons, e.g. "MN">", "SPs_rast", "MAXIMUM_AREA", , 1)-->.
+                Processing similar to SNAs.
             </p>
             
             <h3 id="proc_roads">Roads</h3>
             <p>
-                Euclidean Distance was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
+                <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
 # The following inputs are layers or table views: "Road_dist_int_16bit"
 arcpy.gp.Reclassify_sa("Road_dist_int_16bit", "Value", "0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks", "DATA")-->for use in Weighted Overlay.
             </p>
             
-            <h3 id="proc_gpr">Grand Portage Reservation border</h3>
+            <h3 id="proc_gpr">Grand Portage Reservation</h3>
             <p>
-                It was surprisingly challenging to find open, recently created GIS data for the GPR (or any reservation, for
-                that matter). I was expecting to find something on the Minnesota Geospatial Commons (MGC), a different state
-                government website, or even the GPR website, but I had to settle for an image of a map created in 2012 by
-                Andrew Munsch of deadpioneer.com. Google Maps has a similar border on their map.
+                An image from deadpioneer.com (by Andrew Munsch) was used georeferenced using MCIS, seven <a href="assets/gis/agates/gpr_points.txt">control points</a>, and the 1st Order Polynomial transformation. While a border layer was found on Cook County's <a href="http://156.99.166.245/blue/">Legacy Web Mapping Application</a>, it could not be downloaded. For the portion of the reservation border that comprised the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation on Lake Superior was traced using the previously-created shoreline feature class and the portion of the reservation within Cook County was traced using the georeferenced map as a reference. The islands off the shore of Grand Portage were traced using the state outline and Lake Superior shoreline where applicable.
             </p>
-            
-            <!-- <p>The image was georeferenced using MCIS as a reference. Seven <a href="assets/gis/agates/gpr_points.txt">control points</a> were used with the 1st Order Polynomial (Affine) transformation. For the portion of the reservation that consisted of the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation within Cook County was traced using the georeferenced map as a reference.</p> -->
 
         <h2 id="results">Results</h2>
+        
+        <h2 id="groundtruthing">Groundtruthing</h2>
         
         <h2 id="data">Data sources</h2>
         <p>
             This project relied primarily on data created and hosted by the State of Minnesota and the Minnesota Geological
-            Survey (MGS), with a small contribution from third parties
+            Survey (MGS), with a small contribution from third parties.
         </p>
         
         <!-- <summary>/<detail> toggle: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details -->
@@ -211,6 +203,10 @@ arcpy.gp.Reclassify_sa("Road_dist_int_16bit", "Value", "0 157 1;157 354 2;354 57
             </details>
         </p>
         </section>
+        
+        <small>
+            A similar agate-picking project was undertaken by a student in GIS 3563 (Fall semester, 2017). Unfortunately, I don't know who it was or how their analysis was conducted, so if anyone has details I'd love to hear about it!<br>
+        </small>        
 
         <footer>
         <p><small>Theme from <a href="https://github.com/orderedlist/minimal">Minimal</a></small></p>
