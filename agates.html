@@ -131,16 +131,16 @@
 arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", "Value", "0 1 9;1 5 8;5 10 6;10 25 4;25 50 2;50 100 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass", "DATA")-->to desired weights,
                 and converted to an integer raster.
             </p><!--make sure this paragraph is logically consistent-->
-
-        <figure>
-            <img src="assets/images/prohibitedtest.png" alt="prohibited areas, test image at different resolution"><br>
-            <figcaption><small>prohibited areas, test image at different resolution than agate pic</small></figcaption>
-        </figure>
         
             <h3 id="proc_snas">Scientific and Natural Areas</h3>
             <p>
                 The Scientific and Natural Areas that had some portion of the NS within their borders were exported to a new feature class. <code title="PolygonToRaster_conversion (&quot;SNAs_shp&quot;, &quot;&lt;field with value shared by all polygons, e.g. 'MN'&gt;&quot;, &quot;SNAs_rast&quot;, &quot;MAXIMUM_AREA&quot;, ,1)">Polygon to Raster</code> was then used to convert these areas to rasters for use in the Weighted Overlay tool.
             </p>
+            
+            <figure>
+                <img src="assets/images/prohibitedareas.png" alt="Collection-prohibited areas: Grand Portage Reservation, 193,695,339 m&sup2;; State parks, 142,090,807 m&sup2;; Scientific and Natural Areas, 1,164,520 m&sup2;"><br>
+                <figcaption><small>Land where collection is prohibited. Other private land is not shown.</small></figcaption>
+            </figure>
             
             <h3 id="proc_parks">State parks</h3>
             <p>
