@@ -131,7 +131,12 @@
 arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", "Value", "0 1 9;1 5 8;5 10 6;10 25 4;25 50 2;50 100 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass", "DATA")-->to desired weights,
                 and converted to an integer raster.
             </p><!--make sure this paragraph is logically consistent-->
-        
+            
+            <figure>
+                <img src="assets/images/lsprox.png" alt="Top half of image: Euclidean distance raster, 100 meters from shore; bottom half: reclassified distance raster."><br>
+                <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Location is the Silver Bay marina. Final distance from shore was decreased to 20 meters since no beach is going to be 100 m wide.</small></figcaption>
+            </figure>    
+            
             <h3 id="proc_snas">Scientific and Natural Areas</h3>
             <p>
                 The Scientific and Natural Areas that had some portion of the NS within their borders were exported to a new feature class. <code title="PolygonToRaster_conversion (&quot;SNAs_shp&quot;, &quot;&lt;field with value shared by all polygons, e.g. 'MN'&gt;&quot;, &quot;SNAs_rast&quot;, &quot;MAXIMUM_AREA&quot;, ,1)">Polygon to Raster</code> was then used to convert these areas to rasters for use in the Weighted Overlay tool.
@@ -158,6 +163,11 @@ arcpy.gp.Reclassify_sa("Road_dist_int_16bit", "Value", "0 157 1;157 354 2;354 57
             <p>
                 An image from deadpioneer.com (by Andrew Munsch) was used georeferenced using MCIS, seven <a href="assets/gis/agates/gpr_points.txt">control points</a>, and the 1st Order Polynomial transformation. While a border layer was found on Cook County's <a href="http://156.99.166.245/blue/">Legacy Web Mapping Application</a>, it could not be downloaded. For the portion of the reservation border that comprised the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation on Lake Superior was traced using the previously-created shoreline feature class and the portion of the reservation within Cook County was traced using the georeferenced map as a reference. The islands off the shore of Grand Portage were traced using the state outline and Lake Superior shoreline where applicable.
             </p>
+            
+            <figure>
+                <img src="assets/images/gpr.png" alt="Grand Portage Reservation outline."><br>
+                <figcaption><small>Grand Portage Reservation.</small></figcaption>
+            </figure>            
 
         <h2 id="results">Results</h2>
         <p>
@@ -179,6 +189,7 @@ arcpy.gp.Reclassify_sa("Road_dist_int_16bit", "Value", "0 157 1;157 354 2;354 57
         <p>
             <details>
                 <summary>State data</summary>
+                <a href="https://gisdata.mn.gov/dataset/loc-pop-centers">Cities and other population centers</a><br>
                 <a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a> - slope<br>
                 <a href="https://gisdata.mn.gov/dataset/water-lake-superior-basin">Lake Superior outline</a> - proximity to shoreline<br>
                 <a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image Service (MCIS)</a> - reference for georeferencing<br>
