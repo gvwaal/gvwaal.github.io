@@ -15,7 +15,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
         <meta name="description" content="Gerrit VanderWaal: Geology. GIS. Web mapping. Python. Cooking. Sushi.">
-        <title>Optimal Shore-based Agate Picking Areas of NE MN</title>
+        <title>Optimal Agate Picking Areas of Minnesota's North Shore</title>
 
         <link rel="stylesheet" href="assets/css/style.css?v=">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -39,7 +39,7 @@
       
         <section>
         <!-- any future site content goes here -->
-        <h1 id="top">Optimal Shore-based Agate Picking Areas of Minnesota's North Shore</h1>
+        <h1 id="top">Optimal Agate Picking Areas of Minnesota's North Shore</h1>
         
         <ol>
             <li><a href="#background">Background</a></li>
@@ -70,8 +70,7 @@
         </figure>
         
         <p>
-            Minnesota's North Shore (NS) is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?" The answer to their question is gravel pits, but these often do not make for the most scenic destinations. This project identifies the best locations for agate picking on the North Shore from a quantitative perspective,
-            using ArcMap 10.4, its Spatial Analyst extension, and Python to work with <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a>
+            Minnesota's North Shore (NS) is a frequent destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?" This project identifies the best locations for agate picking on the North Shore from a quantitative perspective, using ArcMap 10.4, its Spatial Analyst extension, and Python to work with <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a>
             data. <!-- please make this better -->
         </p>
         
@@ -108,18 +107,19 @@
         <h3 id="proc_dems">Digital Elevation Models</h3>
             <p>
                 A <a href="https://github.com/gvwaal/misc-scripts/blob/master/dem_fetch.py">Python script</a> was created
-                to quickly download around 180 1-meter DEM tiles needed to cover the NS. While the Minnesota Department of
-                Natural Resources (MnDNR)'s <a href="http://www.dnr.state.mn.us/maps/mntopo/index.html">MnTOPO application</a>
-                allows the user to download elevation data clipped from a user-created polygon, I found that drawing a single
-                non-overlapping polygon at sufficient scale covering the entire NS was too time consuming.
-            </p>
-            
-            <p>
-                The tiles were then merged together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a>
+                to quickly download around 180 1-meter DEM tiles needed to cover the NS. The tiles were then merged together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a>
                 to save time. A slope raster was created from this data using the <code title="Slope(&quot;dem_1m_mn&quot;, &quot;DEGREE&quot;,)">Slope</code> tool and the result was converted from a floating point raster to an integer raster using the <code title="RasterCalculator (Int(&quot;slope_rast&quot; + 0.5,&quot;slope_rast&quot;,), &quot;slope_rast_int&quot;)">Raster Calculator</code> tool.
                 The <code title="Reclassify_sa(&quot;slope_1m_int&quot;, &quot;Value&quot;, &quot;0 10 3;10 20 6;20 30 9;30 40 9;40 50 6;50 60 1;60 70 1;70 80 1;80 90 1&quot;, &quot;slope_reclass&quot;, &quot;DATA&quot;)">Reclassify</code> tool was used to <!-- based roughly off table in https://www.earth-surf-dynam.net/2/469/2014/esurf-2-469-2014.pdf, pg. 471 -->change the cell values to desired weights (note: this can also be done in
-                the Weighted Overlay tool, but doing so is potentially time-consuming).
+                the Weighted Overlay tool, but doing so is potentially time-consuming).<!--While the Minnesota Department of
+                Natural Resources (MnDNR)'s <a href="http://www.dnr.state.mn.us/maps/mntopo/index.html">MnTOPO application</a>
+                allows the user to download elevation data clipped from a user-created polygon, I found that drawing a single
+                non-overlapping polygon at sufficient scale covering the entire NS was too time consuming.-->
             </p>
+            
+            <figure>
+                <img src="assets/images/slope.png" alt="Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster (red to yellow gradient), below is the reclassified data (9 classes, blue lows to red highs."><br>
+                <figcaption><small>Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster, below is the reclassified data.</small></figcaption>
+            </figure>
             
             <h3 id="proc_outline">Lake Superior shoreline</h3>
             <p>
@@ -134,7 +134,7 @@ arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", 
             
             <figure>
                 <img src="assets/images/lsprox.png" alt="Top half of image: Euclidean distance raster, 100 meters from shore; bottom half: reclassified distance raster."><br>
-                <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Location is the Silver Bay marina. Final distance from shore was decreased to 20 meters since no beach is going to be 100 m wide.</small></figcaption>
+                <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Location is the Silver Bay Marina. The reclassified raster only uses 20 meters from shore since 100 was deemed excessive.</small></figcaption>
             </figure>    
             
             <h3 id="proc_snas">Scientific and Natural Areas</h3>
