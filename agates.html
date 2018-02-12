@@ -17,7 +17,7 @@
         <meta name="description" content="Gerrit VanderWaal: Geology. GIS. Web mapping. Python. Cooking. Sushi.">
         <title>Optimal Agate Picking Areas of Minnesota's North Shore</title>
 
-        <link rel="stylesheet" href="assets/css/style.css?v=">
+        <link rel="stylesheet" href="assets/css/style.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=0">
         <!--[if lt IE 9]>
@@ -124,11 +124,7 @@
             <h3 id="proc_outline">Lake Superior shoreline</h3>
             <p>
                 A high-resolution shoreline was created by using the <code title="Con(&quot;slope_rast&quot; > 0,1,0)">Con</code> tool to divide the slope raster into two
-                values: 0 and not 0. The product
-                raster was <code title="RasterToPolygon_conversion(&quot;slope_float&quot;, &quot;LS_shore_poly&quot;, &quot;SIMPLIFY&quot;, &quot;VALUE&quot;)">converted</code> into a polygon and all polygons not the Lake Superior shoreline were deleted
-                using the Editor toolbar. <code title="EucDistance (&quot;LS_shore_poly&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code>     <!--actually 20 m instead of 100?-->           was used to create cells whose values denoted distance from the polygon, Reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
-# The following inputs are layers or table views: "weighted raster components\Buffers\LS_border_rast_int"
-arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", "Value", "0 1 9;1 5 8;5 10 6;10 25 4;25 50 2;50 100 1", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass", "DATA")-->to desired weights,
+                values: 0 and not 0. The product raster was <code title="RasterToPolygon_conversion(&quot;slope_float&quot;, &quot;LS_shore_poly&quot;, &quot;SIMPLIFY&quot;, &quot;VALUE&quot;)">converted</code> into a polygon and all polygons not the Lake Superior shoreline were deleted using the Editor toolbar. <code title="EucDistance (&quot;LS_shore_poly&quot;, 20, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to create cells whose values denoted distance from the polygon, <code title="Reclassify_sa(&quot;weighted raster components\Buffers\LS_border_rast_int&quot;, &quot;Value&quot;, &quot;0 1 9;1 5 7;5 10 5;10 20 1&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass&quot;, &quot;DATA&quot;)">reclassified</code> to desired weights,
                 and converted to an integer raster.
             </p><!--make sure this paragraph is logically consistent-->
             
@@ -154,9 +150,7 @@ arcpy.gp.Reclassify_sa("weighted raster components\Buffers\LS_border_rast_int", 
             
             <h3 id="proc_roads">Roads</h3>
             <p>
-                <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and reclassified <!--# Replace a layer/table view name with a path to a dataset (which can be a layer file) or create the layer/table view within the script
-# The following inputs are layers or table views: "Road_dist_int_16bit"
-arcpy.gp.Reclassify_sa("Road_dist_int_16bit", "Value", "0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9", "C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks", "DATA")-->for use in Weighted Overlay.
+                The original road layer was clipped using a arbitrary polygon to retain only the roads nearest the shore. <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and <code title="Reclassify_sa(&quot;Road_dist_int_16bit&quot;, &quot;Value&quot;, &quot;0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks&quot;, &quot;DATA&quot;)">reclassified</code> for use in Weighted Overlay.
             </p>
             
             <h3 id="proc_gpr">Grand Portage Reservation</h3>
