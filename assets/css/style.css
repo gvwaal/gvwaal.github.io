@@ -11,7 +11,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color:#222;
-  margin:0 0 20px;
+  margin:0 0 10px;
 }
 
 p, ol, table, pre, dl {
@@ -170,9 +170,9 @@ header ul a strong {
 }
 
 section {
-  width:900px;
+  width:950px;
   float:right;
-  padding-bottom:50px;
+  padding-bottom:25px;
 }
 
 small {

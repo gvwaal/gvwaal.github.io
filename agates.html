@@ -43,6 +43,7 @@
         
         <ol>
             <li><a href="#background">Background</a></li>
+            <li><a href="#assumptions">Assumptions</a>
             <li><a href="#processing">Processing</a></li>
             <ul>
                 <li><a href="#proc_bedrock">Bedrock quadrangles</a></li>
@@ -53,7 +54,6 @@
                 <li><a href="#proc_roads">Roads</a></li>
                 <li><a href="#proc_gpr">Grand Portage Reservation</a></li>
             </ul>
-            <li><a href="#assumptions">Assumptions</a>
             <li><a href="#results">Results</a></li>
             <li><a href="#groundtruthing">Groundtruthing</a></li>
             <li><a href="#data">Data sources</a></li>
@@ -65,7 +65,7 @@
         </p>
         
         <figure>
-            <img src="assets/images/agates.jpg" alt="A variety of Lake Superior agate specimens. Samples with and without coarse-grained quartz present."><br>
+            <a href="assets/images/agates.jpg"><img src="assets/images/agates.jpg" alt="A variety of Lake Superior agate specimens. Samples with and without coarse-grained quartz present."></a><br>
             <figcaption><small>A variety of Lake Superior agate specimens, by <a href="https://www.flickr.com/photos/43021860@N00/34182938466/">Tim</a>.</small></figcaption>
         </figure>
         
@@ -81,9 +81,11 @@
         <h2 id="assumptions">Assumptions</h2>
         <p>
             <ol>
-                <li>Beach formation, and therefore agate deposition, will occur on low-angle slopes, such as 30° and below. slopes of repose indicate angle of at least 30 for gravel</li>
+                <li>Agates will be more common in areas with agate-bearing bedrock.</li><!--improve this too-->
+                <li>Agate deposition will occur on mid- to low-angle slopes, such as 40° and below. <a href="https://web.archive.org/web/20180213175502/https://www.earth-surf-dynam.net/2/469/2014/esurf-2-469-2014.pdf">Stark et. al (2014)</a> indicates the angle of repose for mixed sediment that's mostly gravel will likely be between 30 and 40°</li> <!-- improve this, especially the second sentence. flow can be improved-->
                 <li>The most agates will be located closest to the lake (within 10m), since only the strongest (and therefore least common) wave action will be able to move agates inland.</li>
                 <li>The locations with the most agates will be those least visited by humans, and therefore most distant from roads.</li>
+                <li>The user will acquire permission from relevant land owners before visiting or collecting from areas highlighted here.</li>
             </ol>
         </p>
         
@@ -117,7 +119,7 @@
             </p>
             
             <figure>
-                <img src="assets/images/slope.png" alt="Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster (red to yellow gradient), below is the reclassified data (9 classes, blue lows to red highs."><br>
+                <a href="assets/images/slope.png"><img src="assets/images/slope.png" alt="Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster (red to yellow gradient), below is the reclassified data (9 classes, blue lows to red highs."></a><br>
                 <figcaption><small>Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster, below is the reclassified data.</small></figcaption>
             </figure>
             
@@ -129,7 +131,7 @@
             </p><!--make sure this paragraph is logically consistent-->
             
             <figure>
-                <img src="assets/images/lsprox.png" alt="Top half of image: Euclidean distance raster, 100 meters from shore; bottom half: reclassified distance raster."><br>
+                <a href="assets/images/lsprox.png"><img src="assets/images/lsprox.png" alt="Top half of image: Euclidean distance raster, 100 meters from shore; bottom half: reclassified distance raster."></a><br>
                 <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Location is the Silver Bay Marina. The reclassified raster only uses 20 meters from shore since 100 was deemed excessive.</small></figcaption>
             </figure>    
             
@@ -139,7 +141,7 @@
             </p>
             
             <figure>
-                <img src="assets/images/prohibitedareas.png" alt="Collection-prohibited areas: Grand Portage Reservation, 193,695,339 m&sup2;; State parks, 142,090,807 m&sup2;; Scientific and Natural Areas, 1,164,520 m&sup2;"><br>
+                <a href="assets/images/prohibitedareas.png"><img src="assets/images/prohibitedareas.png" alt="Collection-prohibited areas: Grand Portage Reservation, 193,695,339 m&sup2;; State parks, 142,090,807 m&sup2;; Scientific and Natural Areas, 1,164,520 m&sup2;"></a><br>
                 <figcaption><small>Land where collection is prohibited. Other private land is not shown.</small></figcaption>
             </figure>
             
@@ -150,7 +152,7 @@
             
             <h3 id="proc_roads">Roads</h3>
             <p>
-                The original road layer was clipped using a arbitrary polygon to retain only the roads nearest the shore. <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and <code title="Reclassify_sa(&quot;Road_dist_int_16bit&quot;, &quot;Value&quot;, &quot;0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks&quot;, &quot;DATA&quot;)">reclassified</code> for use in Weighted Overlay.
+                The original road layer was clipped using a 1,000m buffer of the shoreline. <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and <code title="Reclassify_sa(&quot;Road_dist_int_16bit&quot;, &quot;Value&quot;, &quot;0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks&quot;, &quot;DATA&quot;)">reclassified</code> for use in Weighted Overlay.
             </p>
             
             <h3 id="proc_gpr">Grand Portage Reservation</h3>
@@ -159,7 +161,7 @@
             </p>
             
             <figure>
-                <img src="assets/images/gpr.png" alt="Grand Portage Reservation outline."><br>
+                <a href="assets/images/gpr.png"><img src="assets/images/gpr.png" alt="Grand Portage Reservation outline."></a><br>
                 <figcaption><small>Grand Portage Reservation.</small></figcaption>
             </figure>            
 
@@ -214,7 +216,7 @@
             
             <details>
                 <summary>Third party data</summary>
-                <a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation (GPR ) border</a> - prohibited areas/georeferencing reference<br>
+                <a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation (GPR ) border</a><br>
             </details>
         </p>
         
