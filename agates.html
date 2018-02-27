@@ -70,8 +70,7 @@
         </figure>
         
         <p>
-            Minnesota's North Shore (NS) is a popular destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?" This project identifies the best locations for agate picking on the North Shore from a quantitative perspective, using ArcMap 10.4, its Spatial Analyst extension, and Python to work with <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster</a>
-            data. <!-- please make this better -->
+            Minnesota's North Shore (NS) is a popular destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?" This project identifies the best locations for agate picking on the North Shore from a quantitative perspective, using ArcMap 10.4, its Spatial Analyst extension, and Python to work with <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster data</a>. <!-- please make this better -->
         </p>
         
         <p>
@@ -99,12 +98,17 @@
             </p>
             
             <p>
-                The bedrock feature classes were converted to rasters using <code title="PolygonToRaster_conversion (&quot;bedrock_fc&quot;, &quot;<geologic unit code on map>&quot;, &quot;bedrock_rast&quot;, , , 1)">Polygon to Raster</code>. The map PDFs were searched for words that would indicate suitability for being an agate host (agate, chalcedony, vug, amygdule, vesicle, basalt, aphyric, aphanitic) and a field was to the rasters added as a means of weighting. The formations containing "agate" were weighted most highly (regardless of chemical composition), those containing "basalt" and other semi-relevant words (amygdule, vesicle, vug, aphyric) rated middling, and the rest weighted lowest.
+                The bedrock feature classes were converted to rasters using <code title="PolygonToRaster_conversion (&quot;bedrock_fc&quot;, &quot;<geologic unit code on map>&quot;, &quot;bedrock_rast&quot;, , , 1)">Polygon to Raster</code>. The map PDFs were searched for words that would indicate suitability for being an agate host (agate, chalcedony, vug, amygdule, vesicle, basalt, aphyric, aphanitic) and a field was to the rasters added as a means of weighting. The formations containing "agate" were weighted most highly (9), those containing "basalt" and other semi-relevant words (amygdule, vesicle, vug, aphyric) rated middling (5), and the rest weighted lowest (1).
             </p>
             
             <p>
-                For the map .tif, the green band was isolated, symbolized with a greyscale (stretched, Minimum-Maximum) color scheme, and exported. The exported band was classified into two classes split at an <em>n</em> value (110) in an attempt to symbolize only the geologic contacts. The raster was exported again and the new raster clipped to the extent of the shoreline proximity raster. This was cleaned up using the Raster Painting toolbar and original RGB .tif as a reference, then converted to polylines using ArcMap's ArcScan toolbar. The lines were converted to polygons <!--arcpy.FeatureToPolygon_management(in_features="M066_l", out_feature_class="C:/gistest/wr_components.gdb/polygons/M066_p", cluster_tolerance="", attributes="ATTRIBUTES", label_features="")--> and unit codes assigned to each polyon. Agate weights were stored in separate .csv files and joined to the polygons, then converted back into a raster for use in the weighted overlay.
+                For the map .tif, the green band was isolated, symbolized with a greyscale (stretched, Minimum-Maximum) color scheme, and exported. The exported band was classified into two classes split at an <em>n</em> value (110) in an attempt to symbolize only the geologic contacts. The raster was exported again and the new raster clipped to the extent of an arbitrary polygon to reduce the time spent cleaning up. This was cleaned up using the Raster Painting toolbar and original RGB .tif as a reference, then converted to polylines using ArcMap's ArcScan toolbar. The lines were <code title="arcpy.FeatureToPolygon_management(in_features=&quot;M066_l&quot;, out_feature_class=&quot;C:/gistest/wr_components.gdb/polygons/M066_p&quot;, cluster_tolerance=&quot;&quot;, attributes=&quot;ATTRIBUTES&quot;, label_features=&quot;&quot;)">converted</code> to polygons and unit codes assigned to each polyon. Agate weights were stored in separate .csv files and joined to the polygons, then converted back into a raster for use in the weighted overlay.
             </p>
+
+            <figure>
+                <a href="assets/images/scanmaps.png"><img src="assets/images/scanmaps.png" alt="The four main steps to PDF digitization. Upper left, georeferenced TIFF rasters; upper right, the TIFF rasters split at n = 110; bottom left, the vector lines output by ArcScan; bottom right, final rasters symbolized by weights and clipped to slope."></a><br>
+                <figcaption><small>The four main steps in the PDF digitizing process. a) The three scanned PDFs, after being converted to TIFFs and georeferenced, b) the three TIFFs split at <em>n</em> = 110, c) the resulting vector lines after ArcScan was used, and d) the final rasters symbolized with weights.</small></figcaption>
+            </figure>
             
         <h3 id="proc_dems">Digital Elevation Models</h3>
             <p>
@@ -155,6 +159,12 @@
                 The original road layer was clipped using a 1,000m buffer of the shoreline. <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and <code title="Reclassify_sa(&quot;Road_dist_int_16bit&quot;, &quot;Value&quot;, &quot;0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks&quot;, &quot;DATA&quot;)">reclassified</code> for use in Weighted Overlay.
             </p>
             
+            <figure>
+            
+                <a href="assets/images/roadprox.png"><img src="assets/images/roadprox.png" alt="Collection-prohibited areas: Grand Portage Reservation, 193,695,339 m&sup2;; State parks, 142,090,807 m&sup2;; Scientific and Natural Areas, 1,164,520 m&sup2;"></a><br>
+                <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Images centered on the Two Harbors iron ore docks. One of the main locations that necessitated a 2,000m distance raster.</small></figcaption>
+            </figure>
+            
             <h3 id="proc_gpr">Grand Portage Reservation</h3>
             <p>
                 An image from deadpioneer.com (by Andrew Munsch) was used georeferenced using MCIS, seven <a href="assets/gis/agates/gpr_points.txt">control points</a>, and the 1st Order Polynomial transformation. While a border layer was found on Cook County's <a href="http://156.99.166.245/blue/">Legacy Web Mapping Application</a>, it could not be downloaded. For the portion of the reservation border that comprised the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation on Lake Superior was traced using the previously-created shoreline feature class and the portion of the reservation within Cook County was traced using the georeferenced map as a reference. The islands off the shore of Grand Portage were traced using the state outline and Lake Superior shoreline where applicable.
@@ -167,7 +177,9 @@
 
         <h2 id="results">Results</h2>
         <p>
-            The Weighted Overlay tool in Spatial Analyst was used executed to get a 
+            Prior to using the Weighted Overlay tool, all layers were clipped to retain only the portions within 20m of shore. The computer used during this project is not particularly beefy and has troubles with processing large or complex amounts of data. To compensate, measures were taken to ease processing, such as retaining only the relevant parts of data, reducing bit depth of the rasters, and splitting the processing extents into smaller areas <!--remove if not true-->.
+
+            in Spatial Analyst was used executed to get a 
         </p>
         
         <h2 id="groundtruthing">Groundtruthing</h2>
