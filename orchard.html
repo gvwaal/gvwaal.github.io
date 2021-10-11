@@ -15,7 +15,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
         <meta name="description" content="Gerrit VanderWaal: Geology. GIS. Web mapping. Python. Cooking. Sushi.">
-        <title>Optimal Agate Picking Areas of Minnesota's North Shore</title>
+        <title>Suitability analysis via weighted overlay: siting an apple orchard - Gerrit VanderWaal</title>
 
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -39,202 +39,418 @@
       
         <section>
         <!-- any future site content goes here -->
-        <h1 id="top">Determination of land optimally suited for an apple orchard</h1>
+        <h1 id="top">Suitability analysis via weighted overlay: siting an apple orchard</h1>
         
         <ol>
-            <li><a href="#background">Background</a></li>
-            <li><a href="#assumptions">Research</a>
+            <li><a href="#research">Research</a>
+            <li><a href="#data">Data</a></li>
             <li><a href="#processing">Processing</a></li>
-            <ul>
-                <li><a href="#proc_bedrock">Bedrock quadrangles</a></li>
-                <li><a href="#proc_dems">Digital Elevation Models</a></li>
-                <li><a href="#proc_outline">Lake Superior shoreline</a></li>
-                <li><a href="#proc_snas">Scientific and Natural Areas</a></li>
-                <li><a href="#proc_parks">State parks</a></li>
-                <li><a href="#proc_roads">Roads</a></li>
-                <li><a href="#proc_gpr">Grand Portage Reservation</a></li>
-            </ul>
-            <li><a href="#results">Results</a></li>
-            <li><a href="#groundtruthing">Groundtruthing</a></li>
-            <li><a href="#data">Data sources</a></li>
+            <li><a href="#result">Result</a></li>
         </ol>
         
-        <h2 id="background">Background</h2>
         <p>
-            The Lake Superior agate is a semiprecious gemstone characterized by red, orange, yellow, white or translucent bands of chalcedony with variable amounts of coarse-grained quartz crystals. Around 1.1 billion years ago, flood basalts associated with the Midcontinent Rift quickly erupted forming vesicles in the lava. As time passed, siliceous fluids percolated through the rock, filling the vesicles with the concentric bands of chalcedony. Over time, the weathering-resistant agates were released from their host rock and distributed throughout the Lake Superior basin. <a href="https://web.archive.org/web/20171021190641/https://www.carleton.edu/departments/geol/resources/comps/compspdffiles/2005/beaster2005.pdf">Beaster (2005)</a> provides a good summary of these stones.
+            A derecho blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there was (and continues to be) debate about what to do about the significant increase in unforested land, but one of the definite planned uses was an orchard. My friend was aware of my GIS/geology background and asked me to help plot figures in the design process.
         </p>
-        
+        <p>
+            During that process I was inspired to conduct a site suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a former garden, perhaps planted in the late 1990s-early 2000s.
+        </p>
         <figure>
-            <a href="assets/images/agates.jpg"><img src="assets/images/agates.jpg" alt="A variety of Lake Superior agate specimens. Samples with and without coarse-grained quartz present."></a><br>
-            <figcaption><small>A variety of Lake Superior agate specimens, by <a href="https://www.flickr.com/photos/43021860@N00/34182938466/">Tim</a>.</small></figcaption>
+                <a href="assets/images/orchard/Aerial20051996.jpg"><img src="assets/images/orchard/Aerial20051996.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Planned orchard shown for reference with a red outline."></a><br>
+                <figcaption><small>A comparison of leaf-on aerial imagery from 2005 (left) and 1996 (right). Just east of the planned orchard in the 1996 imagery are two black dots I interpret to be trees, but it doesn't appear to definitively be a garden.</small></figcaption>
         </figure>
-        
         <p>
-            Minnesota's North Shore (NS) is a popular destination for those in search of agates. Having lived in Duluth, MN for around five years, a frequent question from visiting friends and family is "Where are the best places to look for agates?" This project identifies the best locations for agate picking on the North Shore from a quantitative perspective, using ArcMap 10.4, its Spatial Analyst extension, and Python to work with <a href="https://en.wikipedia.org/wiki/Raster_graphics">raster data</a>. <!-- please make this better -->
-        </p>
-        
-        <p>
-            <code>Monospaced</code> words indicate tools utilized in ArcMap; Python snippets can be viewed by hovering over them, for those interested in the exact inputs.
-        </p>
-                
-        <h2 id="assumptions">Research</h2>
-        <p>
+            In summary, a site suitability analysis:
             <ol>
-                <li>Agates will be more common in areas with agate-bearing bedrock.</li><!--improve this too-->
-                <li>Agate deposition will occur on mid- to low-angle slopes, such as 40° and below. <a href="https://web.archive.org/web/20180213175502/https://www.earth-surf-dynam.net/2/469/2014/esurf-2-469-2014.pdf">Stark et. al (2014)</a> indicates the angle of repose for mixed sediment that's mostly gravel will likely be between 30 and 40°</li> <!-- improve this, especially the second sentence. flow can be improved-->
-                <li>The most agates will be located closest to the lake (within 10m), since only the strongest (and therefore least common) wave action will be able to move agates inland.</li>
-                <li>The locations with the most agates will be those least visited by humans, and therefore most distant from roads.</li>
-                <li>The user will acquire permission from relevant land owners before visiting or collecting from areas highlighted here.</li>
+                <li>asks the user to provide sets of raster data,</li>
+                <li>rank how important each category of data is, and</li>
+                <li>how each set should be weighted</li>
             </ol>
         </p>
+        <p>
+            In this task, the first step is to identify one’s goal (an orchard), then consider what data is needed (environmental attributes needed for a successful orchard), establish how that data should be weighted, then acquire the data and convert it into a usable format. We’ll be using ArcMap 10.x in this analysis.
+        </p>
         
-        <h2 id="processing">Processing</h2> <!--make sure python commands are syntactically correct-->
-            <h3 id="proc_bedrock">Bedrock quadrangles</h3>
+        
+                
+        <h2 id="research">Research</h2>
+        <p>
+            Since the goal is established one must identify what’s needed for a successful orchard. However, since an orchard is defined as any plot of land where fruit or nut trees or grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars.
+        </p>
+        <p>
+            I don’t know anything about growing apples, so I googled around for resources. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three that seemed somewhat reputable:
+            <ul>
+                <li>Teryl R. Roper, Daniel L. Maher, and Patricia S. McManus’ <a href="https://learningstore.extension.wisc.edu/products/growing-apples-in-wisconsin-p413"><i>Growing Apples in Wisconsin</i></a></li>
+                <li>Teryl R. Roper & Gary G. Frank’s <a href="https://learningstore.extension.wisc.edu/products/planning-and-establishing-commercial-apple-orchards-in-wisconsin-p417"><i>Planning and Establishing Commercial Apple Orchards in Wisconsin</i></a></li>
+                <li>Robert Crassweller’s <a href="https://extension.psu.edu/orchard-establishment-site-selection-and-preparation">Orchard Establishment - Site Selection and Preparation</a></li>
+            </ul>
+        </p>
+        <p>
+            For the first two, <strong>click “View Publication” instead of paying</strong>. The table below summarizes common information between the three.
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th>Growing Apples in Wisconsin</th>
+                    <th>Planning and Establishing Commercial Apple Orchards in Wisconsin </th>
+                    <th>Orchard Establishment - Site Selection and Preparation</th>
+                </tr>
+                <tr>
+                    <td>A “gentle slope”</td>
+                    <td>“Slopes of hills or ridges are generally more desirable than the tops because of wind conditions.”</td>
+                    <td>4-8% slope</td>
+                </tr>
+                <tr>
+                    <td>“...land with a gentle slope so that cold air can settle into adjacent lower areas.”</td>
+                    <td>"...be elevated above surrounding areas...”</td>
+                    <td>“The ideal site is on rolling or elevated land...”</td>
+                </tr>
+                <tr>
+                    <td>pH 6-7</td>
+                    <td>pH 5.8-6.8</td>
+                    <td>pH 6.0-6.5</td>
+                </tr>
+                <tr>
+                    <td>“The soil must have good internal water drainage...”</td>
+                    <td>Orchard soils must be well drained...”</td>
+                    <td>“An old recommendation for a desirable orchard soil is that it be...well drained.”</td>
+                </tr>
+                <tr>
+                    <td>“Most of the active roots are found in the top 12 inches of soil...”</td>
+                    <td>“If water stands within 3-4 feet of the surface...the site is probably unsuitable for an orchard.”</td>
+                    <td>“...minimum of 3 to 4 feet deep.”</td>
+                </tr>
+                <tr>
+                    <td>“Apples grow best in fertile...soils”</td>
+                    <td>"low fertility...soils will almost certainly lead to failure.”</td>
+                    <td>“Soil fertility should be medium to low.”</td>
+                </tr>
+                <tr>
+                    <td>“Roots do not tolerate...poorly aerated soils.”</td>
+                    <td>"Orchard soils must be well...aerated.”</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>—</td>
+                    <td>Paragraph 3, page 3 discusses states that due to south-facing slopes receiving more sunlight, temperature fluctuations in winter are greater as a result, leading to tree damage</td>
+                    <td>“Slope exposure should be considered for its effect on fruit trees as they come out of dormancy. A southern-facing slope warms up faster in spring, while the opposite is true of a northern slope. Eastern-facing slopes are intermediate.”</td>
+                </tr>
+                <tr>
+                    <td>Paragraph 8, page 5 implies water-holding capacity is a beneficial soil attribute.</td>
+                    <td>"Soils with good water-holding capacity will retain moisture and supply water to trees during dry periods.”</td>
+                    <td>"[In USDA Zone 3] apple production is marginal and site selection becomes even more important.”</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            Unfortunately, the soil fertility recommendations do not agree and bear further research. The same goes for soil aeration, aspect, and USDA Zone. Water-holding capacity seems intuitive enough to accept based on information available.
+        </p>
+        <p>
+            <a href="http://treefruit.wsu.edu/orchard-management/soils-nutrition/soil-health-in-orchards/">Soil Health in Orchards</a> claims agricultural soils average 1-6% organic matter but does not cite a source. Table 2 of <a href="https://www.tandfonline.com/doi/full/10.1080/02571862.2014.944229">an academic study</a> records percentages ranges from 1-4ish%, but only from a single orchard. While many resources reiterate the importance of soil organic matter, few (reliable) sources provide quantitative recommendations, so for the sake of convenience we’ll go with 2-6% as the ideal amount of soil organic matter.
+        </p>
+        <p>
+            T.T. Kozlowski’s <a href="http://joa.isa-arbor.com/request.asp?JournalID=1&ArticleID=2003&Type=2">Soil Aeration, Flooding, and Tree Growth</a> lists a multitude of reasons why soil aeration is a good thing but does not list quantitative measurements, nor is it strictly about apples, but I think it’s usable enough to inform our analysis.
+        </p>
+        <p>
+            <a href="https://www.princeedwardisland.ca/sites/default/files/publications/af_site_assessment_perennial_crops.pdf">Site Assessment, Selection and Development for Perennial Crops Guide</a> recommends south-facing slopes due to greater exposure to sunlight, as does <a href="https://powderriver.msuextension.org/documents/treesshrubs/EB0222.pdf">Growing Fruit Trees in Montana</a>. <a href="https://www.nd.gov/ndda/sites/default/files/legacy/Marketing/OrchardManuaFinal.pdf">Starting a Community Orchard in North Dakota</a> recommends against south-facing slopes due to increased likelihood of breaking winter dormancy due to winter temperature fluctuations, which may also cause sunscalding and trunk cracking. Because tree damage would occur regardless of how quickly the tree grows, a north-facing slope will be considered ideal.
+        </p>
+        <p>
+            USDA zone preference likely depends on the cultivar chosen and this can be disregarded.
+        </p>
+        
+        <h2 id="data">Data</h2> <!--make sure python commands are syntactically correct-->
+            <h3 id="proc_dems">Buildings and roads</h3>
             <p>
-                Of the 17 quadrangles gathered for use in this project, 11 were in legacy GIS formats (seven of which
-                required <a href="http://support.esri.com/en/technical-article/000004705">conversion</a> from ArcInfo Interchange
-                to a coverage), three had modern GIS formats, and three were scanned PDFs <code title="PDFToTIFF_conversion (&quot;map_pdf&quot;, &quot;map_tif&quot;, , , , , 650, &quot;RGB_TRUE_COLOR&quot;, &quot;NONE&quot;, )">converted</code> to .tif for use in ArcMap. All files were
-                imported into a geodatabase to ensure compatability (coverages do not work with Polygon to Raster).
-            </p>
-            
-            <p>
-                The bedrock feature classes were converted to rasters using <code title="PolygonToRaster_conversion (&quot;bedrock_fc&quot;, &quot;<geologic unit code on map>&quot;, &quot;bedrock_rast&quot;, , , 1)">Polygon to Raster</code>. The map PDFs were searched for words that would indicate suitability for being an agate host (agate, chalcedony, vug, amygdule, vesicle, basalt, aphyric, aphanitic) and a field was to the rasters added as a means of weighting. The formations containing "agate" were weighted most highly (9), those containing "basalt" and other semi-relevant words (amygdule, vesicle, vug, aphyric) rated middling (5), and the rest weighted lowest (1).
-            </p>
-            
-            <p>
-                For the map .tif, the green band was isolated, symbolized with a greyscale (stretched, Minimum-Maximum) color scheme, and exported. The exported band was classified into two classes split at an <em>n</em> value (110) in an attempt to symbolize only the geologic contacts. The raster was exported again and the new raster clipped to the extent of an arbitrary polygon to reduce the time spent cleaning up. This was cleaned up using the Raster Painting toolbar and original RGB .tif as a reference, then converted to polylines using ArcMap's ArcScan toolbar. The lines were <code title="arcpy.FeatureToPolygon_management(in_features=&quot;M066_l&quot;, out_feature_class=&quot;C:/gistest/wr_components.gdb/polygons/M066_p&quot;, cluster_tolerance=&quot;&quot;, attributes=&quot;ATTRIBUTES&quot;, label_features=&quot;&quot;)">converted</code> to polygons and unit codes assigned to each polyon. Agate weights were stored in separate .csv files and joined to the polygons, then converted back into a raster for use in the weighted overlay.
+                Roads and buildings were heads-up digitized using the leaf-off 2010 flight as a reference. <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS</a> has road data in a geospatial format, but it’s road centerlines, which are typically not helpful outside large-scale map symbology.. Even if they published road data as polygons, we’d still need to digitize the property access road. Building and road data were created September 13, 2021.
             </p>
 
-            <figure>
-                <a href="assets/images/scanmaps.png"><img src="assets/images/scanmaps.png" alt="The four main steps to PDF digitization. Upper left, georeferenced TIFF rasters; upper right, the TIFF rasters split at n = 110; bottom left, the vector lines output by ArcScan; bottom right, final rasters symbolized by weights and clipped to slope."></a><br>
-                <figcaption><small>The four main steps in the PDF digitizing process. a) The three scanned PDFs, after being converted to TIFFs and georeferenced, b) the three TIFFs split at <em>n</em> = 110, c) the resulting vector lines after ArcScan was used, and d) the final rasters symbolized with weights.</small></figcaption>
-            </figure>
-            
-        <h3 id="proc_dems">Digital Elevation Models</h3>
+            <h3 id="proc_dems">Elevation</h3>
             <p>
-                A <a href="https://github.com/gvwaal/misc-scripts/blob/master/dem_fetch.py">Python script</a> was created
-                to quickly download around 180 1-meter DEM tiles needed to cover the NS. The tiles were then merged together using <a href="https://github.com/gvwaal/misc-scripts/blob/master/mosaic.py">a different script</a>
-                to save time. A slope raster was created from this data using the <code title="Slope(&quot;dem_1m_mn&quot;, &quot;DEGREE&quot;,)">Slope</code> tool and the result was converted from a floating point raster to an integer raster using the <code title="RasterCalculator (Int(&quot;slope_rast&quot; + 0.5,&quot;slope_rast&quot;,), &quot;slope_rast_int&quot;)">Raster Calculator</code> tool.
-                The <code title="Reclassify_sa(&quot;slope_1m_int&quot;, &quot;Value&quot;, &quot;0 10 3;10 20 6;20 30 9;30 40 9;40 50 6;50 60 1;60 70 1;70 80 1;80 90 1&quot;, &quot;slope_reclass&quot;, &quot;DATA&quot;)">Reclassify</code> tool was used to <!-- based roughly off table in https://www.earth-surf-dynam.net/2/469/2014/esurf-2-469-2014.pdf, pg. 471 -->change the cell values to desired weights (note: this can also be done in
-                the Weighted Overlay tool, but doing so is potentially time-consuming).<!--While the Minnesota Department of
-                Natural Resources (MnDNR)'s <a href="http://www.dnr.state.mn.us/maps/mntopo/index.html">MnTOPO application</a>
-                allows the user to download elevation data clipped from a user-created polygon, I found that drawing a single
-                non-overlapping polygon at sufficient scale covering the entire NS was too time consuming.-->
+                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). In this particular area of the world there are at least two sets DEMs we could use, but fortunately one of those is a 1m flight that works best given the size of the property. From the elevation DEM we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. DEM was acquired xxxxxxxxxx.
             </p>
             
-            <figure>
-                <a href="assets/images/slope.png"><img src="assets/images/slope.png" alt="Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster (red to yellow gradient), below is the reclassified data (9 classes, blue lows to red highs."></a><br>
-                <figcaption><small>Cutface Creek, roughly 6 miles south of Grand Marais. Above is the original slope raster, below is the reclassified data.</small></figcaption>
-            </figure>
-            
-            <h3 id="proc_outline">Lake Superior shoreline</h3>
+            <h3 id="proc_dems">Floodplain</h3>
             <p>
-                A high-resolution shoreline was created by using the <code title="Con(&quot;slope_rast&quot; > 0,1,0)">Con</code> tool to divide the slope raster into two
-                values: 0 and not 0. The product raster was <code title="RasterToPolygon_conversion(&quot;slope_float&quot;, &quot;LS_shore_poly&quot;, &quot;SIMPLIFY&quot;, &quot;VALUE&quot;)">converted</code> into a polygon and all polygons not the Lake Superior shoreline were deleted using the Editor toolbar. <code title="EucDistance (&quot;LS_shore_poly&quot;, 20, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to create cells whose values denoted distance from the polygon, <code title="Reclassify_sa(&quot;weighted raster components\Buffers\LS_border_rast_int&quot;, &quot;Value&quot;, &quot;0 1 9;1 5 7;5 10 5;10 20 1&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/LS_border_reclass&quot;, &quot;DATA&quot;)">reclassified</code> to desired weights,
-                and converted to an integer raster.
-            </p><!--make sure this paragraph is logically consistent-->
-            
-            <figure>
-                <a href="assets/images/lsprox.png"><img src="assets/images/lsprox.png" alt="Top half of image: Euclidean distance raster, 100 meters from shore; bottom half: reclassified distance raster."></a><br>
-                <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Location is the Silver Bay Marina. The reclassified raster only uses 20 meters from shore since 100 was deemed excessive.</small></figcaption>
-            </figure>    
-            
-            <h3 id="proc_snas">Scientific and Natural Areas</h3>
-            <p>
-                The Scientific and Natural Areas that had some portion of the NS within their borders were exported to a new feature class. <code title="PolygonToRaster_conversion (&quot;SNAs_shp&quot;, &quot;&lt;field with value shared by all polygons, e.g. 'MN'&gt;&quot;, &quot;SNAs_rast&quot;, &quot;MAXIMUM_AREA&quot;, ,1)">Polygon to Raster</code> was then used to convert these areas to rasters for use in the Weighted Overlay tool.
+                100-year floodplain polygons were downloaded from Polk County GIS. This were visually validated against <a href="https://msc.fema.gov/nfhl">FEMA’s web map</a> and the official PDF. The floodplain map is effective September 16, 2011.
             </p>
-            
-            <figure>
-                <a href="assets/images/prohibitedareas.png"><img src="assets/images/prohibitedareas.png" alt="Collection-prohibited areas: Grand Portage Reservation, 193,695,339 m&sup2;; State parks, 142,090,807 m&sup2;; Scientific and Natural Areas, 1,164,520 m&sup2;"></a><br>
-                <figcaption><small>Land where collection is prohibited. Other private land is not shown.</small></figcaption>
-            </figure>
-            
-            <h3 id="proc_parks">State parks</h3>
+            <h3 id="proc_dems">Property boundaries</h3>
             <p>
-                Processing similar to SNAs.
+                Parcel data were acquired from Polk County GIS and used to identify the boundary of the property. Validation of property boundaries would require a survey and is out of scope for this analysis.
             </p>
-            
-            <h3 id="proc_roads">Roads</h3>
+            <h3 id="proc_dems">Soil</h3>
             <p>
-                The original road layer was clipped using a 1,000m buffer of the shoreline. <code title="EucDistance(&quot;roads_2012&quot;, 100, 1, &quot;LS_shore_euc&quot;)">Euclidean Distance</code> was used to get a 2,000m raster, which was then clipped using the polygon of Lake Superior to save space. The result was converted to an integer raster and <code title="Reclassify_sa(&quot;Road_dist_int_16bit&quot;, &quot;Value&quot;, &quot;0 157 1;157 354 2;354 571 3;571 797 4;797 1028 5;1028 1262 6;1262 1501 7;1501 1746 8;1746 2000 9&quot;, &quot;C:/Users/Gerrit/GIS/optimal_agate_picking/wr_components.gdb/Reclass_dist_jenks&quot;, &quot;DATA&quot;)">reclassified</code> for use in Weighted Overlay.
+                Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s water-holding capacity, drainage class, organic matter content, and depth to water table. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that would be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.
             </p>
-            
-            <figure>
-            
-                <a href="assets/images/roadprox.png"><img src="assets/images/roadprox.png" alt="Collection-prohibited areas: Grand Portage Reservation, 193,695,339 m&sup2;; State parks, 142,090,807 m&sup2;; Scientific and Natural Areas, 1,164,520 m&sup2;"></a><br>
-                <figcaption><small>Euclidean distance raster (top half) and reclassified distance raster (bottom). Images centered on the Two Harbors iron ore docks. One of the main locations that necessitated a 2,000m distance raster.</small></figcaption>
-            </figure>
-            
-            <h3 id="proc_gpr">Grand Portage Reservation</h3>
+            <h3 id="proc_dems">Wetlands</h3>
             <p>
-                An image from deadpioneer.com (by Andrew Munsch) was used georeferenced using MCIS, seven <a href="assets/gis/agates/gpr_points.txt">control points</a>, and the 1st Order Polynomial transformation. While a border layer was found on Cook County's <a href="http://156.99.166.245/blue/">Legacy Web Mapping Application</a>, it could not be downloaded. For the portion of the reservation border that comprised the state border, a state outline was found on the MGC and was traced with the Editor toolbar. The portion of the reservation on Lake Superior was traced using the previously-created shoreline feature class and the portion of the reservation within Cook County was traced using the georeferenced map as a reference. The islands off the shore of Grand Portage were traced using the state outline and Lake Superior shoreline where applicable.
+                Wetlands polygons derived from the Wisconsin Department of Natural Resources Wetland Survey were downloaded from Polk County GIS and visually validated against <a href="https://dnrmaps.wi.gov/H5/?Viewer=SWDV&runWorkflow=Wetland">the DNR’s web map</a>. These data were augmented by heads-up digitization of an ephemeral stream channel and its floodplain. This feature is not at all apparent when viewing aerial imagery or the wetlands data, but I personally observed it when walking the property and my suspicions were confirmed when viewing the slope raster. It’s difficult to make any definitive conclusion given the lack of information, but it is likely a natural feature (given the meandering nature of the channel) draining a wetland north of the property.
             </p>
-            
-            <figure>
-                <a href="assets/images/gpr.png"><img src="assets/images/gpr.png" alt="Grand Portage Reservation outline."></a><br>
-                <figcaption><small>Grand Portage Reservation.</small></figcaption>
-            </figure>            
 
-        <h2 id="results">Results</h2>
+        <h2 id="processing">Processing</h2>
         <p>
-            Prior to using the Weighted Overlay tool, all layers were clipped to retain only the portions within 20m of shore. The computer used during this project is not particularly beefy and has troubles with processing large or complex amounts of data. To compensate, measures were taken to ease processing, such as retaining only the relevant parts of data, reducing bit depth of the rasters, and splitting the processing extents into smaller areas <!--remove if not true-->.
+            After all primary data (DEMs, soil, etc.) were downloaded they were re-projected in NAD 1983 UTM Zone 15N. The DEMs used bilinear resampling during the re-projection process to reduce the presence of artifacts in the output rasters.
+        </p>
+        <figure>
+                <a href="assets/images/orchard/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/SlopeBilinearNearest.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in teal outline and orchard in red outline."></a><br>
+                <figcaption><small>A comparison of slopes derived from data projected with bilinear (left) and nearest neighbor (right) resampling techniques. Artifacts manifest as an approximately north-south and east-west cross-hatch pattern. While the artifacts are most obvious with nearest neighbor, bilinear does not completely remove them, indicating the artifacts are inherent to the source LiDAR data. Darker color indicates steeper slopes.</small></figcaption>
+        </figure>
+        <p>
+            Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect (slope exposure) rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.
+        </p>
+        
+        <p>
+        <table>
+            <caption>Weights assigned to rasters</caption>
+            <tr>
+                <th colspan="2">Elevation (meters)</th>
+                <th colspan="2">Slope (°)</th>
+                <th colspan="2">Aspect (°)</th>
+            </tr>
+            <tr>
+                <td>1,115 - 1,123</td>
+                <td>1</td>
+                <td>0 - 4</td>
+                <td>1</td>
+                <td>135 - 225</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>1,123 – 1,132</td>
+                <td>2</td>
+                <td>>25</td>
+                <td>2</td>
+                <td>—</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>1,132 – 1,140</td>
+                <td>3</td>
+                <td>20 - 25</td>
+                <td>3</td>
+                <td>45 - 135; 225 - 315</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>1,140 – 1,149</td>
+                <td>4</td>
+                <td>15 - 20</td>
+                <td>4</td>
+                <td>—</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>1,149 – 1,157</td>
+                <td>5</td>
+                <td>4 - 15</td>
+                <td>5</td>
+                <td>315 - 45</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>Restricted</td>
+                <td>—</td>
+                <td>Restricted</td>
+                <td>—</td>
+                <td>Restricted</td>
+            </tr>
+        </table>
+        <caption>Beneath each header are two columns: the left is the data interval and the right is the weight</caption>
+        </p>
+        <p>
+            Weights for elevation are straightforward – the literature suggests planting trees at elevation to avoid planting them in areas where cold air will pool. For similar reasons, the literature advises planting trees on a slope, but given the lack of information, I’ve defined “gentle” to incorporate the only quantitative numbers, plus a little more. One could just as easily interpret “gentle” to mean anything up to 45°. Aspect is also self-explanatory: the higher weights are assigned to north-facing slopes to reduce harm during winter. An aspect of -1°, or flat, was only calculated for the river.
+        </p>
+        <p>
+            Floodplains and wetlands were treated identically. The downloaded polygons were clipped using the property boundary. In the output file, all features were merged together and assigned a value of 1. Using the property boundary, another polygon was created for each layer that filled the gap between the property boundary and the floodplain/wetland feature and assigned a value of 0. The polygons were converted to a raster with a 1m pixel resolution, and reclassified.
+        </p>
+        <p>
+        <table>
+            <caption>Weights assigned to floodplain and wetlands</caption>
+            <tr>
+                <th colspan="2">Floodplain</th>
+                <th colspan="2">Wetland</th>
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>1</td>
+                <td>—</td>
+                <td>1</td>
 
-            in Spatial Analyst was used executed to get a 
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>2</td>
+                <td>—</td>
+                <td>2</td>
+
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>3</td>
+                <td>—</td>
+                <td>3</td>
+
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>4</td>
+                <td>—</td>
+                <td>4</td>
+
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>5</td>
+                <td>0</td>
+                <td>5</td>
+
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Restricted</td>
+                <td>1</td>
+                <td>Restricted</td>
+
+            </tr>
+        </table>
+        <caption>Beneath each header are two columns: the left is the data interval and the right is the weight</caption>
         </p>
-        
-        <h2 id="groundtruthing">Groundtruthing</h2>
         <p>
-            Coming Summer 2018!
+            Not only are the soils in floodplains and wetlands unsuited for growing apple trees, it would be financially unwise. For floodplains, there’s the obvious chance of the river flooding and your trees being washed away. For wetlands, there are financial penalties for destroying wetlands, or at the very least, legally destroying wetlands would likely be financially prohibitive. Anything not a floodplain or wetland is considered optimal.
         </p>
-        
-        <h2 id="data">Data sources</h2>
         <p>
-            This project relied primarily on data created and hosted by the State of Minnesota and the Minnesota Geological
-            Survey (MGS), with a small contribution from third parties.
+            The downloaded soil polygon layer was clipped using the property boundary and the Soil Data Viewer was used to generate water-holding capacity, drainage class, organic matter content, and depth to water table layers, which were then converted to rasters and reclassified.
         </p>
-        
-        <!-- <summary>/<detail> toggle: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details -->
         <p>
-            <details>
-                <summary>State data</summary>
-                <a href="https://gisdata.mn.gov/dataset/loc-pop-centers">Cities and other population centers</a><br>
-                <a href="ftp://ftp.lmic.state.mn.us/pub/data/elevation/lidar/">Digital Elevation Models (DEMs)</a><br>
-                <a href="http://www.mngeo.state.mn.us/chouse/wms/composite_image.html">Minnesota Composite Image Service (MCIS)</a><br>
-                <a href="https://gisdata.mn.gov/dataset/bdry-scientific-and-nat-areas">Scientific and Natural Areas (SNAs)</a><br>
-                <a href="https://gisdata.mn.gov/dataset/bdry-dnr-lrs-prk">State Parks</a><br>
-                <a href="https://gisdata.mn.gov/dataset/trans-roads-mndot-tis">Roads</a><br>
-            </details>
-            
-            <details>
-                <summary>MGS data</summary>
-                <a href="http://hdl.handle.net/11299/60004">M-065: Silver Bay and Split Rock Point NE</a><br>
-                <a href="http://hdl.handle.net/11299/60005">M-066: Illgen City</a><br>
-                <a href="http://hdl.handle.net/11299/60010">M-072: Doyle Lake and Finland</a><br>
-                <a href="http://hdl.handle.net/11299/712">M-128: French River and Lakewood</a><br>
-                <a href="http://hdl.handle.net/11299/317">M-129: Knife River</a><br>
-                <a href="http://hdl.handle.net/11299/406">M-139: Two Harbors</a><br>
-                <a href="http://hdl.handle.net/11299/290">M-140: Castle Danger</a><br>
-                <a href="http://hdl.handle.net/11299/57440">M-147: Split Rock Point</a><br>
-                <a href="http://hdl.handle.net/11299/58167">M-170: Schroeder</a><br>
-                <a href="http://hdl.handle.net/11299/58168">M-171: Tofte</a><br>
-                <a href="http://hdl.handle.net/11299/58169">M-172: Little Marais</a><br>
-                <a href="http://hdl.handle.net/11299/58171">M-174: Lutsen</a><br>
-                <a href="http://hdl.handle.net/11299/58221">M-179: Deer Yard Lake and Good Harbor Bay</a><br>
-                <a href="http://hdl.handle.net/11299/58225">M-182: Duluth</a><br>
-                <a href="http://hdl.handle.net/11299/101646">M-189: Grand Marais</a><br>
-                <a href="http://hdl.handle.net/11299/115932">M-190: Kadunce River</a><br>
-                <a href="http://hdl.handle.net/11299/159554">M-195: Marr Island and Hovland</a><br>
-            </details>
-            
-            <details>
-                <summary>Third party data</summary>
-                <a href="http://www.deadpioneer.com/routes/US61/historicus61se/mineralcenter/mineralcentercontext.jpg">Grand Portage Reservation (GPR ) border</a><br>
-            </details>
+        <table>
+            <caption>Weights assigned to soil data</caption>
+            <tr>
+                <th colspan="2">Water-holding capacity (cm/cm)</th>
+                <th colspan="2">Drainage class</th>
+                <th colspan="2">Organic matter content (%)</th>
+                <th colspan="2">Depth to water table (cm)</th>
+
+            </tr>
+            <tr>
+                <td>≤0.14</td>
+                <td>1</td>
+                <td>Very poorly drained; Somewhat poorly drained; Poorly drained</td>
+                <td>1</td>
+                <td>>60</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>0.15 - 0.17</td>
+                <td>2</td>
+                <td>—</td>
+                <td>2</td>
+                <td>—</td>
+                <td>2</td>
+                <td>15</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>0.18 - 0.21</td>
+                <td>3</td>
+                <td>Somewhat excessively drained</td>
+                <td>3</td>
+                <td>10</td>
+                <td>3</td>
+                <td>30</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>0.22 - 0.23</td>
+                <td>4</td>
+                <td>Moderately well drained</td>
+                <td>4</td>
+                <td>1.25</td>
+                <td>4</td>
+                <td>—</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>0.23 - 0.6</td>
+                <td>5</td>
+                <td>Well drained</td>
+                <td>5</td>
+                <td>2 - 6</td>
+                <td>5</td>
+                <td>201</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>—</td>
+                <td>Restricted</td>
+                <td>—</td>
+                <td>Restricted</td>
+                <td>—</td>
+                <td>Restricted</td>
+                <td>—</td>
+                <td>Restricted</td>
+            </tr>
+        </table>
+        <caption>Beneath each header are two columns: the left is the data interval and the right is the weight</caption>
+        </p>
+        <p>
+            In addition to assigning weights to the data, one must assign weights to each layer such that they sum to 100%. We will use these:
+            <table>
+                <tr>
+                    <td>Aspect</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>Depth to water table</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>Elevation</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>Slope</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>Drainage class</td>
+                    <td>10%</td>
+                </tr>
+                <tr>
+                    <td>Organic matter content</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>Water-holding capacity</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>Buildings</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Floodplain</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Roads</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Wetland</td>
+                    <td>0%</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            The data that are the least easy to artificially alter have the highest weights, while those that can be artificially altered have lowest. Buildings, floodplains, roads, and wetlands are included exclusively to restrict land from being considered and have the lowest weights of all.
         </p>
         
-        <small>
-            A different agate-picking project was undertaken by a student in GIS 3563 (Fall semester, 2017). Unfortunately, I don't know who it was or how their analysis was conducted, so if anyone has details I'd love to hear about it!<br>
-        </small>        
+        
+        <h2 id="result">Result</h2>
+        <p>
+            :)
+        </p>
         
         </section>       
 
