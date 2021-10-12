@@ -49,8 +49,12 @@
         </ol>
         
         <p>
-            A derecho blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there was (and continues to be) debate about what to do about the significant increase in unforested land, but one of the definite planned uses was an orchard. My friend was aware of my GIS/geology background and asked me to help plot figures in the design process.
+            A derecho blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there was (and continues to be) debate about what to do with the significant increase in unforested land, but one of the definite planned uses was an orchard. My friend was aware of my GIS/geology background and asked me to help plot figures in the design process.
         </p>
+        <figure>
+                <a href="assets/images/orchard/Aerial20202018.jpg"><img src="assets/images/orchard/Aerial20202018.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a teal outline."></a><br>
+                <figcaption><small>A comparison of leaf-on aerial imagery from 2020 (left) and 2018 (right). Large swathes of downed trees cover much of northern half of the property.</small></figcaption>
+        </figure>
         <p>
             During that process I was inspired to conduct a site suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a former garden, perhaps planted in the late 1990s-early 2000s.
         </p>
@@ -77,7 +81,7 @@
             Since the goal is established one must identify what’s needed for a successful orchard. However, since an orchard is defined as any plot of land where fruit or nut trees or grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars.
         </p>
         <p>
-            I don’t know anything about growing apples, so I googled around for resources. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three that seemed somewhat reputable:
+            I don’t know anything about growing apples, so I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three resources that seemed somewhat reputable:
             <ul>
                 <li>Teryl R. Roper, Daniel L. Maher, and Patricia S. McManus’ <a href="https://learningstore.extension.wisc.edu/products/growing-apples-in-wisconsin-p413"><i>Growing Apples in Wisconsin</i></a></li>
                 <li>Teryl R. Roper & Gary G. Frank’s <a href="https://learningstore.extension.wisc.edu/products/planning-and-establishing-commercial-apple-orchards-in-wisconsin-p417"><i>Planning and Establishing Commercial Apple Orchards in Wisconsin</i></a></li>
@@ -157,33 +161,63 @@
             USDA zone preference likely depends on the cultivar chosen and this can be disregarded.
         </p>
         
-        <h2 id="data">Data</h2> <!--make sure python commands are syntactically correct-->
-            <h3 id="proc_dems">Buildings and roads</h3>
+        <h2 id="data">Data</h2>
+        
+            <h3 id="proc_dems">Aerial imagery</h3>
             <p>
-                Roads and buildings were heads-up digitized using the leaf-off 2010 flight as a reference. <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS</a> has road data in a geospatial format, but it’s road centerlines, which are typically not helpful outside large-scale map symbology.. Even if they published road data as polygons, we’d still need to digitize the property access road. Building and road data were created September 13, 2021.
-            </p>
-
-            <h3 id="proc_dems">Elevation</h3>
-            <p>
-                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). In this particular area of the world there are at least two sets DEMs we could use, but fortunately one of those is a 1m flight that works best given the size of the property. From the elevation DEM we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. DEM was acquired xxxxxxxxxx.
+                A variety of aerial imagery was used as references, either for figure creation or creation of geospatial data. They include:
+                    <ul>
+                        <li>1938, August 18: United States Department of Agriculture (USDA) via the University of Wisconsin-Madison's <a href="https://maps.sco.wisc.edu/WHAIFinder/">WHAIFinder</a> service</li>
+                        <li>1979, May 24: USDA via the United States Geological Survey's <a href="https://earthexplorer.usgs.gov/">EarthExplorer</a> service</li>
+                        <li>1996, May 18: Polk County via EarthExplorer</li>
+                        <li>2005, June 18: USDA <a href="https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/">National Agriculture Imagery Program (NAIP)</a> via EarthExplorer</li>
+                        <li>2010, April 4: North Central Wisconsin Regional Planning Commission via EarthExplorer</li>
+                        <li>2018, September 6: USDA NAIP via EarthExplorer</li>
+                        <li>2020, June 25:: USDA NAIP via EarthExplorer</li>
+                    </ul>
+                They are referenced in this project by the year acquired.
             </p>
             
-            <h3 id="proc_dems">Floodplain</h3>
+            <h3 id="buildingsroads">Buildings and roads</h3>
             <p>
-                100-year floodplain polygons were downloaded from Polk County GIS. This were visually validated against <a href="https://msc.fema.gov/nfhl">FEMA’s web map</a> and the official PDF. The floodplain map is effective September 16, 2011.
+                Roads and buildings were heads-up digitized using a combination of the slope raster and the leaf-off 2010 aerial imagery as references. The <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS Division</a> publishes road centerlines, but these are not typically helpful outside large-scale map symbology.
             </p>
-            <h3 id="proc_dems">Property boundaries</h3>
+            <figure>
+                <a href="assets/images/orchard/BuildingsRoads.jpg"><img src="assets/images/orchard/BuildingsRoads.jpg" alt="Displays building and road data created for this project against the 2020 aerial imagery."></a><br>
+                <figcaption><small>Buildings (southwest quadrant) in red, roads in yellow.</small></figcaption>
+            </figure>
+            <h3 id="elevation">Elevation</h3>
             <p>
-                Parcel data were acquired from Polk County GIS and used to identify the boundary of the property. Validation of property boundaries would require a survey and is out of scope for this analysis.
+                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). In this particular area of the world there are at least two sets DEMs we could use, but fortunately one of those is a 1m flight that works best given the size of the property. From the elevation DEM we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This DEM was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide more specific date metadata.
             </p>
-            <h3 id="proc_dems">Soil</h3>
+            <figure>
+                <a href="assets/images/orchard/Elevation.jpg"><img src="assets/images/orchard/Elevation.jpg" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a><br>
+                <figcaption><small>Higher elevations represented by lighter colors, lower elevations by darker. Highest elevation within the propery boundary is approximately 1,157 ft and the lowest is 1,115. It is a low-relief property despite the dramatic color changes.</small></figcaption>
+            </figure>
+            <h3 id="floodplain">Floodplain</h3>
+            <p>
+                100-year floodplain polygons were downloaded from the Polk County GIS Division. This were visually validated against <a href="https://msc.fema.gov/nfhl">FEMA’s web map</a> and the official PDF map. The floodplain map is effective September 16, 2011.
+            </p>
+            <figure>
+                <a href="assets/images/orchard/Floodplain.jpg"><img src="assets/images/orchard/Floodplain.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
+                <figcaption><small>Floodplain depicted as the hatched polygon.</small></figcaption>
+            </figure>
+            <h3 id="parcel">Property boundaries</h3>
+            <p>
+                Parcel data were acquired from the Polk County GIS Division and used to identify the boundary of the property. Validation of property boundaries would require a survey and is out of scope for this analysis. These data were downloaded August 29, 2021.
+            </p>
+            <h3 id="soil">Soil</h3>
             <p>
                 Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s water-holding capacity, drainage class, organic matter content, and depth to water table. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that would be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.
             </p>
             <h3 id="proc_dems">Wetlands</h3>
             <p>
-                Wetlands polygons derived from the Wisconsin Department of Natural Resources Wetland Survey were downloaded from Polk County GIS and visually validated against <a href="https://dnrmaps.wi.gov/H5/?Viewer=SWDV&runWorkflow=Wetland">the DNR’s web map</a>. These data were augmented by heads-up digitization of an ephemeral stream channel and its floodplain. This feature is not at all apparent when viewing aerial imagery or the wetlands data, but I personally observed it when walking the property and my suspicions were confirmed when viewing the slope raster. It’s difficult to make any definitive conclusion given the lack of information, but it is likely a natural feature (given the meandering nature of the channel) draining a wetland north of the property.
+                Wetland polygons derived from the Wisconsin Department of Natural Resources Wetland Survey were downloaded from the Polk County GIS Division and visually validated against <a href="https://dnrmaps.wi.gov/H5/?Viewer=SWDV&runWorkflow=Wetland">the DNR’s web map</a>. These data were augmented by heads-up digitization of an ephemeral stream channel and its floodplain. This feature is not at all apparent when viewing aerial imagery or the wetlands data, but I personally observed it when walking the property and my suspicions were confirmed when viewing the slope raster. It is especially evident in the 1947 aerial imagery.
             </p>
+            <figure>
+                <a href="assets/images/orchard/Wetlands.jpg"><img src="assets/images/orchard/Wetlands.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
+                <figcaption><small>Wetlands depicted as green transparent polygons. The lighter green of the two polygons is the ephemeral channel and floodplain.</small></figcaption>
+            </figure>
 
         <h2 id="processing">Processing</h2>
         <p>
@@ -196,7 +230,10 @@
         <p>
             Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect (slope exposure) rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.
         </p>
-        
+        <figure>
+                <a href="assets/images/orchard/test.jpg"><img src="assets/images/orchard/test.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in teal outline and orchard in red outline."></a><br>
+                <figcaption><small>ugly?</small></figcaption>
+        </figure>
         <p>
         <table>
             <caption>Weights assigned to rasters</caption>
