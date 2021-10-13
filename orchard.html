@@ -173,7 +173,7 @@
                         <li>2005, June 18: USDA <a href="https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/">National Agriculture Imagery Program (NAIP)</a> via EarthExplorer</li>
                         <li>2010, April 4: North Central Wisconsin Regional Planning Commission via EarthExplorer</li>
                         <li>2018, September 6: USDA NAIP via EarthExplorer</li>
-                        <li>2020, June 25:: USDA NAIP via EarthExplorer</li>
+                        <li>2020, June 25: USDA NAIP via EarthExplorer</li>
                     </ul>
                 They are referenced in this project by the year acquired.
             </p>
@@ -231,14 +231,13 @@
             Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect (slope exposure) rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.
         </p>
         <figure>
-                <a href="assets/images/orchard/test.jpg"><img src="assets/images/orchard/test.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in teal outline and orchard in red outline."></a><br>
-                <figcaption><small>ugly?</small></figcaption>
+                <a href="assets/images/orchard/ElevationAspectSlope.jpg"><img src="assets/images/orchard/ElevationAspectSlope.jpg" alt="Six images displayed in a two by three grid. Top left images displays elevation within the property, with lowest elevation in blue, highest in yellow-orange, and middling in lime green. Top middle image displays slope within the property, with low slopes as very light pink and high slopes as very dark pink. Top right image displays aspect, with low aspect as  turquoise, high aspect as purple, and middling as dark blue. Below each is its respective reclassification using the same color schemes."></a><br>
         </figure>
         <p>
         <table>
             <caption>Weights assigned to rasters</caption>
             <tr>
-                <th colspan="2">Elevation (meters)</th>
+                <th colspan="2">Elevation (feet)</th>
                 <th colspan="2">Slope (°)</th>
                 <th colspan="2">Aspect (°)</th>
             </tr>
@@ -291,7 +290,7 @@
                 <td>Restricted</td>
             </tr>
         </table>
-        <caption>Beneath each header are two columns: the left is the data interval and the right is the weight</caption>
+        <caption><small>Beneath each header are two columns: the left is the data interval and the right is the weight</small></caption>
         </p>
         <p>
             Weights for elevation are straightforward – the literature suggests planting trees at elevation to avoid planting them in areas where cold air will pool. For similar reasons, the literature advises planting trees on a slope, but given the lack of information, I’ve defined “gentle” to incorporate the only quantitative numbers, plus a little more. One could just as easily interpret “gentle” to mean anything up to 45°. Aspect is also self-explanatory: the higher weights are assigned to north-facing slopes to reduce harm during winter. An aspect of -1°, or flat, was only calculated for the river.
@@ -349,7 +348,7 @@
 
             </tr>
         </table>
-        <caption>Beneath each header are two columns: the left is the data interval and the right is the weight</caption>
+        <caption><small>Beneath each header are two columns: the left is the data interval and the right is the weight</small></caption>
         </p>
         <p>
             Not only are the soils in floodplains and wetlands unsuited for growing apple trees, it would be financially unwise. For floodplains, there’s the obvious chance of the river flooding and your trees being washed away. For wetlands, there are financial penalties for destroying wetlands, or at the very least, legally destroying wetlands would likely be financially prohibitive. Anything not a floodplain or wetland is considered optimal.
@@ -428,7 +427,7 @@
                 <td>Restricted</td>
             </tr>
         </table>
-        <caption>Beneath each header are two columns: the left is the data interval and the right is the weight</caption>
+        <caption><small>Beneath each header are two columns: the left is the data interval and the right is the weight</small></caption>
         </p>
         <p>
             In addition to assigning weights to the data, one must assign weights to each layer such that they sum to 100%. We will use these:
