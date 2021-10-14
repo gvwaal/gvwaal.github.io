@@ -19,7 +19,7 @@
 
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <meta name="viewport" content="width=device-width, initial-scale=0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0">
         <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -49,33 +49,33 @@
         </ol>
         
         <p>
-            A derecho blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there was (and continues to be) debate about what to do with the significant increase in unforested land, but one of the definite planned uses was an orchard. My friend was aware of my GIS/geology background and asked me to help plot figures in the design process.
+            A <a href="https://www.spc.noaa.gov/misc/AbtDerechos/derechofaq.htm">derecho</a> blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there's some debate about what to do with the significant increase in unforested land, but one of the planned uses was an orchard. My friend was aware of my mapping/geology background and asked me to plot some figures during the design process.
         </p>
         <figure>
-                <a href="assets/images/orchard/Aerial20202018.jpg"><img src="assets/images/orchard/Aerial20202018.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a teal outline."></a><br>
-                <figcaption><small>A comparison of leaf-on aerial imagery from 2020 (left) and 2018 (right). Large swathes of downed trees cover much of northern half of the property.</small></figcaption>
+                <a href="assets/images/orchard/Aerial20202018.jpg"><img src="assets/images/orchard/Aerial20202018.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a turquoise outline."></a><br>
+                <figcaption><small>A comparison of leaf-on aerial imagery from 2020 (left) and 2018 (right). Large swathes of downed trees cover much of northern half of the property. The turquoise square is the property boundary.</small></figcaption>
         </figure>
         <p>
-            During that process I was inspired to conduct a site suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a former garden, perhaps planted in the late 1990s-early 2000s.
+            During that process I was inspired to conduct a site suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a garden developed by one of the former property owners.
         </p>
         <figure>
-                <a href="assets/images/orchard/Aerial20051996.jpg"><img src="assets/images/orchard/Aerial20051996.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Planned orchard shown for reference with a red outline."></a><br>
-                <figcaption><small>A comparison of leaf-on aerial imagery from 2005 (left) and 1996 (right). Just east of the planned orchard in the 1996 imagery are two black dots I interpret to be trees, but it doesn't appear to definitively be a garden.</small></figcaption>
+                <a href="assets/images/orchard/Aerial20202018zoom.jpg"><img src="assets/images/orchard/Aerial20202018zoom.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Planned orchard shown for reference with a red outline."></a><br>
+                <figcaption><small>2020 (left) and 2018 (right).</small></figcaption>
         </figure>
         <p>
-            In summary, a site suitability analysis:
+            In summary, a site suitability analysis consolidates different datasets with the intent of identifying an ideal location for a use, in this case, an orchard. For this analysis we'll rely on the Weighted Overlay tool provided with Esri's ArcMap software. Using Weighted Overlay looks something like this:
             <ol>
-                <li>asks the user to provide sets of raster data,</li>
-                <li>rank how important each category of data is, and</li>
-                <li>how each set should be weighted</li>
+                <li>Identify a goal (find alternate locations that are best suited for an apple orchard)</li>
+                <li>Identify attributes that would assist in achieving</li>
+                <li>Acquire or create geospatial datasets of those attributes</li>
+                <li>Rank the data in terms of desirability</li>
+                <li>Assign weights to the datasets</li>
+                <li>Run Weighted Overlay</li>
+                <li>Analyze results</li>
+                <li>Groundtruth results</li>
             </ol>
         </p>
-        <p>
-            In this task, the first step is to identify one’s goal (an orchard), then consider what data is needed (environmental attributes needed for a successful orchard), establish how that data should be weighted, then acquire the data and convert it into a usable format. We’ll be using ArcMap 10.x in this analysis.
-        </p>
         
-        
-                
         <h2 id="research">Research</h2>
         <p>
             Since the goal is established one must identify what’s needed for a successful orchard. However, since an orchard is defined as any plot of land where fruit or nut trees or grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars.
@@ -146,7 +146,7 @@
             </table>
         </p>
         <p>
-            Unfortunately, the soil fertility recommendations do not agree and bear further research. The same goes for soil aeration, aspect, and USDA Zone. Water-holding capacity seems intuitive enough to accept based on information available.
+            Unfortunately, the soil fertility recommendations do not agree and bear further research. The same goes for soil aeration, aspect (the direction a slope faces), and USDA Zone. Water-holding capacity seems intuitive enough to accept based on information available.
         </p>
         <p>
             <a href="http://treefruit.wsu.edu/orchard-management/soils-nutrition/soil-health-in-orchards/">Soil Health in Orchards</a> claims agricultural soils average 1-6% organic matter but does not cite a source. Table 2 of <a href="https://www.tandfonline.com/doi/full/10.1080/02571862.2014.944229">an academic study</a> records percentages ranges from 1-4ish%, but only from a single orchard. While many resources reiterate the importance of soil organic matter, few (reliable) sources provide quantitative recommendations, so for the sake of convenience we’ll go with 2-6% as the ideal amount of soil organic matter.
@@ -188,7 +188,7 @@
             </figure>
             <h3 id="elevation">Elevation</h3>
             <p>
-                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). In this particular area of the world there are at least two sets DEMs we could use, but fortunately one of those is a 1m flight that works best given the size of the property. From the elevation DEM we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This DEM was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide more specific date metadata.
+                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). In this particular area of the world there are at least two sets DEMs we could use, but fortunately one of those is a 1m flight that works best given the size of the property. From the elevation DEM we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This DEM was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).
             </p>
             <figure>
                 <a href="assets/images/orchard/Elevation.jpg"><img src="assets/images/orchard/Elevation.jpg" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a><br>
@@ -208,8 +208,12 @@
             </p>
             <h3 id="soil">Soil</h3>
             <p>
-                Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s water-holding capacity, drainage class, organic matter content, and depth to water table. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that would be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.
+                Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s available water capacity (previously referenced as water-holding capacity), depth to water table, drainage class, and organic matter content. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that would be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.
             </p>
+            <figure>
+                <a href="assets/images/orchard/Soil.jpg"><img src="assets/images/orchard/Soil.jpg" alt="Soils data displayed with a two by three grid. The right two-thirds is soil data, generally using reds as low values and blues as high values."></a><br>
+                <figcaption><small>Soils data depicted with symbology as imported by the Soil Data Viewer.</small></figcaption>
+            </figure>
             <h3 id="proc_dems">Wetlands</h3>
             <p>
                 Wetland polygons derived from the Wisconsin Department of Natural Resources Wetland Survey were downloaded from the Polk County GIS Division and visually validated against <a href="https://dnrmaps.wi.gov/H5/?Viewer=SWDV&runWorkflow=Wetland">the DNR’s web map</a>. These data were augmented by heads-up digitization of an ephemeral stream channel and its floodplain. This feature is not at all apparent when viewing aerial imagery or the wetlands data, but I personally observed it when walking the property and my suspicions were confirmed when viewing the slope raster. It is especially evident in the 1947 aerial imagery.
@@ -224,11 +228,11 @@
             After all primary data (DEMs, soil, etc.) were downloaded they were re-projected in NAD 1983 UTM Zone 15N. The DEMs used bilinear resampling during the re-projection process to reduce the presence of artifacts in the output rasters.
         </p>
         <figure>
-                <a href="assets/images/orchard/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/SlopeBilinearNearest.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in teal outline and orchard in red outline."></a><br>
+                <a href="assets/images/orchard/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/SlopeBilinearNearest.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in turquoise outline and orchard in red outline."></a><br>
                 <figcaption><small>A comparison of slopes derived from data projected with bilinear (left) and nearest neighbor (right) resampling techniques. Artifacts manifest as an approximately north-south and east-west cross-hatch pattern. While the artifacts are most obvious with nearest neighbor, bilinear does not completely remove them, indicating the artifacts are inherent to the source LiDAR data. Darker color indicates steeper slopes.</small></figcaption>
         </figure>
         <p>
-            Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect (slope exposure) rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.
+            Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.
         </p>
         <figure>
                 <a href="assets/images/orchard/ElevationAspectSlope.jpg"><img src="assets/images/orchard/ElevationAspectSlope.jpg" alt="Six images displayed in a two by three grid. Top left images displays elevation within the property, with lowest elevation in blue, highest in yellow-orange, and middling in lime green. Top middle image displays slope within the property, with low slopes as very light pink and high slopes as very dark pink. Top right image displays aspect, with low aspect as  turquoise, high aspect as purple, and middling as dark blue. Below each is its respective reclassification using the same color schemes."></a><br>
@@ -293,128 +297,154 @@
         <caption><small>Beneath each header are two columns: the left is the data interval and the right is the weight</small></caption>
         </p>
         <p>
-            Weights for elevation are straightforward – the literature suggests planting trees at elevation to avoid planting them in areas where cold air will pool. For similar reasons, the literature advises planting trees on a slope, but given the lack of information, I’ve defined “gentle” to incorporate the only quantitative numbers, plus a little more. One could just as easily interpret “gentle” to mean anything up to 45°. Aspect is also self-explanatory: the higher weights are assigned to north-facing slopes to reduce harm during winter. An aspect of -1°, or flat, was only calculated for the river.
+            Weights for elevation are straightforward – the literature suggests planting trees at elevation to avoid areas where cold air will pool. For similar reasons, the literature advises planting trees on a slope, but given the lack of information, I’ve defined “gentle” to incorporate the only quantitative numbers, plus a little more. One could just as easily interpret “gentle” to mean anything up to 45°. Aspect is also self-explanatory: the higher weights are assigned to north-facing slopes to reduce harm during winter. An aspect of -1°, or flat, was only calculated for the river.
         </p>
         <p>
-            Floodplains and wetlands were treated identically. The downloaded polygons were clipped using the property boundary. In the output file, all features were merged together and assigned a value of 1. Using the property boundary, another polygon was created for each layer that filled the gap between the property boundary and the floodplain/wetland feature and assigned a value of 0. The polygons were converted to a raster with a 1m pixel resolution, and reclassified.
+            Buildings, floodplains, roads, and wetlands were treated identically. The polygons were clipped using the property boundary, converted to rasters with a 1m pixel resolution, and reclassified.
         </p>
         <p>
         <table>
-            <caption>Weights assigned to floodplain and wetlands</caption>
+            <caption>Weights assigned to buildings, floodplains, roads, and wetlands</caption>
             <tr>
-                <th colspan="2">Floodplain</th>
-                <th colspan="2">Wetland</th>
+                <th colspan="2">Buildings</th>
+                <th colspan="2">Floodplains</th>
+                <th colspan="2">Roads</th>
+                <th colspan="2">Wetlands</th>
             </tr>
             <tr>
                 <td>—</td>
                 <td>1</td>
                 <td>—</td>
                 <td>1</td>
-
+                <td>—</td>
+                <td>1</td>
+                <td>—</td>
+                <td>1</td>
             </tr>
             <tr>
                 <td>—</td>
                 <td>2</td>
                 <td>—</td>
                 <td>2</td>
-
+                <td>—</td>
+                <td>2</td>
+                <td>—</td>
+                <td>2</td>
             </tr>
             <tr>
                 <td>—</td>
                 <td>3</td>
                 <td>—</td>
                 <td>3</td>
-
+                <td>—</td>
+                <td>3</td>
+                <td>—</td>
+                <td>3</td>
             </tr>
             <tr>
                 <td>—</td>
                 <td>4</td>
                 <td>—</td>
                 <td>4</td>
-
+                <td>—</td>
+                <td>4</td>
+                <td>—</td>
+                <td>4</td>
             </tr>
             <tr>
-                <td>0</td>
+                <td>NODATA</td>
                 <td>5</td>
-                <td>0</td>
+                <td>NODATA</td>
                 <td>5</td>
-
+                <td>NODATA</td>
+                <td>5</td>
+                <td>NODATA</td>
+                <td>5</td>
             </tr>
             <tr>
                 <td>1</td>
                 <td>Restricted</td>
                 <td>1</td>
                 <td>Restricted</td>
-
+                <td>1</td>
+                <td>Restricted</td>
+                <td>1</td>
+                <td>Restricted</td>
             </tr>
         </table>
-        <caption><small>Beneath each header are two columns: the left is the data interval and the right is the weight</small></caption>
+        <caption><small>Beneath each header are two columns: the left is the feature present as a "1" and the right is the weight. "NODATA" is a how ArcMap represents the lack of a cell value within a geographic extent. For example, if one has a 2-by-2 grid, and a 1-by-1 cell within that grid has a value of "3" while the rest of the 1-by-1 cells have no associated value, ArcMap would label those three cells as NODATA. An analagous term is <a href="https://en.wikipedia.org/wiki/Null_(SQL)">NULL</a>.</small></caption>
         </p>
         <p>
             Not only are the soils in floodplains and wetlands unsuited for growing apple trees, it would be financially unwise. For floodplains, there’s the obvious chance of the river flooding and your trees being washed away. For wetlands, there are financial penalties for destroying wetlands, or at the very least, legally destroying wetlands would likely be financially prohibitive. Anything not a floodplain or wetland is considered optimal.
         </p>
         <p>
-            The downloaded soil polygon layer was clipped using the property boundary and the Soil Data Viewer was used to generate water-holding capacity, drainage class, organic matter content, and depth to water table layers, which were then converted to rasters and reclassified.
+            The downloaded soil polygon layer was clipped using the property boundary and the Soil Data Viewer was used to generate available water capacity, drainage class, organic matter content, and depth to water table layers, which were then converted to rasters and reclassified.
         </p>
         <p>
         <table>
             <caption>Weights assigned to soil data</caption>
             <tr>
-                <th colspan="2">Water-holding capacity (cm/cm)</th>
-                <th colspan="2">Drainage class</th>
-                <th colspan="2">Organic matter content (%)</th>
+                <th colspan="2">Available water capacity (cm/cm)</th>
                 <th colspan="2">Depth to water table (cm)</th>
+                <th colspan="2">Drainage class</th>
+                <th colspan="2">Organic matter content (% by weight)</th>
+                
 
             </tr>
             <tr>
                 <td>≤0.14</td>
                 <td>1</td>
+                <td>0</td>
+                <td>1</td>
                 <td>Very poorly drained; Somewhat poorly drained; Poorly drained</td>
                 <td>1</td>
                 <td>>60</td>
                 <td>1</td>
-                <td>0</td>
-                <td>1</td>
+                
             </tr>
             <tr>
                 <td>0.15 - 0.17</td>
                 <td>2</td>
-                <td>—</td>
-                <td>2</td>
-                <td>—</td>
-                <td>2</td>
                 <td>15</td>
                 <td>2</td>
+                <td>—</td>
+                <td>2</td>
+                <td>—</td>
+                <td>2</td>
+                
             </tr>
             <tr>
                 <td>0.18 - 0.21</td>
+                <td>3</td>
+                <td>30</td>
                 <td>3</td>
                 <td>Somewhat excessively drained</td>
                 <td>3</td>
                 <td>10</td>
                 <td>3</td>
-                <td>30</td>
-                <td>3</td>
+                
             </tr>
             <tr>
                 <td>0.22 - 0.23</td>
+                <td>4</td>
+                <td>—</td>
                 <td>4</td>
                 <td>Moderately well drained</td>
                 <td>4</td>
                 <td>1.25</td>
                 <td>4</td>
-                <td>—</td>
-                <td>4</td>
+                
             </tr>
             <tr>
                 <td>0.23 - 0.6</td>
+                <td>5</td>
+                <td>201</td>
                 <td>5</td>
                 <td>Well drained</td>
                 <td>5</td>
                 <td>2 - 6</td>
                 <td>5</td>
-                <td>201</td>
-                <td>5</td>
+                
             </tr>
             <tr>
                 <td>—</td>
@@ -427,7 +457,7 @@
                 <td>Restricted</td>
             </tr>
         </table>
-        <caption><small>Beneath each header are two columns: the left is the data interval and the right is the weight</small></caption>
+        <caption><small>Beneath each header are two columns: the left is the data interval/value and the right is the weight.</small></caption>
         </p>
         <p>
             In addition to assigning weights to the data, one must assign weights to each layer such that they sum to 100%. We will use these:
@@ -457,7 +487,7 @@
                     <td>5%</td>
                 </tr>
                 <tr>
-                    <td>Water-holding capacity</td>
+                    <td>Available water capacity</td>
                     <td>5%</td>
                 </tr>
                 <tr>
@@ -488,7 +518,7 @@
             :)
         </p>
         
-        </section>       
+        </section>
 
         <footer>
         <p><small>Theme from <a href="https://github.com/orderedlist/minimal">Minimal</a></small></p>
