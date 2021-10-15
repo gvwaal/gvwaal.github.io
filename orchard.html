@@ -63,10 +63,10 @@
                 <figcaption><small>2020 (left) and 2018 (right).</small></figcaption>
         </figure>
         <p>
-            In summary, a site suitability analysis consolidates different datasets with the intent of identifying an ideal location for a use, in this case, an orchard. For this analysis we'll rely on the Weighted Overlay tool provided with Esri's ArcMap software. Using Weighted Overlay looks something like this:
+            A site suitability analysis consolidates different datasets with the intent of identifying an ideal location for a use, in this case, an orchard. For this analysis we'll rely on the Weighted Overlay tool provided with Esri's ArcMap software. Using Weighted Overlay looks something like this:
             <ol>
-                <li>Identify a goal (find alternate locations that are best suited for an apple orchard)</li>
-                <li>Identify attributes that would assist in achieving</li>
+                <li>Identify a goal (find alternate locations that are best suited for an orchard)</li>
+                <li>Identify attributes that would assist in achieving that goal</li>
                 <li>Acquire or create geospatial datasets of those attributes</li>
                 <li>Rank the data in terms of desirability</li>
                 <li>Assign weights to the datasets</li>
@@ -78,10 +78,10 @@
         
         <h2 id="research">Research</h2>
         <p>
-            Since the goal is established one must identify what’s needed for a successful orchard. However, since an orchard is defined as any plot of land where fruit or nut trees or grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars.
+            Since we've established our goal, we'll establish our scope. Because an orchard is defined as any plot of land where fruit or nut trees are grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars. We'll focus on doing relatively surface-level research given financial and time constraints. Next, we'll identify attributes required for a successful apple orchard.
         </p>
         <p>
-            I don’t know anything about growing apples, so I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three resources that seemed somewhat reputable:
+            I don’t know anything about growing apples! So I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three resources that seemed somewhat reputable:
             <ul>
                 <li>Teryl R. Roper, Daniel L. Maher, and Patricia S. McManus’ <a href="https://learningstore.extension.wisc.edu/products/growing-apples-in-wisconsin-p413"><i>Growing Apples in Wisconsin</i></a></li>
                 <li>Teryl R. Roper & Gary G. Frank’s <a href="https://learningstore.extension.wisc.edu/products/planning-and-establishing-commercial-apple-orchards-in-wisconsin-p417"><i>Planning and Establishing Commercial Apple Orchards in Wisconsin</i></a></li>
@@ -141,7 +141,12 @@
                 <tr>
                     <td>Paragraph 8, page 5 implies water-holding capacity is a beneficial soil attribute.</td>
                     <td>"Soils with good water-holding capacity will retain moisture and supply water to trees during dry periods.”</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>—</td>
                     <td>"[In USDA Zone 3] apple production is marginal and site selection becomes even more important.”</td>
+                    <td>—</td>
                 </tr>
             </table>
         </p>
@@ -168,11 +173,10 @@
                 A variety of aerial imagery was used as references, either for figure creation or creation of geospatial data. They include:
                     <ul>
                         <li>1938, August 18: United States Department of Agriculture (USDA) via the University of Wisconsin-Madison's <a href="https://maps.sco.wisc.edu/WHAIFinder/">WHAIFinder</a> service</li>
-                        <li>1979, May 24: USDA via the United States Geological Survey's <a href="https://earthexplorer.usgs.gov/">EarthExplorer</a> service</li>
+                        <li>1979, May 24: USDA via the United States Geological Survey (USGS)'s <a href="https://earthexplorer.usgs.gov/">EarthExplorer</a> service</li>
                         <li>1996, May 18: Polk County via EarthExplorer</li>
-                        <li>2005, June 18: USDA <a href="https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/">National Agriculture Imagery Program (NAIP)</a> via EarthExplorer</li>
                         <li>2010, April 4: North Central Wisconsin Regional Planning Commission via EarthExplorer</li>
-                        <li>2018, September 6: USDA NAIP via EarthExplorer</li>
+                        <li>2018, September 6: USDA <a href="https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/">National Agriculture Imagery Program (NAIP)</a> via EarthExplorer</li>
                         <li>2020, June 25: USDA NAIP via EarthExplorer</li>
                     </ul>
                 They are referenced in this project by the year acquired.
@@ -184,23 +188,26 @@
             </p>
             <figure>
                 <a href="assets/images/orchard/BuildingsRoads.jpg"><img src="assets/images/orchard/BuildingsRoads.jpg" alt="Displays building and road data created for this project against the 2020 aerial imagery."></a><br>
-                <figcaption><small>Buildings (southwest quadrant) in red, roads in yellow.</small></figcaption>
+                <figcaption><small>Buildings (southwest quadrant) in red, roads in yellow. The combined area for both sets are a little under two acres, or 4% of the property.</small></figcaption>
             </figure>
             <h3 id="elevation">Elevation</h3>
             <p>
-                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). In this particular area of the world there are at least two sets DEMs we could use, but fortunately one of those is a 1m flight that works best given the size of the property. From the elevation DEM we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This DEM was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).
+                Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). I located three DEM sets we could choose from: two acquired for the USGS's <a href="https://www.usgs.gov/core-science-systems/ngp/3dep">3D Elevation Program</a> (3DEP, 2016) and one flown for Polk County (2015). While the 3DEP DEMs are more recent and thus would better match ground conditions, at <a href="https://www.sciencebase.gov/catalog/item/5df04f5be4b02caea0f4fd39">1 arc-second</a> (~30 meter) resolution and <a href="https://www.sciencebase.gov/catalog/item/5f7784da82ce1d74e7d6caec">1/3 arc-second</a> (~10 meter) they're far too coarse for our use case. Resolution refers to how much ground a given raster cell represents - in the case of the latter 3DEP set, one cell represents a 10 meter by 10 meter square on the ground. The Polk County 2015 will be used (1 meter resolution!), and from this we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This set was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).
             </p>
             <figure>
                 <a href="assets/images/orchard/Elevation.jpg"><img src="assets/images/orchard/Elevation.jpg" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a><br>
                 <figcaption><small>Higher elevations represented by lighter colors, lower elevations by darker. Highest elevation within the propery boundary is approximately 1,157 ft and the lowest is 1,115. It is a low-relief property despite the dramatic color changes.</small></figcaption>
             </figure>
+            <p>
+                The National Oceanic and Atmospheric Administration maintains a <a href="https://coast.noaa.gov/inventory/">very useful catalogue</a> of the United State's elevation data if you're interested in elevation data for your area.
+            </p>
             <h3 id="floodplain">Floodplain</h3>
             <p>
                 100-year floodplain polygons were downloaded from the Polk County GIS Division. This were visually validated against <a href="https://msc.fema.gov/nfhl">FEMA’s web map</a> and the official PDF map. The floodplain map is effective September 16, 2011.
             </p>
             <figure>
                 <a href="assets/images/orchard/Floodplain.jpg"><img src="assets/images/orchard/Floodplain.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
-                <figcaption><small>Floodplain depicted as the hatched polygon.</small></figcaption>
+                <figcaption><small>Floodplain depicted as the hatched polygon. A little over one acre (around 2% of the total area) lies within the property boundary.</small></figcaption>
             </figure>
             <h3 id="parcel">Property boundaries</h3>
             <p>
@@ -220,7 +227,7 @@
             </p>
             <figure>
                 <a href="assets/images/orchard/Wetlands.jpg"><img src="assets/images/orchard/Wetlands.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
-                <figcaption><small>Wetlands depicted as green transparent polygons. The lighter green of the two polygons is the ephemeral channel and floodplain.</small></figcaption>
+                <figcaption><small>Wetlands depicted as green transparent polygons. The lighter green of the two polygons is the ephemeral channel and floodplain. Wetlands cover a little under eight acres, or 19% of the property.</small></figcaption>
             </figure>
 
         <h2 id="processing">Processing</h2>
@@ -514,8 +521,11 @@
         
         
         <h2 id="result">Result</h2>
+        <figure>
+                <a href="assets/images/orchard/Overlay.jpg"><img src="assets/images/orchard/Overlay.jpg" alt=""></a><br>
+        </figure>
         <p>
-            :)
+            :) talk about why the roads got buffered
         </p>
         
         </section>
