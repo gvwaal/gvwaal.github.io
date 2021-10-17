@@ -52,14 +52,14 @@
             A <a href="https://www.spc.noaa.gov/misc/AbtDerechos/derechofaq.htm">derecho</a> blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there's some debate about what to do with the significant increase in unforested land, but one of the planned uses was an orchard. My friend was aware of my mapping/geology background and asked me to plot some figures during the design process.
         </p>
         <figure>
-                <a href="assets/images/orchard/Aerial20202018.jpg"><img src="assets/images/orchard/Aerial20202018.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a turquoise outline."></a><br>
+                <a href="assets/images/orchard/figure/Aerial20202018.jpg"><img src="assets/images/orchard/thumb/Aerial20202018.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a turquoise outline."></a><br>
                 <figcaption><small>A comparison of leaf-on aerial imagery from 2020 (left) and 2018 (right). Large swathes of downed trees cover much of northern half of the property. The turquoise square is the property boundary.</small></figcaption>
         </figure>
         <p>
             During that process I was inspired to conduct a site suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a garden developed by one of the former property owners.
         </p>
         <figure>
-                <a href="assets/images/orchard/Aerial20202018zoom.jpg"><img src="assets/images/orchard/Aerial20202018zoom.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Planned orchard shown for reference with a red outline."></a><br>
+                <a href="assets/images/orchard/figure/Aerial20202018zoom.jpg"><img src="assets/images/orchard/thumb/Aerial20202018zoom.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Planned orchard shown for reference with a red outline."></a><br>
                 <figcaption><small>2020 (left) and 2018 (right).</small></figcaption>
         </figure>
         <p>
@@ -184,19 +184,19 @@
             
             <h3 id="buildingsroads">Buildings and roads</h3>
             <p>
-                Roads and buildings were heads-up digitized using a combination of the slope raster and the leaf-off 2010 aerial imagery as references. The <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS Division</a> publishes road centerlines, but these are not typically helpful outside large-scale map symbology.
+                Buildings and roads were heads-up digitized using a combination of the slope raster and the leaf-off 2010 aerial imagery as references. The <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS Division</a> publishes road centerlines, but these are not typically helpful outside large-scale map symbology. To lessen the annoyance from storm damage, we'll restrict trees from being planted from within 30 feet of buildings and roads. 30ft is the approximate maximum apple tree height, but it’s probable the chosen cultivar will be much shorter than this to aid fruit access.
             </p>
             <figure>
-                <a href="assets/images/orchard/BuildingsRoads.jpg"><img src="assets/images/orchard/BuildingsRoads.jpg" alt="Displays building and road data created for this project against the 2020 aerial imagery."></a><br>
-                <figcaption><small>Buildings (southwest quadrant) in red, roads in yellow. The combined area for both sets are a little under two acres, or 4% of the property.</small></figcaption>
+                <a href="assets/images/orchard/figure/BuildingsRoads.jpg"><img src="assets/images/orchard/thumb/BuildingsRoads.jpg" alt="Displays building and road data created for this project against the 2020 aerial imagery."></a><br>
+                <figcaption><small>Buildings (and 30ft from buildings) in red, roads in yellow. The combined area for both sets are a little under two acres, or 4% of the property. The polygons created by the 30 ft buffer increase the area to a little under six acres, or 14% of the property.</small></figcaption>
             </figure>
             <h3 id="elevation">Elevation</h3>
             <p>
                 Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). I located three DEM sets we could choose from: two acquired for the USGS's <a href="https://www.usgs.gov/core-science-systems/ngp/3dep">3D Elevation Program</a> (3DEP, 2016) and one flown for Polk County (2015). While the 3DEP DEMs are more recent and thus would better match ground conditions, at <a href="https://www.sciencebase.gov/catalog/item/5df04f5be4b02caea0f4fd39">1 arc-second</a> (~30 meter) resolution and <a href="https://www.sciencebase.gov/catalog/item/5f7784da82ce1d74e7d6caec">1/3 arc-second</a> (~10 meter) they're far too coarse for our use case. Resolution refers to how much ground a given raster cell represents - in the case of the latter 3DEP set, one cell represents a 10 meter by 10 meter square on the ground. The Polk County 2015 will be used (1 meter resolution!), and from this we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This set was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).
             </p>
             <figure>
-                <a href="assets/images/orchard/Elevation.jpg"><img src="assets/images/orchard/Elevation.jpg" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a><br>
-                <figcaption><small>Higher elevations represented by lighter colors, lower elevations by darker. Highest elevation within the propery boundary is approximately 1,157 ft and the lowest is 1,115. It is a low-relief property despite the dramatic color changes.</small></figcaption>
+                <a href="assets/images/orchard/figure/Elevation.jpg"><img src="assets/images/orchard/thumb/Elevation.jpg" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a><br>
+                <figcaption><small>Higher elevations represented by lighter colors, lower elevations by darker. Highest elevation within the property boundary is approximately 1,157 ft and the lowest is 1,115. It is a low-relief property despite the dramatic color changes.</small></figcaption>
             </figure>
             <p>
                 The National Oceanic and Atmospheric Administration maintains a <a href="https://coast.noaa.gov/inventory/">very useful catalogue</a> of the United State's elevation data if you're interested in elevation data for your area.
@@ -206,7 +206,7 @@
                 100-year floodplain polygons were downloaded from the Polk County GIS Division. This were visually validated against <a href="https://msc.fema.gov/nfhl">FEMA’s web map</a> and the official PDF map. The floodplain map is effective September 16, 2011.
             </p>
             <figure>
-                <a href="assets/images/orchard/Floodplain.jpg"><img src="assets/images/orchard/Floodplain.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
+                <a href="assets/images/orchard/figure/Floodplain.jpg"><img src="assets/images/orchard/thumb/Floodplain.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
                 <figcaption><small>Floodplain depicted as the hatched polygon. A little over one acre (around 2% of the total area) lies within the property boundary.</small></figcaption>
             </figure>
             <h3 id="parcel">Property boundaries</h3>
@@ -218,7 +218,7 @@
                 Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s available water capacity (previously referenced as water-holding capacity), depth to water table, drainage class, and organic matter content. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that would be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.
             </p>
             <figure>
-                <a href="assets/images/orchard/Soil.jpg"><img src="assets/images/orchard/Soil.jpg" alt="Soils data displayed with a two by three grid. The right two-thirds is soil data, generally using reds as low values and blues as high values."></a><br>
+                <a href="assets/images/orchard/figure/Soil.jpg"><img src="assets/images/orchard/thumb/Soil.jpg" alt="Soils data displayed with a two by three grid. The right two-thirds is soil data, generally using reds as low values and blues as high values."></a><br>
                 <figcaption><small>Soils data depicted with symbology as imported by the Soil Data Viewer.</small></figcaption>
             </figure>
             <h3 id="proc_dems">Wetlands</h3>
@@ -226,7 +226,7 @@
                 Wetland polygons derived from the Wisconsin Department of Natural Resources Wetland Survey were downloaded from the Polk County GIS Division and visually validated against <a href="https://dnrmaps.wi.gov/H5/?Viewer=SWDV&runWorkflow=Wetland">the DNR’s web map</a>. These data were augmented by heads-up digitization of an ephemeral stream channel and its floodplain. This feature is not at all apparent when viewing aerial imagery or the wetlands data, but I personally observed it when walking the property and my suspicions were confirmed when viewing the slope raster. It is especially evident in the 1947 aerial imagery.
             </p>
             <figure>
-                <a href="assets/images/orchard/Wetlands.jpg"><img src="assets/images/orchard/Wetlands.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
+                <a href="assets/images/orchard/figure/Wetlands.jpg"><img src="assets/images/orchard/thumb/Wetlands.jpg" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a><br>
                 <figcaption><small>Wetlands depicted as green transparent polygons. The lighter green of the two polygons is the ephemeral channel and floodplain. Wetlands cover a little under eight acres, or 19% of the property.</small></figcaption>
             </figure>
 
@@ -235,14 +235,14 @@
             After all primary data (DEMs, soil, etc.) were downloaded they were re-projected in NAD 1983 UTM Zone 15N. The DEMs used bilinear resampling during the re-projection process to reduce the presence of artifacts in the output rasters.
         </p>
         <figure>
-                <a href="assets/images/orchard/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/SlopeBilinearNearest.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in turquoise outline and orchard in red outline."></a><br>
+                <a href="assets/images/orchard/figure/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/thumb/SlopeBilinearNearest.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in turquoise outline and orchard in red outline."></a><br>
                 <figcaption><small>A comparison of slopes derived from data projected with bilinear (left) and nearest neighbor (right) resampling techniques. Artifacts manifest as an approximately north-south and east-west cross-hatch pattern. While the artifacts are most obvious with nearest neighbor, bilinear does not completely remove them, indicating the artifacts are inherent to the source LiDAR data. Darker color indicates steeper slopes.</small></figcaption>
         </figure>
         <p>
             Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.
         </p>
         <figure>
-                <a href="assets/images/orchard/ElevationAspectSlope.jpg"><img src="assets/images/orchard/ElevationAspectSlope.jpg" alt="Six images displayed in a two by three grid. Top left images displays elevation within the property, with lowest elevation in blue, highest in yellow-orange, and middling in lime green. Top middle image displays slope within the property, with low slopes as very light pink and high slopes as very dark pink. Top right image displays aspect, with low aspect as  turquoise, high aspect as purple, and middling as dark blue. Below each is its respective reclassification using the same color schemes."></a><br>
+                <a href="assets/images/orchard/figure/ElevationAspectSlope.jpg"><img src="assets/images/orchard/thumb/ElevationAspectSlope.jpg" alt="Six images displayed in a two by three grid. Top left images displays elevation within the property, with lowest elevation in blue, highest in yellow-orange, and middling in lime green. Top middle image displays slope within the property, with low slopes as very light pink and high slopes as very dark pink. Top right image displays aspect, with low aspect as  turquoise, high aspect as purple, and middling as dark blue. Below each is its respective reclassification using the same color schemes."></a><br>
         </figure>
         <p>
         <table>
@@ -379,7 +379,7 @@
                 <td>Restricted</td>
             </tr>
         </table>
-        <caption><small>Beneath each header are two columns: the left is the feature present as a "1" and the right is the weight. "NODATA" is a how ArcMap represents the lack of a cell value within a geographic extent. For example, if one has a 2-by-2 grid, and a 1-by-1 cell within that grid has a value of "3" while the rest of the 1-by-1 cells have no associated value, ArcMap would label those three cells as NODATA. An analagous term is <a href="https://en.wikipedia.org/wiki/Null_(SQL)">NULL</a>.</small></caption>
+        <caption><small>Beneath each header are two columns: the left is the feature present as a "1" and the right is the weight. "NODATA" is a how ArcMap represents the lack of a cell value within a geographic extent. For example, if one has a 2-by-2 grid, and a 1-by-1 cell within that grid has a value of "3" while the rest of the 1-by-1 cells have no associated value, ArcMap would label those three cells as NODATA. An analogous term is <a href="https://en.wikipedia.org/wiki/Null_(SQL)">NULL</a>.</small></caption>
         </p>
         <p>
             Not only are the soils in floodplains and wetlands unsuited for growing apple trees, it would be financially unwise. For floodplains, there’s the obvious chance of the river flooding and your trees being washed away. For wetlands, there are financial penalties for destroying wetlands, or at the very least, legally destroying wetlands would likely be financially prohibitive. Anything not a floodplain or wetland is considered optimal.
@@ -522,13 +522,33 @@
         
         <h2 id="result">Result</h2>
         <figure>
-                <a href="assets/images/orchard/Overlay.jpg"><img src="assets/images/orchard/Overlay.jpg" alt=""></a><br>
+                <a href="assets/images/orchard/figure/Overlay.jpg"><img src="assets/images/orchard/thumb/Overlay.jpg" alt=""></a><br>
+                <br>
+                <figcaption><small>The output of Weighted Overlay given the above datasets and weights. Restricted indicates land barred from being used as an apple orchard. 5 indicates land best suited for an apple orchard and 1 the least suited.</small></figcaption>
         </figure>
         <p>
-            :) talk about why the roads got buffered
+            And this is the result of running Weighted Overlay! Land calculated as most optimal (5) comprises just under one acre, or around 2% of the property. The majority of this land is at the center of the property at approximately the current garden location and in the northwest quadrant, with smaller groupings on the far northeast side and sparsely bordering the access road. Next most-optimal land (4) comprises almost 11 acres (27%) and fills almost the entire northwest quadrant, a large portion of the center of the property, and even more land near the entrance to the access road. Middling-ranked land (3) consumes almost the same amount as 4-ranked land and is located almost entirely on the eastern half of the property, while filling the northwest quadrant where 4- and 5-ranked land does not. 2-ranked land (five acres, 12%) is almost exclusively present on the eastern half with a small crescent between the buildings and river. Finally, the least suitable land for an apple orchard (1) is adjacent the river in the southern half of the property, taking up a mere 0.05 acres (0.12%). Restricted land eliminates 12 acres (29%) from being considered.
+        </p>
+        <figure>
+                <a href="assets/images/orchard/figure/OverlaySplit.jpg"><img src="assets/images/orchard/thumb/OverlaySplit.jpg" alt="A 1-by-5 image displaying each rank by itself, with 5 on the left and 1 on the right. 5 is displayed as dark green and 1 as dark orange-red. Property boundary outline (turqouise), planned orchard outline (red), and building outlines (red) for reference."></a><br>
+        </figure>
+        
+        <h2 id="discussion">Discussion</h2>
+        <h3 id="discresults">The results</h3>
+        <p>
+            The result of Weighted Overlay indicates a significant portion of the property would be well suited (4- or 5-ranked) for planting apple trees, which is great news! Should the family decide on an alternate location for the orchard, this allows them more flexibility. Additionally, the portions of the property that would be best suited are also the ones that would be relatively easy to access: the northwest quadrant could likely be accessed by crossing the road ditch, and the current planned location is near existing trails and the access road. Depending on the level of ambition present, the next step should be soil trenching and sampling to verify the result accurately represents ground conditions.
+        </p>
+        <p>
+            I was very surprised to discover that the location of the existing garden wound up being well-suited for apples. I'm sure the previous homeowner didn't expect to use that plot for apples, but I imagine that apples' preferred growing environment has many similarities with other plants. I imagine that homeowner did basically the same process as demonstrated here, albeit analogue and relying more on personal knowledge and hunches.
         </p>
         
+        <h3 id="discdata">The data</h3>
+        <p>
+            A model is only as good as its data, and the data used in this analysis are generally high quality. These data are commonly used for planning by government agencies and private landowners alike. However, the elevation DEMs are deeply flawed. You will agree: in the aspect image below, each cardinal direction is given a different color. We can accept there was some flaw in LiDAR acquisition or its subsequent processing which causes these north-south trending lines, or we can accept the property is covered in rolls spaced around 70 feet apart
+        </p>
         </section>
+        
+        steps forward could include refining Weighted Overlay inputs with more data and groundtruthing, like 500 year floodplain
 
         <footer>
         <p><small>Theme from <a href="https://github.com/orderedlist/minimal">Minimal</a></small></p>
