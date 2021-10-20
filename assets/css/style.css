@@ -104,6 +104,7 @@ th {
 }
 
 img {
+  display:block;/* added 10/20 trying to get images to center*/
   max-width:60%;
 }
 
