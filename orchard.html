@@ -34,7 +34,6 @@
             <a href="mailto:gerrit.vwaal@gmail.com">email</a><br>
             <a href="https://www.linkedin.com/in/gvwaal">linkedin</a><br>
             <a href="https://github.com/gvwaal">github</a><br>
-            <a href="https://twitter.com/gvwaal">twitter</a><br>
         </header>
       
         <section>
@@ -46,25 +45,27 @@
                 <li><a href="#data">Data</a></li>
                 <li><a href="#processing">Processing</a></li>
                 <li><a href="#result">Result</a></li>
+                <li><a href="#discusion">Discussion</a></li>
+                <li><a href="#next">Next Steps</a></li>
             </ol>
             
-            <p>A <a href="https://www.spc.noaa.gov/misc/AbtDerechos/derechofaq.htm">derecho</a> blasted through my friend's family cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there's some debate about what to do with the significant increase in unforested land, but one of the planned uses was an orchard. My friend was aware of my mapping/geology background and asked me to plot some figures during the design process.</p>
+            <p>A <a href="https://www.spc.noaa.gov/misc/AbtDerechos/derechofaq.htm">derecho</a> blasted through my friend's family's cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there's some debate about what to do with the significant increase in unforested land, but one of the planned uses was an orchard. My friend was aware of my mapping/geology background and asked me to plot some figures during the design process.</p>
             <figure>
                     <a href="assets/images/orchard/figure/Aerial20202018.jpg"><img src="assets/images/orchard/thumb/Aerial20202018.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a turquoise outline."></a><br>
                     <figcaption><small>A comparison of leaf-on aerial imagery from 2020 (left) and 2018 (right). Large swathes of downed trees cover much of northern half of the property. The turquoise square is the property boundary.</small></figcaption>
             </figure>
-            <p>During that process I was inspired to conduct a site suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a garden developed by one of the former property owners.</p>
+            <p>During that process I was inspired to conduct a suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a garden established by one of the former property owners.</p>
             <figure>
                     <a href="assets/images/orchard/figure/Aerial20202018zoom.jpg"><img src="assets/images/orchard/thumb/Aerial20202018zoom.jpg" alt="A side-by-side comparison of two leaf-on aerial imagery. Planned orchard shown for reference with a red outline."></a><br>
                     <figcaption><small>2020 (left) and 2018 (right).</small></figcaption>
             </figure>
-            <p>A site suitability analysis consolidates different datasets with the intent of identifying an ideal location for a use, in this case, an orchard. For this analysis we'll rely on the Weighted Overlay tool provided with Esri's ArcMap software. Using Weighted Overlay looks something like this:
+            <p>A suitability analysis consolidates different datasets with the intent of identifying an ideal location for a use, in this case an orchard. For this analysis we'll rely on the <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/weighted-overlay.htm">Weighted Overlay</a> tool provided with Esri's <a href="https://desktop.arcgis.com/en/arcmap/10.3/main/map/mapping-and-visualization-in-arcgis-for-desktop.htm">ArcMap</a> software. Using Weighted Overlay looks something like this:
                 <ol>
                     <li>Identify a goal (find alternate locations that are best suited for an orchard)</li>
                     <li>Identify attributes that would assist in achieving that goal</li>
                     <li>Acquire or create geospatial datasets of those attributes</li>
-                    <li>Rank the data in terms of desirability</li>
-                    <li>Assign weights to the datasets</li>
+                    <li>Rank the data in terms of desirability using a common scale (e.g. 1-5 with 5 being most optimal)</li>
+                    <li>Assign weights to the datasets (how important the dataset is to an optimal outcome)</li>
                     <li>Run Weighted Overlay</li>
                     <li>Analyze results</li>
                     <li>Groundtruth results</li>
@@ -73,7 +74,7 @@
             
             <h2 id="research">Research</h2>
             <p>Since we've established our goal, we'll establish our scope. Because an orchard is defined as any plot of land where fruit or nut trees are grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars. We'll focus on doing relatively surface-level research given financial and time constraints. Next, we'll identify attributes required for a successful apple orchard.</p>
-            <p>I don’t know anything about growing apples! So I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three resources that seemed somewhat reputable:
+            <p>I don’t know anything about growing apples! So I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three resources that seem reputable:
                 <ul>
                     <li>Teryl R. Roper, Daniel L. Maher, and Patricia S. McManus’ <a href="https://learningstore.extension.wisc.edu/products/growing-apples-in-wisconsin-p413"><i>Growing Apples in Wisconsin</i></a></li>
                     <li>Teryl R. Roper & Gary G. Frank’s <a href="https://learningstore.extension.wisc.edu/products/planning-and-establishing-commercial-apple-orchards-in-wisconsin-p417"><i>Planning and Establishing Commercial Apple Orchards in Wisconsin</i></a></li>
@@ -84,66 +85,77 @@
             <p>
                 <table>
                     <tr>
-                        <th>Growing Apples in Wisconsin</th>
-                        <th>Planning and Establishing Commercial Apple Orchards in Wisconsin </th>
-                        <th>Orchard Establishment - Site Selection and Preparation</th>
+                        <td></td>
+                        <th scope="col">Growing Apples in Wisconsin</th>
+                        <th scope="col">Planning and Establishing Commercial Apple Orchards in Wisconsin </th>
+                        <th scope="col">Orchard Establishment - Site Selection and Preparation</th>
                     </tr>
                     <tr>
+                        <th scope="row">Slope</th>
                         <td>A “gentle slope”</td>
                         <td>“Slopes of hills or ridges are generally more desirable than the tops because of wind conditions.”</td>
                         <td>4-8% slope</td>
                     </tr>
                     <tr>
+                        <th scope="row">Elevation</th>
                         <td>“...land with a gentle slope so that cold air can settle into adjacent lower areas.”</td>
                         <td>"...be elevated above surrounding areas...”</td>
                         <td>“The ideal site is on rolling or elevated land...”</td>
                     </tr>
                     <tr>
-                        <td>pH 6-7</td>
-                        <td>pH 5.8-6.8</td>
-                        <td>pH 6.0-6.5</td>
+                        <th scope="row">pH</th>
+                        <td>6.0-7.0</td>
+                        <td>5.8-6.8</td>
+                        <td>6.0-6.5</td>
                     </tr>
                     <tr>
+                        <th scope="row">Drainage</th>
                         <td>“The soil must have good internal water drainage...”</td>
                         <td>Orchard soils must be well drained...”</td>
                         <td>“An old recommendation for a desirable orchard soil is that it be...well drained.”</td>
                     </tr>
                     <tr>
+                        <th scope="row">Soil depth</th>
                         <td>“Most of the active roots are found in the top 12 inches of soil...”</td>
                         <td>“If water stands within 3-4 feet of the surface...the site is probably unsuitable for an orchard.”</td>
                         <td>“...minimum of 3 to 4 feet deep.”</td>
                     </tr>
                     <tr>
+                        <th scope="row">Organic matter</th>
                         <td>“Apples grow best in fertile...soils”</td>
                         <td>"low fertility...soils will almost certainly lead to failure.”</td>
                         <td>“Soil fertility should be medium to low.”</td>
                     </tr>
                     <tr>
+                        <th scope="row">Aeration</th>
                         <td>“Roots do not tolerate...poorly aerated soils.”</td>
                         <td>"Orchard soils must be well...aerated.”</td>
                         <td>—</td>
                     </tr>
                     <tr>
+                        <th scope="row">Slope exposure</th>
                         <td>—</td>
                         <td>Paragraph 3, page 3 discusses states that due to south-facing slopes receiving more sunlight, temperature fluctuations in winter are greater as a result, leading to tree damage</td>
                         <td>“Slope exposure should be considered for its effect on fruit trees as they come out of dormancy. A southern-facing slope warms up faster in spring, while the opposite is true of a northern slope. Eastern-facing slopes are intermediate.”</td>
                     </tr>
                     <tr>
+                        <th scope="row">Water-holding capacity</th>
                         <td>Paragraph 8, page 5 implies water-holding capacity is a beneficial soil attribute.</td>
                         <td>"Soils with good water-holding capacity will retain moisture and supply water to trees during dry periods.”</td>
                         <td>—</td>
                     </tr>
                     <tr>
+                        <th scope="row">USDA Zone</th>
                         <td>—</td>
                         <td>"[In USDA Zone 3] apple production is marginal and site selection becomes even more important.”</td>
                         <td>—</td>
                     </tr>
                 </table>
             </p>
-            <p>Unfortunately, the soil fertility recommendations do not agree and bear further research. The same goes for soil aeration, aspect (the direction a slope faces), and USDA Zone. Water-holding capacity seems intuitive enough to accept based on information available.</p>
+            <p>Unfortunately, the soil fertility recommendations do not agree and bear further research. The same goes for soil aeration, aspect (the direction a slope faces), and <a href="https://planthardiness.ars.usda.gov/">USDA Zone</a>. I feel confident assuming the importance of water-holding capacity based on the information available.</p>
             <p><a href="http://treefruit.wsu.edu/orchard-management/soils-nutrition/soil-health-in-orchards/">Soil Health in Orchards</a> claims agricultural soils average 1-6% organic matter but does not cite a source. Table 2 of <a href="https://www.tandfonline.com/doi/full/10.1080/02571862.2014.944229">an academic study</a> records percentages ranges from 1-4ish%, but only from a single orchard. While many resources reiterate the importance of soil organic matter, few (reliable) sources provide quantitative recommendations, so for the sake of convenience we’ll go with 2-6% as the ideal amount of soil organic matter.</p>
             <p>T.T. Kozlowski’s <a href="http://joa.isa-arbor.com/request.asp?JournalID=1&ArticleID=2003&Type=2">Soil Aeration, Flooding, and Tree Growth</a> lists a multitude of reasons why soil aeration is a good thing but does not list quantitative measurements, nor is it strictly about apples, but I think it’s usable enough to inform our analysis.</p>
-            <p><a href="https://www.princeedwardisland.ca/sites/default/files/publications/af_site_assessment_perennial_crops.pdf">Site Assessment, Selection and Development for Perennial Crops Guide</a> recommends south-facing slopes due to greater exposure to sunlight, as does <a href="https://powderriver.msuextension.org/documents/treesshrubs/EB0222.pdf">Growing Fruit Trees in Montana</a>. <a href="https://www.nd.gov/ndda/sites/default/files/legacy/Marketing/OrchardManuaFinal.pdf">Starting a Community Orchard in North Dakota</a> recommends against south-facing slopes due to increased likelihood of breaking winter dormancy due to winter temperature fluctuations, which may also cause sunscalding and trunk cracking. Because tree damage would occur regardless of how quickly the tree grows, a north-facing slope will be considered ideal.</p>
+            <p><a href="https://www.princeedwardisland.ca/sites/default/files/publications/af_site_assessment_perennial_crops.pdf">Site Assessment, Selection and Development for Perennial Crops Guide</a> recommends south-facing slopes due to greater exposure to sunlight, as does <a href="https://powderriver.msuextension.org/documents/treesshrubs/EB0222.pdf">Growing Fruit Trees in Montana</a>. However, <a href="https://www.nd.gov/ndda/sites/default/files/legacy/Marketing/OrchardManuaFinal.pdf">Starting a Community Orchard in North Dakota</a> recommends against south-facing slopes due to increased likelihood of breaking winter dormancy due to winter temperature fluctuations, which may also cause sunscalding and trunk cracking. While it would be nice to place the trees so that they receive more sunlight and therefore grow more quickly, tree damage would occur at any stage of the tree's growth, and so we'll consider a north-facing slope ideal.</p>
             <p>USDA zone preference likely depends on the cultivar chosen and this can be disregarded.</p>
             
             <h2 id="data">Data</h2>
@@ -158,16 +170,16 @@
                             <li>2018, September 6: USDA <a href="https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/">National Agriculture Imagery Program (NAIP)</a> via EarthExplorer</li>
                             <li>2020, June 25: USDA NAIP via EarthExplorer</li>
                         </ul>
-                    They are referenced in this project by the year acquired.</p>
+                    They are referenced in this write-up by the year acquired.</p>
                 
                 <h3 id="buildingsroads">Buildings and roads</h3>
-                <p>Buildings and roads were heads-up digitized using a combination of the slope raster and the leaf-off 2010 aerial imagery as references. The <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS Division</a> publishes road centerlines, but these are not typically helpful outside large-scale map symbology. To lessen the annoyance from storm damage, we'll restrict trees from being planted from within 30 feet of buildings and roads. 30ft is the approximate maximum apple tree height, but it’s probable the chosen cultivar will be much shorter than this to aid fruit access.</p>
+                <p>Buildings and roads were heads-up digitized using a combination of the slope raster and the leaf-off 2010 aerial imagery as references. The <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS Division</a> publishes road centerlines, but these are not helpful for our use-case. To lessen the annoyance from storm damage, we'll restrict trees from being planted from within 30 feet of buildings and roads. 30ft is the approximate maximum apple tree height (based off a quick review of Google sources), but it’s probable the chosen cultivar will be much shorter than this to aid fruit harvesting.</p>
                 <figure>
                     <a href="assets/images/orchard/figure/BuildingsRoads.jpg"><img src="assets/images/orchard/thumb/BuildingsRoads.jpg" alt="Displays building and road data created for this project against the 2020 aerial imagery."></a><br>
                     <figcaption><small>Buildings (and 30ft from buildings) in red, roads in yellow. The combined area for both sets are a little under two acres, or 4% of the property. The polygons created by the 30 ft buffer increase the area to a little under six acres, or 14% of the property.</small></figcaption>
                 </figure>
                 <h3 id="elevation">Elevation</h3>
-                <p>Elevation data is commonly delivered in a raster format called a Digital Elevation Model (DEM). I located three DEM sets we could choose from: two acquired for the USGS's <a href="https://www.usgs.gov/core-science-systems/ngp/3dep">3D Elevation Program</a> (3DEP, 2016) and one LiDAR (<a href="https://oceanservice.noaa.gov/facts/lidar.html">Light Detection and Ranging</a>) flown for Polk County (2015). While the 3DEP DEMs are more recent and thus would better match ground conditions, at <a href="https://www.sciencebase.gov/catalog/item/5df04f5be4b02caea0f4fd39">1 arc-second</a> (~30 meter) resolution and <a href="https://www.sciencebase.gov/catalog/item/5f7784da82ce1d74e7d6caec">1/3 arc-second</a> (~10 meter) they're far too coarse for our use case. Resolution refers to how much ground a given raster cell represents - in the case of the latter 3DEP set, one cell represents a 10 meter by 10 meter square on the ground. The Polk County 2015 will be used (1 meter resolution!), and from this we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This set was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).</p>
+                <p>Elevation data is commonly delivered in a <a href="https://guides.lib.umich.edu/c.php?g=282942&p=1885352">raster</a> format called a Digital Elevation Model (DEM). I located three DEM sets we could choose from: two acquired for the USGS's <a href="https://www.usgs.gov/core-science-systems/ngp/3dep">3D Elevation Program</a> (3DEP, 2016) and one LiDAR (<a href="https://oceanservice.noaa.gov/facts/lidar.html">Light Detection and Ranging</a>) flown for Polk County (2015). While the 3DEP DEMs are more recent and thus would better match ground conditions, at <a href="https://www.sciencebase.gov/catalog/item/5df04f5be4b02caea0f4fd39">1 arc-second</a> (~30 meter) resolution and <a href="https://www.sciencebase.gov/catalog/item/5f7784da82ce1d74e7d6caec">1/3 arc-second</a> (~10 meter) they're far too coarse for our use case. Resolution refers to how much ground a given raster cell represents - in the case of the latter 3DEP set, one cell represents a 10 meter by 10 meter square on the ground. The Polk County 2015 will be used (1 meter resolution!), and from this we can derive slope and aspect. DEM tiles were downloaded from <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">here</a>. This set was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).</p>
                 <figure>
                     <a href="assets/images/orchard/figure/Elevation.jpg"><img src="assets/images/orchard/thumb/Elevation.jpg" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a><br>
                     <figcaption><small>Higher elevations represented by lighter colors, lower elevations by darker. Highest elevation within the property boundary is approximately 1,157 ft and the lowest is 1,115. It is a low-relief property despite the dramatic color changes.</small></figcaption>
@@ -182,7 +194,7 @@
                 <h3 id="parcel">Property boundaries</h3>
                 <p>Parcel data were acquired from the Polk County GIS Division and used to identify the boundary of the property. Validation of property boundaries would require a survey and is out of scope for this analysis. These data were downloaded August 29, 2021.</p>
                 <h3 id="soil">Soil</h3>
-                <p>Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s available water capacity (previously referenced as water-holding capacity), depth to water table, drainage class, and organic matter content. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that would be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.</p>
+                <p>Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> plugin for ArcMap was used to generate polygons describing each soil unit’s available water capacity (previously referenced as water-holding capacity), depth to water table, drainage class, and organic matter content. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that could be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.</p>
                 <figure>
                     <a href="assets/images/orchard/figure/Soil.jpg"><img src="assets/images/orchard/thumb/Soil.jpg" alt="Soils data displayed with a two by three grid. The right two-thirds is soil data, generally using reds as low values and blues as high values."></a><br>
                     <figcaption><small>Soils data depicted with symbology as imported by the Soil Data Viewer.</small></figcaption>
@@ -195,7 +207,7 @@
                 </figure>
 
             <h2 id="processing">Processing</h2>
-            <p>After all primary data (DEMs, soil, etc.) were downloaded they were re-projected in NAD 1983 UTM Zone 15N. The DEMs used bilinear resampling during the re-projection process to reduce the presence of artifacts in the output rasters.</p>
+            <p>After all primary data (DEMs, soil, etc.) were downloaded they were re-projected in <a href="https://epsg.io/26915">NAD83 UTM Zone 15N</a>. The DEMs used bilinear resampling during the re-projection process to reduce the presence of artifacts in the output rasters.</p>
             <figure>
                     <a href="assets/images/orchard/figure/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/thumb/SlopeBilinearNearest.jpg" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in turquoise outline and orchard in red outline."></a><br>
                     <figcaption><small>A comparison of slopes derived from data projected with bilinear (left) and nearest neighbor (right) resampling techniques. Artifacts manifest as an approximately north-south and east-west cross-hatch pattern. While the artifacts are most obvious with nearest neighbor, bilinear does not completely remove them, indicating the artifacts are inherent to the source LiDAR data. Darker color indicates steeper slopes.</small></figcaption>
@@ -249,7 +261,7 @@
                         <td>5</td>
                         <td>4 - 15</td>
                         <td>5</td>
-                        <td>315 - 45</td>
+                        <td>0 - 45; 315 - 360</td>
                         <td>5</td>
                     </tr>
                     <tr>
@@ -257,7 +269,7 @@
                         <td>Restricted</td>
                         <td>—</td>
                         <td>Restricted</td>
-                        <td>—</td>
+                        <td>-1</td>
                         <td>Restricted</td>
                     </tr>
                 </table>
@@ -519,21 +531,22 @@
             <p>The result of Weighted Overlay indicates under a quarter of the property would be well suited (4- or 5-ranked) for alternate apple tree locations, with most land in the northwest quadrant and the northeast corner. These are also portions of land that are easy to access as both abut established roads and logging trails. Depending on the level of ambition present, the next step should be direct observation of the soil via hole digging and sampling to verify the result accurately represents ground conditions.</p>
             <p>I was a bit shocked to discover the general location of the orchard as planned is well-suited for growing apples. The previous homeowner likely sited the former garden with a different crop in mind and leaned on their personal experience. I expected the data would contradict their judgement - perhaps the soil data would reveal the soil was poorly suited for agriculture, for example.</p>
             <h3 id="discdata">The data</h3>
-            <p>A model is only as good as its data, and the data used in this analysis are generally high quality. These data are commonly used for planning by government agencies and private landowners alike. The bedrock of this analysis are the elevation and soils data.</p>
-            <p>The elevation data portrays the property as it existed on the date acquired — that is, as it was six years ago. This is acceptably current. The largest change to the property since acquisition was the clear-cutting, but the DEMs depict the ground elevation, not the tree canopy. The resolution is good enough to identify buildings and roads, and very importantly, the unexpected ephemeral stream.</p>
-            <p>The soils data seem to be reliable. 12 of 23 soil units are classified as Order 2. According to Chapter 4 of the NRCS' <i><a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054254#orders">Soil Survey Manual</a></i>, Orders are "determined by the field procedures used to identify soil components and place map unit boundaries, the minimum permissible size of map unit delineation, and the  kind  of  map  unit  to  which  soil  components  are  aggregated." (page 269) The <i>Manual</i> indicates Order 2 is suited for general agriculture planning (page 273), which this analysis is. From a brief review of the <i>Manual</i> and Google, I was unable to find a reason why a soil unit would be missing an Order, but I assume its simply because the field procedures used in generating the data are unknown.</p>
+            <p>A model is only as good as its data, and the data used in this analysis are high quality based on the resources available to me. These data are commonly used for planning by government agencies and private landowners alike due to ease of access and few restrictions on their use. The bedrock of this model are the elevation and soils data.</p>
+            <p>The elevation data portrays the property as it existed on the date acquired — that is, as it was six years ago. This is acceptably current. The largest change to the property since acquisition was the clear-cutting, but the DEMs depict the ground elevation, not the tree canopy. The resolution is good enough to identify buildings and roads, and very importantly, the stream channel bisecting the property.</p>
+            <p>The soils data seem to be reliable. 12 of 23 soil units are classified as Order 2. According to Chapter 4 of the NRCS' <i><a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054254#orders">Soil Survey Manual</a></i>, "Orders" are "determined by the field procedures used to identify soil components and place map unit boundaries, the minimum permissible size of map unit delineation, and the  kind  of  map  unit  to  which  soil  components  are  aggregated." The <i>Manual</i> indicates Order 2 data is suitable for general agriculture planning (page 273), which this analysis is. From a brief review of the <i>Manual</i> and Google, I was unable to find a reason why a soil unit would be missing an Order, but I assume it's because the field procedures used in generating the data are unknown.</p>
             <figure>
                 <a href="assets/images/orchard/figure/SoilOrder.jpg"><img src="assets/images/orchard/thumb/SoilOrder.jpg" alt="A 1-by-5 image displaying each rank by itself, with 5 on the left and 1 on the right. 5 is displayed as dark green and 1 as dark orange-red. Property boundary outline (turqouise), planned orchard outline (red), and building outlines (red) for reference."></a><br>
             </figure>
             <p>The <i> Manual</i> describes Order 2 as:
                  <blockquote>
-                    Field procedures allow plotting of soil boundaries by observation and by interpretation of remotely sensed data [e.g. aerial imagery, LiDAR; page 238]. The soils in each delineation are identified primarily by traversing [visiting observation points set any distance apart, where the distance is adjusted based on soil boundaries and the variability its properties; page 264] and transecting [visiting observation points set at fixed distances apart; page 264]. Observations and remotely sensed data are secondary types of documentation. Boundaries are verified at closely spaced intervals. Map units are mostly consociations and complexes but may also include undifferentiated groups or associations. Map unit components are phases of soil series or phases of miscellaneous areas. Map units may also be named for a taxonomic category above the series. Delineations are variable in size, with a minimum of 0.6 hectare to 4 hectares (1.5 to 10 acres), depending on landscape complexity and survey objectives. Contrasting minor components vary in size and amount within the limits permitted by the kind of map unit used. Base map scale is generally 1:12,000 to 1:31,680, depending on the complexity of the soil pattern within the area.
+                    Field procedures allow plotting of soil boundaries by observation and by interpretation of remotely sensed data [e.g. aerial imagery, LiDAR; page 238]. The soils in each delineation are identified primarily by traversing [visiting observation points set any distance apart, where the distance is adjusted based on soil boundaries and the variability of its properties; page 264] and transecting [visiting observation points set at fixed distances apart; page 264]. Observations and remotely sensed data are secondary types of documentation. Boundaries are verified at closely spaced intervals. Map units are mostly consociations and complexes but may also include undifferentiated groups or associations. Map unit components are phases of soil series or phases of miscellaneous areas. Map units may also be named for a taxonomic category above the series. Delineations are variable in size, with a minimum of 0.6 hectare to 4 hectares (1.5 to 10 acres), depending on landscape complexity and survey objectives. Contrasting minor components vary in size and amount within the limits permitted by the kind of map unit used. Base map scale is generally 1:12,000 to 1:31,680, depending on the complexity of the soil pattern within the area.
                 </blockquote></p>
-            <p>A shortcoming with the floodplain data I would like to see resolved is the lack of 500-year floodplain boundaries. A 100-year floodplain is defined as an area with a 1% annual chance of flooding, so its existence implies the presence of a 500-year floodplain as well — an area with a 0.2% annual chance of flooding. Since high precipitation events are becoming  increasingly common due to anthropogenic climate change, knowing the 500-year boundaries is absolutely critical to long-term planning. Just because it's not currently delineated by FEMA doesn't mean it doesn't exist.</p>
+            <p>A shortcoming with the floodplain data I would like to see resolved is the lack of 500-year floodplain boundaries. A 100-year floodplain is defined as an area with a 1% annual chance of flooding, so its existence implies the presence of a 500-year floodplain as well — an area with a 0.2% annual chance of flooding. Since high precipitation events are becoming increasingly common due to anthropogenic climate change, knowing the 500-year boundaries is absolutely critical to long-term planning. Just because they're not currently delineated by FEMA doesn't mean it doesn't exist.</p>
             
-            <h2 id="result">Next Steps</h2>
-            <p>Groundtruthing is essential if an alternate orchard location is desired. This analysis is only a model and real-life conditions typically deviate from expectations generated from a model. It may be helpful to send soil samples to be analyzed for an objective look at prospective orchard locations.</p>
-            <p>It's my preference to calculate a 500-year floodplain for this area and include the results in an updated analysis. This will be done as time and ambition is available. Setting that floodplain to Restricted seems overly conservative, so it would probably earn a 1 or 2-rank.</p>
+            <h2 id="next">Next Steps</h2>
+            <p>Groundtruthing is essential if an alternate orchard location is desired. This analysis is only a model and real-life conditions usually deviate from models. It would be helpful, but perhaps not financially prudent, to send soil samples to be analyzed for an objective look at soil attributes.</p>
+            <p>It's my preference to calculate a 500-year floodplain for this area and include the results in an updated analysis. In practice, this would probably have negligible impact on the Weighted Overlay results since the optimal apple-growing land is a good distance away from the river.</p>
+            <p>As time permits, I'd like to do a more thorough look at the data available through Soil Data Viewer to see if it's possible to figure out why not all data is complete, like pH.</p>
         </section>
         <footer>
         <p><small>Theme from <a href="https://github.com/orderedlist/minimal">Minimal</a></small></p>
