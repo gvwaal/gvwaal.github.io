@@ -77,8 +77,10 @@ pre {
 
 table{
   table-layout:fixed;
-  width:100%;
+  /*width:100%;*/
   border-collapse:collapse;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 th, td {
@@ -194,6 +196,12 @@ footer {
 figure {
   display: block;
   text-align:center;
+}
+
+figcaption {
+  text-align:center;
+  line-height:14px;
+  font-weight:400;
 }
 
 figure img {
