@@ -1,5 +1,5 @@
-@import "fonts";
-@import "rouge-github";
+/*@import "fonts";
+@import "rouge-github"; commented out 10/26/2021 since I'm not using these at this time*/
 
 body {
   background-color: #fff;
@@ -210,7 +210,10 @@ figure img {
 }
 
 @media print, screen and (max-width: 960px) {
-
+  div.mobilehider {
+    display:none;
+  }
+  
   div.wrapper {
     width:auto;
     margin:0;
@@ -245,6 +248,10 @@ figure img {
 }
 
 @media print, screen and (max-width: 720px) {
+  div.mobilehider {
+    display:none;
+  }
+  
   body {
     word-wrap:break-word;
   }
@@ -263,6 +270,10 @@ figure img {
 }
 
 @media print, screen and (max-width: 480px) {
+  div.mobilehider {
+    display:none;
+  }
+  
   body {
     padding:15px;
   }
