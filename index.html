@@ -13,6 +13,124 @@
         <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+
+        <!-- CSS is here to improve responsiveness according to https://web.dev/defer-non-critical-css/#optimize -->
+        <style type="text/css">
+            body {
+            background-color: #fff;
+            padding:25px;
+            font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color:#727272;
+            font-weight:400;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              color:#222;
+              margin:0 0 10px;
+            }
+
+            p, ol, table, pre, dl {
+              margin:0 0 20px;
+            }
+
+            h1, h2, h3 {
+              line-height:1.1;
+            }
+
+            h3 {
+              text-indent: 2em;
+            }
+
+            h1 {
+              font-size:28px;
+            }
+
+            a {
+              color:#39c;
+              text-decoration:none;
+            }
+            
+            .wrapper {
+              width:1300px;
+            }
+
+            blockquote {
+              border-left:1px solid #e5e5e5;
+              margin:0;
+              padding:0 0 0 20px;
+              font-style:italic;
+            }
+            
+            table{
+              table-layout:fixed;
+              /*width:100%;*/
+              border-collapse:collapse;
+              margin-left:auto;
+              margin-right:auto;
+            }
+
+            th, td {
+              text-align:center;
+              padding:5px 10px;
+              border-bottom:1px solid #e5e5e5;
+            }
+            
+            th {
+              color:#444;
+            }
+
+            img {
+              max-width:60%;
+            }
+
+            header {
+              width:270px;
+              float:left;
+              position:fixed;
+              -webkit-font-smoothing:subpixel-antialiased;
+            }
+            
+            strong {
+              color:#222;
+              font-weight:700;
+            }
+
+            section {
+              width:950px;
+              float:right;
+              padding-bottom:25px;
+            }
+
+            small {
+              font-size:11px;
+            }
+
+            footer {
+              width:270px;
+              float:left;
+              position:fixed;
+              bottom:25px;
+              -webkit-font-smoothing:subpixel-antialiased;
+            }
+
+            figure {
+              display: block;
+              text-align:center;
+            }
+
+            figcaption {
+              text-align:center;
+              line-height:14px;
+              font-weight:400;
+            }
+
+            figure img {
+              position: relative;
+              /*left: 20%;*/
+            }
+        </style>
+        <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
     </head>
 
     <body>
@@ -31,7 +149,7 @@
         <h1>Personal projects</h1>
         <h3><a href="/orchard.html">Where do apples like to grow? Siting an apple orchard with a geospatial suitability analysis</a></h3>
         <hr>
-        <h1>Undergraduate research projects</h1>
+        <h1>Undergraduate research projects from back in the day</h1>
         <h3>Sediment provenance of Twin Ports baymouth bars <sup><a href="/assets/pdf/urop2017.pdf">PDF, 10.7 MB</a></sup></h3>
         <h3>Influence of mineral liberation on metal leaching and dissolution rates in ore material and associated host rock <sup><a href="/assets/pdf/urop2016.pdf">PDF, 0.41 MB</a></sup></h3>
 
