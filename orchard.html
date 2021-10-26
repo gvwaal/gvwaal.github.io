@@ -4,15 +4,133 @@
         <html lang="en-US">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <meta name="description" content="Gerrit VanderWaal: Geology. GIS. Python. Walks in the woods.">
-        <title>What do apples like? Siting an apple orchard via geospatial suitability analysis - Gerrit VanderWaal</title>
+        <meta name="description" content="Gerrit VanderWaal's repository for personal projects.">
+        <title>Where do apples like to grow? Siting an apple orchard with a geospatial suitability analysis - Gerrit VanderWaal</title>
 
-        <link rel="stylesheet" href="assets/css/style.css">
+        <!--<link rel="stylesheet" href="assets/css/style.css">-->
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
         <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        
+        <!-- CSS is here to improve responsiveness according to https://web.dev/defer-non-critical-css/#optimize -->
+        <style type="text/css">
+            body {
+            background-color: #fff;
+            padding:25px;
+            font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color:#727272;
+            font-weight:400;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              color:#222;
+              margin:0 0 10px;
+            }
+
+            p, ol, table, pre, dl {
+              margin:0 0 20px;
+            }
+
+            h1, h2, h3 {
+              line-height:1.1;
+            }
+
+            h3 {
+              text-indent: 2em;
+            }
+
+            h1 {
+              font-size:28px;
+            }
+
+            a {
+              color:#39c;
+              text-decoration:none;
+            }
+            
+            .wrapper {
+              width:1300px;
+            }
+
+            blockquote {
+              border-left:1px solid #e5e5e5;
+              margin:0;
+              padding:0 0 0 20px;
+              font-style:italic;
+            }
+            
+            table{
+              table-layout:fixed;
+              /*width:100%;*/
+              border-collapse:collapse;
+              margin-left:auto;
+              margin-right:auto;
+            }
+
+            th, td {
+              text-align:center;
+              padding:5px 10px;
+              border-bottom:1px solid #e5e5e5;
+            }
+            
+            th {
+              color:#444;
+            }
+
+            img {
+              max-width:60%;
+            }
+
+            header {
+              width:270px;
+              float:left;
+              position:fixed;
+              -webkit-font-smoothing:subpixel-antialiased;
+            }
+            
+            strong {
+              color:#222;
+              font-weight:700;
+            }
+
+            section {
+              width:950px;
+              float:right;
+              padding-bottom:25px;
+            }
+
+            small {
+              font-size:11px;
+            }
+
+            footer {
+              width:270px;
+              float:left;
+              position:fixed;
+              bottom:25px;
+              -webkit-font-smoothing:subpixel-antialiased;
+            }
+
+            figure {
+              display: block;
+              text-align:center;
+            }
+
+            figcaption {
+              text-align:center;
+              line-height:14px;
+              font-weight:400;
+            }
+
+            figure img {
+              position: relative;
+              /*left: 20%;*/
+            }
+        </style>
+        <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
     </head>
 
     <body>
@@ -20,8 +138,8 @@
         <header>
             <h1><a href="/" style="color:#222;">Gerrit VanderWaal</a></h1>
             <div class="mobilehider">
-                <p>Working with a variety of data to answer environmental questions.</p>
-                <p>Geoscientist by training with quite a bit of experience with Python and SQL.</p>
+                <p>Geoscientist by education augmented with a background in geospatial analysis, Python, and SQL.</p>
+                <p>Enjoys manipulating a variety of data to answer interesting environmental questions and make my life easier.</p>
                 <a href="mailto:gerrit.vwaal@gmail.com">email</a><br>
                 <a href="https://www.linkedin.com/in/gvwaal">linkedin</a><br>
                 <a href="https://github.com/gvwaal">github</a><br>
@@ -30,7 +148,7 @@
       
         <section>
             <!-- any future site content goes here -->
-            <h1 id="top">What do apples like?</h1>
+            <h1 id="top">Where do apples like to grow?</h1>
             <h2>Siting an apple orchard with a geospatial suitability analysis</h2>
             <ol>
                 <li><a href="#research">Research</a>

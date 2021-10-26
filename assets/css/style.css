@@ -1,40 +1,6 @@
 /*@import "fonts";
 @import "rouge-github"; commented out 10/26/2021 since I'm not using these at this time*/
 
-body {
-  background-color: #fff;
-  padding:25px;
-  font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color:#727272;
-  font-weight:400;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color:#222;
-  margin:0 0 10px;
-}
-
-p, ol, table, pre, dl {
-  margin:0 0 20px;
-}
-
-h1, h2, h3 {
-  line-height:1.1;
-}
-
-h3 {
-  text-indent: 2em;
-}
-
-h1 {
-  font-size:28px;
-}
-
-a {
-  color:#39c;
-  text-decoration:none;
-}
-
 a:hover {
   color:#069;
 }
@@ -48,17 +14,6 @@ a small {
 
 a:hover small {
   color:#777;
-}
-
-.wrapper {
-  width:1300px;
-}
-
-blockquote {
-  border-left:1px solid #e5e5e5;
-  margin:0;
-  padding:0 0 0 20px;
-  font-style:italic;
 }
 
 code, pre {
@@ -75,38 +30,9 @@ pre {
   overflow-x: auto;
 }
 
-table{
-  table-layout:fixed;
-  /*width:100%;*/
-  border-collapse:collapse;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-th, td {
-  text-align:center;
-  padding:5px 10px;
-  border-bottom:1px solid #e5e5e5;
-}
-
 dt {
   color:#444;
   font-weight:700;
-}
-
-th {
-  color:#444;
-}
-
-img {
-  max-width:60%;
-}
-
-header {
-  width:270px;
-  float:left;
-  position:fixed;
-  -webkit-font-smoothing:subpixel-antialiased;
 }
 
 header ul {
@@ -152,11 +78,6 @@ header ul a:active {
   background-color:#f0f0f0;
 }
 
-strong {
-  color:#222;
-  font-weight:700;
-}
-
 header ul li + li + li {
   border-right:none;
   width:89px;
@@ -168,45 +89,11 @@ header ul a strong {
   color:#222;
 }
 
-section {
-  width:950px;
-  float:right;
-  padding-bottom:25px;
-}
-
-small {
-  font-size:11px;
-}
-
 hr {
   border:0;
   background:#e5e5e5;
   height:1px;
   margin:0 0 20px;
-}
-
-footer {
-  width:270px;
-  float:left;
-  position:fixed;
-  bottom:25px;
-  -webkit-font-smoothing:subpixel-antialiased;
-}
-
-figure {
-  display: block;
-  text-align:center;
-}
-
-figcaption {
-  text-align:center;
-  line-height:14px;
-  font-weight:400;
-}
-
-figure img {
-  position: relative;
-  /*left: 20%;*/
 }
 
 @media print, screen and (max-width: 960px) {
