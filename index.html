@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<meta name="description" content="Gerrit VanderWaal's repository for personal projects.">
+        <meta name="google-site-verification" content="gaQ4oCP-Wpxl73BblOAgAdey42LYRoO0pj6VMR1523I" />
         <title>Gerrit VanderWaal</title>
 
         <!--<link rel="stylesheet" href="assets/css/style.css?v=">-->
@@ -23,7 +24,7 @@
             color:#727272;
             font-weight:400;
             }
-
+            
             h1, h2, h3, h4, h5, h6 {
               color:#222;
               margin:0 0 10px;
@@ -38,7 +39,7 @@
             }
 
             h3 {
-              text-indent: 2em;
+              margin-left: 2em;
             }
 
             h1 {
@@ -63,7 +64,6 @@
             
             table{
               table-layout:fixed;
-              /*width:100%;*/
               border-collapse:collapse;
               margin-left:auto;
               margin-right:auto;
@@ -126,8 +126,11 @@
 
             figure img {
               position: relative;
-              /*left: 20%;*/
             }
+            .grid {
+            display:grid;
+            grid-template-columns: 3fr 1fr;
+            )
         </style>
         <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
@@ -146,12 +149,17 @@
       
         <section>
         <!-- any future site content goes here -->
-        <h1>Personal projects</h1>
-        <h3><a href="/orchard.html">Where do apples like to grow? Siting an apple orchard with a geospatial suitability analysis</a></h3>
-        <hr>
-        <h1>Undergraduate research projects from back in the day</h1>
-        <h3>Sediment provenance of Twin Ports baymouth bars <sup><a href="/assets/pdf/urop2017.pdf">PDF, 10.7 MB</a></sup></h3>
-        <h3>Influence of mineral liberation on metal leaching and dissolution rates in ore material and associated host rock <sup><a href="/assets/pdf/urop2016.pdf">PDF, 0.41 MB</a></sup></h3>
+        <h2>Personal projects</h2>
+        <div class="grid">
+            <div><h3>Where do apples like to grow? <a href="/orchard.html">Siting an apple orchard with a geospatial suitability analysis</a></h3></div>
+            <div><a href="/orchard.html"><img style="float:right;" src="assets/images/orchard/thumb/Overlay.webp" width="150px" /></a></div>
+        </div>
+        
+        <br><hr>
+        
+        <h2>Undergraduate research projects from back in the day</h2>
+            <h3>Sediment provenance of Twin Ports baymouth bars <sup><a href="/assets/pdf/urop2017.pdf">PDF, 10.7 MB</a></sup></h3>
+            <h3>Influence of mineral liberation on metal leaching and dissolution rates in ore material and associated host rock <sup><a href="/assets/pdf/urop2016.pdf">PDF, 0.41 MB</a></sup></h3>
 
         </section>
       
