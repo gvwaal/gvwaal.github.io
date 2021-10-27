@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
         <meta name="description" content="Gerrit VanderWaal's repository for personal projects.">
-        <title>Where do apples like to grow? Siting an apple orchard with a geospatial suitability analysis - Gerrit VanderWaal</title>
+        <title>Where do apples like to grow? Finding optimal orchard locations with a geospatial suitability analysis - Gerrit VanderWaal</title>
 
         <!--<link rel="stylesheet" href="assets/css/style.css">-->
         <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -126,7 +126,10 @@
 
             figure img {
               position: relative;
-              /*left: 20%;*/
+            }
+            
+            caption {
+              font-size:17px;
             }
         </style>
         <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -149,7 +152,7 @@
         <section>
             <!-- any future site content goes here -->
             <h1 id="top">Where do apples like to grow?</h1>
-            <h2>Siting an apple orchard with a geospatial suitability analysis</h2>
+            <h2>Finding optimal orchard locations with a geospatial suitability analysis</h2>
             <ol>
                 <li><a href="#research">Research</a>
                 <li><a href="#data">Data</a></li>
@@ -161,7 +164,7 @@
             
             <p>A <a href="https://www.spc.noaa.gov/misc/AbtDerechos/derechofaq.htm">derecho</a> blasted through my friend's family's cabin property on <a href="https://bringmethenews.com/minnesota-weather/national-weather-service-confirms-2-derechos-ripped-through-minnesota-wisconsin">July 19, 2019</a>. Several months ago, a majority of the property was clear-cut in order to remove the downed trees. Naturally, there's some debate about what to do with the significant increase in unforested land, but one of the planned uses was an orchard. My friend was aware of my mapping/geology background and asked me to plot some figures during the design process.</p>
             <figure>
-                    <a href="assets/images/orchard/figure/Aerial20202018.jpg"><img src="assets/images/orchard/thumb/Aerial20202018.webp" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary for reference with a turquoise outline."></a>
+                    <a href="assets/images/orchard/figure/Aerial20202018.jpg"><img src="assets/images/orchard/thumb/Aerial20202018.webp" alt="A side-by-side comparison of two leaf-on aerial imagery. Property boundary is presented for reference as a square turquoise outline."></a>
                     <figcaption><small>Figure 1: A comparison of leaf-on aerial imagery from 2020 (left) and 2018 (right). Large swathes of downed trees cover much of northern half of the property. The turquoise square is the property boundary.</small></figcaption>
             </figure>
             <p>During that process I was inspired to conduct a suitability analysis to see if there were other areas of the property that might be optimally suited for an orchard. As currently designed, the orchard was to be situated adjacent a garden established by one of the former property owners.</p>
@@ -183,7 +186,7 @@
             
             <h2 id="research">Research</h2>
             <p>Since we've established our goal, we'll establish our scope. Because an orchard is defined as any plot of land where fruit or nut trees are grown, we’ll narrow the scope to an apple orchard. We won’t narrow the scope to any particular cultivars. We'll focus on doing relatively surface-level research given financial and time constraints. Next, we'll identify attributes required for a successful apple orchard.</p>
-            <p>I don’t know anything about growing apples! So I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three resources that seem reputable:
+            <p>I don’t know anything about growing apples! So I searched the internet. I limited myself to the first several pages of Google for the sake of convenience and speed. I found three primary resources that seem reputable:
                 <ul>
                     <li>Teryl R. Roper, Daniel L. Maher, and Patricia S. McManus’ <a href="https://learningstore.extension.wisc.edu/products/growing-apples-in-wisconsin-p413"><i>Growing Apples in Wisconsin</i></a></li>
                     <li>Teryl R. Roper & Gary G. Frank’s <a href="https://learningstore.extension.wisc.edu/products/planning-and-establishing-commercial-apple-orchards-in-wisconsin-p417"><i>Planning and Establishing Commercial Apple Orchards in Wisconsin</i></a></li>
@@ -263,8 +266,8 @@
             <figcaption><small>Table 1</small></figcaption><br>
             <p>The soil fertility recommendations do not agree and bear further research, as does soil aeration, aspect (the direction a slope faces), and <a href="https://planthardiness.ars.usda.gov/">USDA Zone</a>. I feel confident assuming the importance of water-holding capacity based on the information available.</p>
             <p><a href="http://treefruit.wsu.edu/orchard-management/soils-nutrition/soil-health-in-orchards/">Soil Health in Orchards</a> claims agricultural soils average 1-6% organic matter but does not cite a source. Table 2 of <a href="https://www.tandfonline.com/doi/full/10.1080/02571862.2014.944229">an academic study</a> records percentages ranges from 1-4ish%, but only from a single orchard. While many resources reiterate the importance of soil organic matter, few (reliable) sources provide quantitative recommendations, so for the sake of convenience we’ll go with 2-6% as the ideal amount of soil organic matter.</p>
-            <p>T.T. Kozlowski’s <a href="http://joa.isa-arbor.com/request.asp?JournalID=1&ArticleID=2003&Type=2">Soil Aeration, Flooding, and Tree Growth</a> lists a multitude of reasons why soil aeration is a good thing but does not list quantitative measurements, nor is it strictly about apples, but I think it’s usable enough to inform our analysis.</p>
-            <p><a href="https://www.princeedwardisland.ca/sites/default/files/publications/af_site_assessment_perennial_crops.pdf">Site Assessment, Selection and Development for Perennial Crops Guide</a> recommends south-facing slopes due to greater exposure to sunlight, as does <a href="https://powderriver.msuextension.org/documents/treesshrubs/EB0222.pdf">Growing Fruit Trees in Montana</a>. However, <a href="https://www.nd.gov/ndda/sites/default/files/legacy/Marketing/OrchardManuaFinal.pdf">Starting a Community Orchard in North Dakota</a> recommends against south-facing slopes due to increased likelihood of breaking winter dormancy due to winter temperature fluctuations, which may also cause sunscalding and trunk cracking. While it would be nice to place the trees so that they receive more sunlight and therefore grow more quickly, tree damage would occur at any stage of the tree's growth, and so we'll consider a north-facing slope ideal.</p>
+            <p>T.T. Kozlowski’s <a href="http://joa.isa-arbor.com/request.asp?JournalID=1&ArticleID=2003&Type=2">Soil Aeration, Flooding, and Tree Growth</a><sup>PDF, 1.1 MB</sup> lists a multitude of reasons why soil aeration is a good thing but does not list quantitative measurements, nor is it strictly about apples, but I think it’s usable enough to inform our analysis.</p>
+            <p><a href="https://www.princeedwardisland.ca/sites/default/files/publications/af_site_assessment_perennial_crops.pdf">Site Assessment, Selection and Development for Perennial Crops Guide</a><sup>PDF, 0.15 MB</sup> recommends south-facing slopes due to greater exposure to sunlight, as does <a href="https://powderriver.msuextension.org/documents/treesshrubs/EB0222.pdf">Growing Fruit Trees in Montana</a><sup>PDF, 1.5 MB</sup>. However, <a href="https://www.nd.gov/ndda/sites/default/files/legacy/Marketing/OrchardManuaFinal.pdf">Starting a Community Orchard in North Dakota</a><sup>PDF, 1.9 MB</sup> recommends against south-facing slopes due to increased likelihood of breaking winter dormancy due to winter temperature fluctuations, which may also cause sunscalding and trunk cracking. While it would be nice to place the trees so that they receive more sunlight and therefore grow more quickly, tree damage would occur at any stage of the tree's growth, and so we'll consider a north-facing slope ideal.</p>
             <p>USDA zone preference likely depends on the cultivar chosen and this can be disregarded.</p>
             
             <h2 id="data">Data</h2>
@@ -284,11 +287,11 @@
                 <h3 id="buildingsroads">Buildings and roads</h3>
                 <p>Buildings and roads were heads-up digitized using a combination of the slope raster and the leaf-off 2010 aerial imagery as references. The <a href="https://www.co.polk.wi.us/landinfogisdataportal">Polk County GIS Division</a> publishes road centerlines, but these are not helpful for our use-case. To lessen the annoyance from storm damage, we'll restrict trees from being planted from within 30 feet of buildings and roads. 30ft is the approximate maximum apple tree height (based off a quick review of Google sources), but it’s probable the chosen cultivar will be much shorter than this to aid fruit harvesting.</p>
                 <figure>
-                    <a href="assets/images/orchard/figure/BuildingsRoads.jpg"><img src="assets/images/orchard/thumb/BuildingsRoads.webp" alt="Displays building and road data created for this project against the 2020 aerial imagery."></a>
+                    <a href="assets/images/orchard/figure/BuildingsRoads.jpg"><img src="assets/images/orchard/thumb/BuildingsRoads.webp" alt="Displays building and road data created for this project over 2020 aerial imagery."></a>
                     <figcaption><small>Figure 3: Buildings (and 30ft from buildings) in red, roads in yellow. The combined area for both sets are a little under two acres, or 4% of the property. The polygons created by the 30 ft buffer increase the area to a little under six acres, or 14% of the property.</small></figcaption>
                 </figure>
                 <h3 id="elevation">Elevation</h3>
-                <p>Elevation data is commonly delivered in a <a href="https://guides.lib.umich.edu/c.php?g=282942&p=1885352">raster</a> format called a Digital Elevation Model (DEM). I located three DEM sets we could choose from: two acquired for the USGS's <a href="https://www.usgs.gov/core-science-systems/ngp/3dep">3D Elevation Program</a> (3DEP, 2016) and one LiDAR (<a href="https://oceanservice.noaa.gov/facts/lidar.html">Light Detection and Ranging</a>) flown for Polk County (2015). While the 3DEP DEMs are more recent and thus would better match ground conditions, at <a href="https://www.sciencebase.gov/catalog/item/5df04f5be4b02caea0f4fd39">1 arc-second</a> (~30 meter) resolution and <a href="https://www.sciencebase.gov/catalog/item/5f7784da82ce1d74e7d6caec">1/3 arc-second</a> (~10 meter) they're far too coarse for our use case. Resolution refers to how much ground a given raster cell represents — in the case of the latter 3DEP set, one cell represents a 10 meter by 10 meter square on the ground. The Polk County 2015 will be used (1 meter resolution!), and from this we can derive slope and aspect. DEM tiles were downloaded from the Wisconsin State Cartographer's Office interactive <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">LiDAR tile index</a> for Polk County. This set was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).</p>
+                <p>Elevation data is commonly delivered in a <a href="https://guides.lib.umich.edu/c.php?g=282942&p=1885352">raster</a> format called a Digital Elevation Model (DEM). I located three DEM sets we could choose from: two acquired for the USGS's <a href="https://www.usgs.gov/core-science-systems/ngp/3dep">3D Elevation Program</a> (3DEP, 2016) and one LiDAR (<a href="https://oceanservice.noaa.gov/facts/lidar.html">Light Detection and Ranging</a>) flown for Polk County (2015). While the 3DEP DEMs are more recent and thus would better match ground conditions, at <a href="https://www.sciencebase.gov/catalog/item/5df04f5be4b02caea0f4fd39">1 arc-second</a> (~30 meter) resolution and <a href="https://www.sciencebase.gov/catalog/item/5f7784da82ce1d74e7d6caec">1/3 arc-second</a> (~10m) they're far too coarse for our use case. Resolution refers to how much ground a given raster cell represents — in the case of the latter 3DEP set, one cell represents a 10m-by-10m square on the ground. The Polk County 2015 will be used (1m resolution!), and from this we can derive slope and aspect. DEM tiles were downloaded from the Wisconsin State Cartographer's Office interactive <a href="https://www.sco.wisc.edu/scoapps/lidar/tile-search/?layer=polk">LiDAR tile index</a> for Polk County. This set was acquired any time between March 21-31, 2015; unfortunately, the County's chosen contractor did not provide date metadata on a per-tile basis (or it's not public).</p>
                 <figure>
                     <a href="assets/images/orchard/figure/Elevation.jpg"><img src="assets/images/orchard/thumb/Elevation.webp" alt="Elevation of the property displayed with high elevations in orange-yellow, lowest elevations in blue, and middling elevations in lime green."></a>
                     <figcaption><small>Figure 4: Higher elevations represented by lighter colors, lower elevations by darker. Highest elevation within the property boundary is approximately 1,157 ft and the lowest is 1,115. It is a low-relief property despite the dramatic color changes.</small></figcaption>
@@ -305,29 +308,29 @@
                 <h3 id="soil">Soil</h3>
                 <p>Soil data were downloaded from the Natural Resources Conservation Service (NRCS)’s <a href="https://websoilsurvey.nrcs.usda.gov/app/WebSoilSurvey.aspx">Web Soil Survey</a>. This generated a product that included polygons of soil unit outlines and tabular data describing various soil attributes. The NRCS’ <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detailfull/soils/survey/geo/?cid=nrcs142p2_053620">Soil Data Viewer</a> add-in for ArcMap was used to generate polygons describing each soil unit’s available water capacity (previously referenced as water-holding capacity), depth to water table, drainage class, and organic matter content. A subset of the data available through the add-in can be viewed in <a href="assets/images/orchard/figure/SoilDataViewer.jpg">this image</a>. I tried to only use “primary” soil attributes, or attributes intrinsic to the soil. For example, the Soil Data Viewer has a “Pesticide Leaching Potential” layer that could be very useful in this analysis, but I figured this Potential would be calculated using primary soil attributes, and therefore would effectively count those soil attributes twice. Additionally, only attributes with values for all soil polygons were used. This data was current as of September 9, 2021.</p>
                 <figure>
-                    <a href="assets/images/orchard/figure/SoilUnits.jpg"><img src="assets/images/orchard/thumb/SoilUnits.webp" alt="Soils data displayed with a two by three grid. The right two-thirds is soil data, generally using reds as low values and blues as high values."></a>
-                    <figcaption><small>Figure 6: Soil units downloaded from the Web Soil Survey. A PDF report of soil unit descriptions can be viewed <a href="assets/pdf/orchard/SoilUnitDescriptions.pdf">here</a>.</small></figcaption>
+                    <a href="assets/images/orchard/figure/SoilUnits.jpg"><img src="assets/images/orchard/thumb/SoilUnits.webp" alt="Soils polygons acquired from the Web Soil Survey symbolized with each polygon having a different color and labeled with their map unit key."></a>
+                    <figcaption><small>Figure 6: Soil units downloaded from the Web Soil Survey. A report of soil unit descriptions can be viewed <a href="assets/pdf/orchard/SoilUnitDescriptions.pdf">at this PDF</a><sup>0.03 MB</sup>.</small></figcaption>
                 </figure>
                 <figure>
-                    <a href="assets/images/orchard/figure/SoilAttributes.jpg"><img src="assets/images/orchard/thumb/SoilAttributes.webp" alt="Soils data displayed with a two by three grid. The right two-thirds is soil data, generally using reds as low values and blues as high values."></a>
+                    <a href="assets/images/orchard/figure/SoilAttributes.jpg"><img src="assets/images/orchard/thumb/SoilAttributes.webp" alt="Soils data displayed with a 2-by-3 grid. The left 2-by-2 grid is soil data, generally using reds as low values and blues as high values."></a>
                     <figcaption><small>Figure 7: Soil attributes depicted with symbology as imported by the Soil Data Viewer.</small></figcaption>
                 </figure>
                 <h3 id="proc_dems">Wetlands</h3>
                 <p>Wetland polygons derived from the Wisconsin Department of Natural Resources Wetland Survey were downloaded from the Polk County GIS Division and visually validated against <a href="https://dnrmaps.wi.gov/H5/?Viewer=SWDV&runWorkflow=Wetland">the DNR’s web map</a>. These data were augmented by heads-up digitization of an ephemeral stream channel and its floodplain. This feature is not at all apparent when viewing aerial imagery or the wetlands data, but I personally observed it when walking the property and my suspicions were confirmed when viewing the slope raster. It is especially evident in the 1947 aerial imagery.</p>
                 <figure>
-                    <a href="assets/images/orchard/figure/Wetlands.jpg"><img src="assets/images/orchard/thumb/Wetlands.webp" alt="Floodplain depicted in a grey hatch pattern over 2020 aerial imagery."></a>
+                    <a href="assets/images/orchard/figure/Wetlands.jpg"><img src="assets/images/orchard/thumb/Wetlands.webp" alt="Wetlands over 2020 aerial imagery."></a>
                     <figcaption><small>Figure 8: Wetlands depicted as green transparent polygons. The lighter green of the two polygons is the ephemeral channel and floodplain. Wetlands cover a little under eight acres, or 19% of the property.</small></figcaption>
                 </figure>
 
             <h2 id="processing">Processing</h2>
-            <p>After all primary data (DEMs, soil, etc.) were downloaded they were re-projected in <a href="https://epsg.io/26915">NAD83 UTM Zone 15N</a>. The DEMs used bilinear resampling during the re-projection process to reduce the presence of artifacts in the output rasters.</p>
+            <p>After all primary data (DEMs, soil, etc.) were downloaded they were <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/project-raster.htm">re-projected</a> in <a href="https://epsg.io/26915">NAD83 UTM Zone 15N</a>. Bilinear resampling was used during the re-projection process to reduce the presence of linear artifacts in the output rasters.</p>
             <figure>
                     <a href="assets/images/orchard/figure/SlopeBilinearNearest.jpg"><img src="assets/images/orchard/thumb/SlopeBilinearNearest.webp" alt="A side-by-side comparison of two slope rasters derived from different resampling techniques. Steeper slopes are darker pint and flatter slopes lighter pink. Property boundary in turquoise outline and orchard in red outline."></a>
                     <figcaption><small>Figure 9: A comparison of slopes derived from data projected with bilinear (left) and nearest neighbor (right) resampling techniques. Artifacts manifest as an approximately north-south and east-west cross-hatch pattern. While the artifacts are most obvious with nearest neighbor, bilinear does not completely remove them, indicating the artifacts are inherent to the source LiDAR data. Darker color indicates steeper slopes.</small></figcaption>
             </figure>
-            <p>Since the property fell on a seam line between two DEM tiles, they were merged together, then clipped using the property boundary polygon. From this elevation raster, the Slope and Aspect tools were used to generate slope and aspect rasters. The elevation, slope, and aspect tools were then Reclassified to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.</p>
+            <p>Since the property fell on a seam line between two DEM tiles, they were <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/mosaic-to-new-raster.htm">merged</a> together, then <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/data-management-toolbox/clip.htm">clipped</a> using the property boundary polygon. From this elevation raster, the <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/slope.htm">Slope</a> and <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/aspect.htm">Aspect</a> tools were used to generate slope and aspect rasters. The elevation, slope, and aspect tools were then <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/reclassify.htm">Reclassified</a> to 1) assign weights to the values in the raster and 2) convert the raster to an integer pixel type for use in the Weighted Overlay tool.</p>
             <figure>
-                    <a href="assets/images/orchard/figure/ElevationAspectSlope.jpg"><img src="assets/images/orchard/thumb/ElevationAspectSlope.webp" alt="Six images displayed in a two by three grid. Top left images displays elevation within the property, with lowest elevation in blue, highest in yellow-orange, and middling in lime green. Top middle image displays slope within the property, with low slopes as very light pink and high slopes as very dark pink. Top right image displays aspect, with low aspect as  turquoise, high aspect as purple, and middling as dark blue. Below each is its respective reclassification using the same color schemes."></a>
+                    <a href="assets/images/orchard/figure/ElevationAspectSlope.jpg"><img src="assets/images/orchard/thumb/ElevationAspectSlope.webp" alt="Six images displayed in a 2-by-3 grid. Top left images displays elevation within the property, with lowest elevation in blue, highest in yellow-orange, and middling in lime green. Top middle image displays slope within the property, with low slopes as very light pink and high slopes as very dark pink. Top right image displays aspect, with low aspect as light blue and high aspect as dark blue. Below each is its respective reclassification using the same color schemes."></a>
             </figure>
             <figcaption><small>Figure 10</small></figcaption><br>
             <table>
@@ -386,9 +389,9 @@
                     <td>Restricted</td>
                 </tr>
             </table>
-            <figcaption><small>Table 2: Beneath each header are two columns: the left is the data interval and the right is the weight</small></figcaption><br>
+            <figcaption><small>Table 2: Beneath each header are two columns: the left is the data interval and the right is the weight. "Restricted" removes cells from use in Weighted Overlay and overrides all other rankings in all other datasets.</small></figcaption><br>
             <p>Weights for elevation are straightforward – the literature suggests planting trees at elevation to avoid areas where cold air will pool. For similar reasons, the literature advises planting trees on a slope, but given the lack of information, I’ve defined “gentle” to incorporate the only quantitative numbers, plus a little more. One could just as easily interpret “gentle” to mean anything up to 45°. Aspect is also self-explanatory: the higher weights are assigned to north-facing slopes to reduce harm during winter. An aspect of -1°, or flat, was only calculated for the river.</p>
-            <p>Buildings, floodplains, roads, and wetlands were treated identically. The polygons were clipped using the property boundary, converted to rasters with a 1m pixel resolution, and reclassified.</p>
+            <p>Buildings, floodplains, roads, and wetlands were treated identically. The polygons were <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/clip.htm">clipped</a> using the property boundary, <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/conversion-toolbox/polygon-to-raster.htm">converted</a> to rasters with a 1m resolution, and reclassified.</p>
             <table>
                 <caption>Weights assigned to buildings, floodplains, roads, and wetlands</caption>
                 <tr>
@@ -587,14 +590,14 @@
             <p>The data that are the least easy to artificially alter have the highest weights, while those that can be artificially altered have lowest. Buildings, floodplains, roads, and wetlands are included exclusively to restrict land from being considered and have the lowest weights of all.</p>
             
             <h2 id="result">Result</h2>
-            <figure>
-                    <a href="assets/images/orchard/figure/Overlay.jpg"><img src="assets/images/orchard/thumb/Overlay.webp" alt=""></a><br>
-                    <figcaption><small>Figure 11: The output of Weighted Overlay given the above datasets and weights. Restricted indicates land barred from being used as an apple orchard. 5 indicates land best suited for an apple orchard and 1 the least suited.</small></figcaption>
-            </figure>
             <p>This is the output of running Weighted Overlay!</p>
+            <figure>
+                    <a href="assets/images/orchard/figure/Overlay.jpg"><img src="assets/images/orchard/thumb/Overlay.webp" alt="Weighted Overlay output with most optimal land as dark green, least optimal land as purple, and Restricted land as black."></a><br>
+                    <figcaption><small>Figure 11: The output of Weighted Overlay given the above datasets and weights. 5 indicates land best suited for an apple orchard, 1 the least suited, and Restricted being land barred from consideration.</small></figcaption>
+            </figure>
             <p>Land calculated as most optimal (5) is finely dispersed but generally restricted to a northwest-southeast trend and a lobe at the northeast corner of the property. Next most-optimal land (4) fills sizeable chunks of the property: primarily the northwest quadrant, the center of the property, and an offshoot along the access road. Middling-ranked land (3) is evenly distributed around the whole property unless currently Restricted. 2-ranked land is almost exclusively present on the eastern half with a small crescent between the buildings and river. Least suitable land is scatterd due east of the buildings.</p>
             <figure>
-                    <a href="assets/images/orchard/figure/OverlaySplit.jpg"><img src="assets/images/orchard/thumb/OverlaySplit.webp" alt="A 1-by-5 image displaying each rank by itself, with 5 on the left and 1 on the right. 5 is displayed as dark green and 1 as dark orange-red. Property boundary outline (turqouise), planned orchard outline (red), and building outlines (red) for reference."></a>
+                    <a href="assets/images/orchard/figure/OverlaySplit.jpg"><img src="assets/images/orchard/thumb/OverlaySplit.webp" alt="A 1-by-5 image displaying each rank by itself, with 5 on the left and 1 on the right. 5 is displayed as dark green and 1 as purple. Property boundary outline (turqouise), planned orchard outline (red), and building outlines (red) for reference."></a>
                     <figcaption><small>Figure 12</small></figcaption>
             </figure>
             <table>
@@ -644,7 +647,7 @@
             <p>The elevation data portrays the property as it existed on the date acquired — that is, as it was six years ago. This is acceptably current. The largest change to the property since acquisition was the clear-cutting, but the DEMs depict the ground elevation, not the tree canopy. The resolution is good enough to identify buildings and roads, and very importantly, the stream channel bisecting the property.</p>
             <p>The soils data seem to be reliable. 12 of 23 soil units are classified as Order 2. According to Chapter 4 of the NRCS' <i><a href="https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054254#orders">Soil Survey Manual</a></i>, "Orders" are "determined by the field procedures used to identify soil components and place map unit boundaries, the minimum permissible size of map unit delineation, and the  kind  of  map  unit  to  which  soil  components  are  aggregated." The <i>Manual</i> indicates Order 2 data is suitable for general agriculture planning (page 273), which this analysis is. From a brief review of the <i>Manual</i> and Google, I was unable to find a reason why a soil unit would be missing an Order, but I assume it's because the field procedures used in generating the data are unknown.</p>
             <figure>
-                <a href="assets/images/orchard/figure/SoilOrder.jpg"><img src="assets/images/orchard/thumb/SoilOrder.webp" alt="A 1-by-5 image displaying each rank by itself, with 5 on the left and 1 on the right. 5 is displayed as dark green and 1 as dark orange-red. Property boundary outline (turqouise), planned orchard outline (red), and building outlines (red) for reference."></a>
+                <a href="assets/images/orchard/figure/SoilOrder.jpg"><img src="assets/images/orchard/thumb/SoilOrder.webp" alt="Soil Orders for the soil data used in this analysis, depicted in orange with a transparency effect."></a>
                 <figcaption><small>Figure 13</small></figcaption>
             </figure>
             <p>The <i> Manual</i> describes Order 2 as:
@@ -655,9 +658,9 @@
             
             <h2 id="next">Next Steps</h2>
             <ol>
-                <li>Groundtruthing: Essential if an alternate orchard location is desired, suggested if proceeding with the current location. While the model provides quantitative insight into ideal locations, the actual viability will depend on ground conditions. Additionaly, it would be helpful (but perhaps not financially prudent) to send soil samples to be analyzed for a refined look at soil attributes.</li>
-                <li>500-year floodplain: If the boundaries can be generated relatively easily, it would be preferred to include them in an updated analysis.</li>
-                <li>Additional soil data review: A more thorough look at the data available through Soil Data Viewer would be useful in figuring out why some data is incomplete, like pH or Total Subsidence. Completed data could be used in enhancing the model.</li>
+                <li><strong>Groundtruthing</strong>: Essential if an alternate orchard location is desired, suggested if proceeding with the current location. While the model provides quantitative insight into ideal locations, the actual viability will depend on ground conditions. Additionaly, it would be helpful (but perhaps not financially prudent) to send soil samples to be analyzed for a refined look at soil attributes.</li>
+                <li><strong>500-year floodplain</strong>: If the boundaries can be generated relatively easily, it would be preferred to include them in an updated analysis.</li>
+                <li><strong>Additional data review</strong>: A more thorough look at the data available through Soil Data Viewer would be useful in figuring out why some data is incomplete, like pH or Total Subsidence. Completed data could be used in enhancing the model.</li>
             </ol>
         </section>
         <footer>
