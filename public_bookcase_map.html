@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+	<!-- Leaflet dependencies-->
+    <link rel="stylesheet" href="plugins/leaflet/leaflet.css"/>
+    <script src="plugins/leaflet/leaflet.js"></script>
+
+	<!--Leaflet MarkerClusterGroup dependencies-->
+	<link rel="stylesheet" href="plugins/leaflet/MarkerCluster.css"/>
+	<link rel="stylesheet" href="plugins/leaflet/MarkerCluster.Default.css"/>
+    <script src="plugins/leaflet/leaflet.markercluster-src.js"></script>
+
+	<!-- Public bookcase export-->
+	<script src="plugins/leaflet/public_bookcase_export.js"></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 100%;
+			width: 100%;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+
+	
+</head>
+	<body>
+		<div id='map'></div>
+		<script>
+			const map = L.map('map').setView([44.946488868731905, -93.21985018893679], 13);
+
+			map.locate({setView: true, maxZoom: 18});
+
+			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+			}).addTo(map);
+
+			var markers = L.markerClusterGroup();
+
+			function onEachFeature(feature, layer) {
+				let popupContent = `<p>${feature.properties.Address}</p>`;
+
+				if (feature.properties && feature.properties.popupContent) {
+					popupContent += feature.properties.popupContent;
+				}
+				layer.bindPopup(popupContent);
+			}
+
+			markers.addLayer(L.geoJSON(publicBookcases, {
+				pointToLayer(feature, latlng) {
+					return L.marker(latlng);
+				},
+				onEachFeature
+			}));
+			map.addLayer(markers);
+
+			function onLocationFound(e) {
+				L.circle(e.latlng, {
+					color: 'red',
+					fillColor: '#f03',
+					fillOpacity: 0.5,
+					radius: 5
+				}).addTo(map);
+			}
+			map.on('locationfound', onLocationFound);
+
+			function onLocationError(e) {
+				alert(e.message);
+			}
+			map.on('locationerror', onLocationError);
+		</script>
+
+
+
+	</body>
+</html>
