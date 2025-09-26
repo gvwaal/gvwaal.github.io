@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+    <head>
+        <html lang="en-US">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="description" content="Gerrit VanderWaal's repository for personal projects.">
+        <title>Identifying potential corporate partners for habitat restoration - Gerrit VanderWaal</title>
+
+        <!--<link rel="stylesheet" href="assets/css/style.css">-->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        <!-- CSS is here to improve responsiveness according to https://web.dev/defer-non-critical-css/#optimize -->
+        <style type="text/css">
+            body {
+            background-color: #fff;
+            padding:25px;
+            font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color:#727272;
+            font-weight:400;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              color:#222;
+              margin:0 0 10px;
+            }
+
+            p, ol, table, pre, dl {
+              margin:0 0 20px;
+            }
+
+            h1, h2, h3 {
+              line-height:1.1;
+            }
+
+            h3 {
+              margin-left: 2em;
+            }
+
+            h1 {
+              font-size:28px;
+            }
+
+            a {
+              color:#39c;
+              text-decoration:none;
+            }
+            
+            .wrapper {
+              width:1300px;
+            }
+
+            blockquote {
+              border-left:1px solid #e5e5e5;
+              margin:0;
+              padding:0 0 0 20px;
+              font-style:italic;
+            }
+            
+            table{
+              table-layout:fixed;
+              /*width:100%;*/
+              border-collapse:collapse;
+              margin-left:auto;
+              margin-right:auto;
+            }
+
+            th, td {
+              text-align:center;
+              padding:5px 10px;
+              border-bottom:1px solid #e5e5e5;
+            }
+            
+            th {
+              color:#444;
+            }
+
+            img {
+              max-width:60%;
+            }
+
+            header {
+              width:270px;
+              float:left;
+              position:fixed;
+              -webkit-font-smoothing:subpixel-antialiased;
+            }
+            
+            strong {
+              color:#222;
+              font-weight:700;
+            }
+
+            section {
+              width:950px;
+              float:right;
+              padding-bottom:25px;
+            }
+
+            small {
+              font-size:11px;
+            }
+
+            footer {
+              width:270px;
+              float:left;
+              position:fixed;
+              bottom:25px;
+              -webkit-font-smoothing:subpixel-antialiased;
+            }
+
+            figure {
+              display: block;
+              text-align:center;
+            }
+
+            figcaption {
+              text-align:center;
+              line-height:14px;
+              font-weight:400;
+            }
+
+            figure img {
+              position: relative;
+            }
+            
+            caption {
+              font-size:17px;
+            }
+        </style>
+        <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+    </head>
+
+    <body>
+    <div class="wrapper">
+        <header>
+            <h1><a href="/" style="color:#222;">Gerrit VanderWaal</a></h1>
+            <div class="mobilehider">
+                <p>Sometimes I give myself research projects and this is where I write up my findings.</p>
+                <a href="mailto:gerrit.vwaal@gmail.com">email</a><br>
+                <a href="https://www.linkedin.com/in/gvwaal">linkedin</a><br>
+                <a href="https://github.com/gvwaal">github</a><br>
+                <a href="https://www.openstreetmap.org/user/gvwaal">openstreetmap</a>
+            </div>
+        </header>
+      
+        <section>
+            <!-- any future site content goes here -->
+            <h1 id="top">Identifying potential corporate partners for habitat restoration</h1>
+            <ol>
+                <li><a href="#research">Research</a>
+                <li><a href="#data">Data</a></li>
+                <li><a href="#processing">Processing</a></li>
+                <li><a href="#result">Result</a></li>
+                <li><a href="#discussion">Discussion</a></li>
+                <li><a href="#next">Next Steps</a></li>
+            </ol>
+            
+            <p>Habitat restoration can be expensive work. One way of making dollars go further is partnering with businesses that own land of interest to conservation: the business contributes money and access to their land, and the entity conducting restoration can achieve its goals.</p>
+            
+            <p>Friends of the Mississippi River (FMR), a local nonprofit focused towards restoring and enhancing the environment in the watersheds around the <a href="https://www.nps.gov/miss/index.htm">Mississippi National River and Recreation Area</a> (MNRRA), selectively partners with local businesses to manage their land in pursuit of conservation goals. How could FMR identify other businesses for similar parterships?</p>
+            
+            <p>One way would be to generate a site suitability scheme for identifying areas ideal for conservation, then calculate which largest land parcels contain land that scores highly.</p>
+            
+            <p>Fortunately, the Minnesota Department of Natural Resources (DNR) has already generated a suitability scheme that could fit FMR's purposes. In pursuit of the DNR's conservation goals, they use the Marxan software to identify priority areas for protecting biological diversity and have published <a href="https://gisdata.mn.gov/dataset/env-sna-conserv-opportunity-area">a layer of such areas for the whole state</a>, which will be referred to here as "SNACOA".</p>
+            
+            <p>But how to identify landowners? The easiest way is through parcel data. Fortunatley, the <a href="https://metrocouncil.org/">Metropolitan Council</a> aggregates <a href="https://gisdata.mn.gov/dataset/us-mn-state-metrogis-plan-regional-parcels">parcel data for the seven metro counties</a> (Anoka, Carver, Dakota, Hennepin, Ramsey, Scott, and Washington), which provides an effecient means of acquiring parcel data.</p>
+
+            <p>Accoring to FMR's <a href="https://fmr.org/updates/conservation/how-we-choose-sites-protect-and-restore">"How we choose sites to protect and restore"</a> page, FMR focuses their resources on the Twin Cities metropolitan area and "essential tributaries and lands that drain to the metro river". What this specifically means is ambiguous, but based on FMR's <a href="https://fmr.org/where-we-work">map of current restoration sites</a> (see the "Protection and restoration sites" section), FMR generally limits their work areas to the seven metro counties and the six DNR <a href="https://resources.gisdata.mn.gov/pub/gdrs/data/pub/us_mn_state_dnr/geos_dnr_watersheds/metadata/dnr_watersheds_dnr_level_04_huc_08_majors.html">Major Watersheds</a> intersecting the MNRRA (Lower Minnesota River, Mississippi River - Lake Pepin/St. Cloud/Twin Cities, North Fork Crow River, and Rum River).</p>
+
+            <p>Accordingly, to identify only landowners in the seven metro counties with land of interest to FMR, the SNACOA can be <a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/vectoroverlay.html#clip">clipped</a> to the seven metro counties, then by the six watersheds.</p>
+
+            <p>To identify the entities owning land best suited to conservation efforts, the clipped SNACOA can be <a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/gdal/vectorconversion.html#gdalrasterize">rasterized</a> (using a 10 meter by 10 meter resolution), used as an input to <a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#qgiszonalstatisticsfb">Zonal Statistics</a> in conjunction with the clipped parcel dataset, and <a href="https://docs.qgis.org/3.40/en/docs/user_manual/processing_algs/qgis/vectorgeneral.html#qgisexecutesql">queried with SQL</a> to identify the top 10 parcels with the largest areas with the most land of conservation interest.</p>
+
+            <p>The output of this workflow reveals the largest landowners with the most land critical to conservation are farmers (or landlords of farmland).</p>
+                        
+            <table>
+                <caption>Table 1: Top 10 Largest Parcels with Highest Priority for Conservation</caption>
+                <tr>
+                    <th colspan="2">Majority</th>
+                    <th colspan="2">Mean</th>
+                    <th colspan="2">Median</th>
+                </tr>
+                <tr>
+                    <th>Acreage</th>
+                    <th>Taxpayer</th>
+                    <th>Acreage</th>
+                    <th>Taxpayer</th>
+                    <th>Acreage</th>
+                    <th>Taxpayer</th>
+                </tr>
+                <tr>
+                    <td>483</td>
+                    <td>Sever Peterson Family Trust</td>
+                    <td>483</td>
+                    <td>Sever Peterson Family Trust</td>
+                    <td>483</td>
+                    <td>Sever Peterson Family Trust</td>
+
+                </tr>
+                <tr>
+                    <td>218</td>
+                    <td>P Farm Hdg #3 Lp And H Notermann Tr</td>
+                    <td>257</td>
+                    <td>Spring Meadow Inc</td>
+                    <td>218</td>
+                    <td>P Farm Hdg #3 Lp And H Notermann Tr</td>
+
+                </tr>
+                <tr>
+                    <td>214</td>
+                    <td>Cargill Inc</td>
+                    <td>218</td>
+                    <td>P Farm Hdg #3 Lp And H Notermann Tr</td>
+                    <td>214</td>
+                    <td>Cargill Inc</td>
+
+                </tr>
+                <tr>
+                    <td>155</td>
+                    <td>Minnesota Valley Lands LLC</td>
+                    <td>214</td>
+                    <td>Cargill Inc</td>
+                    <td>155</td>
+                    <td>Minnesota Valley Lands LLC</td>
+
+                </tr>
+                <tr>
+                    <td>154</td>
+                    <td>Mid America Festivals Corp</td>
+                    <td>155</td>
+                    <td>Minnesota Valley Lands LLC</td>
+                    <td>154</td>
+                    <td>Mid America Festivals Corp</td>
+
+                </tr>
+                <tr>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                    <td>154</td>
+                    <td>Mid America Festivals Corp</td>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                </tr>
+                <tr>
+                    <td>120</td>
+                    <td>Shakopee Mdewakanton Sioux Community (SMSC)</td>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                    <td>115</td>
+                    <td>Wellens Jr Charles A</td>
+                </tr>
+                <tr>
+                    <td>115</td>
+                    <td>Wellens Jr Charles A</td>
+                    <td>120</td>
+                    <td>SMSC</td>
+                    <td>111</td>
+                    <td>Merriam Properties LLC</td>
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td>Merriam Properties LLC</td>
+                    <td>116</td>
+                    <td>Tousley Douglas S [et al.]</td>
+                    <td>111</td>
+                    <td>Spring Hill Golf Club</td>
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td>Spring Hill Golf Club</td>
+                    <td>115</td>
+                    <td>Wellens Jr Charles A</td>
+                    <td>103</td>
+                    <td>MN Valley Lands Inc</td>
+                </tr>
+                
+            </table>
+            <figcaption><small>Table 1: The most likely owner is linked. "Majority/Mean/Median" refers to the Zonal Statistics calculation: majority is the most common cell value in the parcel, mean is the mean cell value in the parcel, and median is the median cell value in the parcel. "Acreage" refers to the parcel acreage as calculated by the county. "Taxpayer" is the entity paying property taxes for the parcel and is assumed to also be the property owner.</small></figcaption>
+            <br>
+            <details>
+                <summary>SQL Query used to generate these results</summary>
+                <p><code>
+                    SELECT * -- Return all columns from the selected feature layer<br>
+                    FROM input1 -- How the tool refers to its inputs; the number is iterated by one for each input<br>
+                    WHERE<br>
+                    [Zonal Statistics majority/mean/median field] > 4 AND -- 4 because that's the value associated with a "high" priority level in the SNACOA<br>
+                    (tax_name NOT LIKE '%north oaks%' AND tax_name NOT LIKE '%wildlife%' AND tax_name NOT LIKE '%natural resources%' AND tax_name NOT LIKE '%park district%' AND tax_name NOT LIKE '%city of%' AND tax_name NOT LIKE '%united states%' AND tax_name NOT LIKE '%state of%' AND tax_name NOT LIKE '%university%' AND tax_name NOT LIKE '%county%' AND tax_name NOT LIKE '%hennepin park%') -- removes taxpayers whose names indicate they're part of a governmental body since that's not the class of entities of interest<br>
+                    ORDER BY acres_poly DESC LIMIT 10 -- Return only the features with the top 10 largest surface areas by acres
+                </code></p>
+            </details><br>
+            <p>In the Majority columns, taxpayers <a href="https://www.eplocalnews.org/2022/06/23/from-corn-to-cannabis-the-peterson-family-farm-continues-to-grow-and-innovate/">Sever Peterson Family Trust</a>, P Farm Hdg #3 Lp And H Notermann Tr (possily "Peterson Farm Holding #3 LP and Howard Notermann Trust?"), seem to be agriculturally-related in some manner based on google searches and the land use of these parcels based on the 2023 FSA aerial imagery. <a href="https://www.cargill.com/">Cargill Inc</a> likely supports Cargill's river shipping operations (although there's no obvious current land use). Minnesota Valley Lands LLC is <a href="https://www.guidestar.org/profile/20-4162476">potentially</a> owned by the <a href="https://www.mnvalleytrust.org/">Minnesota Valley Land Trust</a>, <a href="https://www.mafestivals.com/about.html">Mid America Festivals Corp</a> operates the local Rennaisance Fair, <a href="https://www.valleyfair.com/">Valleyfair LLC</a> comprises half an amusement park, SMS comprises a <a href="https://dakotaprairiecomposting.com/about-us/">commercial composting initiative</a> owned and operated by the <a href="https://shakopeedakota.org/">SMSC</a>
+            
+            
+            
+            
+            
+            </p>
+            <p>But farmers often need their land freely available to grow crops and don't often have a lot of extra cash laying around to particpiate in habitat restoration. This is the output when farmers are removed from consideration:</p>
+
+            <table>
+                <caption>Table 2: Top 10 Largest Parcels with Highest Priority for Conservation, sans Farmers</caption>
+                <tr>
+                    <th colspan="2">Majority</th>
+                    <th colspan="2">Mean</th>
+                    <th colspan="2">Median</th>
+                </tr>
+                <tr>
+                    <th>Acreage</th>
+                    <th>Taxpayer</th>
+                    <th>Acreage</th>
+                    <th>Taxpayer</th>
+                    <th>Acreage</th>
+                    <th>Taxpayer</th>
+                </tr>
+                <tr>
+                    <td>214</td>
+                    <td>Cargill Inc</td>
+                    <td>214</td>
+                    <td>Cargill Inc</td>
+                    <td>214</td>
+                    <td>Cargill Inc</td>
+
+                </tr>
+                <tr>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+
+                </tr>
+                <tr>
+                    <td>120</td>
+                    <td>SMSC</td>
+                    <td>120</td>
+                    <td>SMSC</td>
+                    <td>111</td>
+                    <td>Merriam Properties LLC</td>
+
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td>Merriam Properties LLC</td>
+                    <td>111</td>
+                    <td>Merriam Properties LLC</td>
+                    <td>111</td>
+                    <td>Spring Hill Golf Club</td>
+
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td>Spring Hill Golf Club</td>
+                    <td>111</td>
+                    <td>Spring Hill Golf Club</td>
+                    <td>100</td>
+                    <td>Dem-Con Landfill LLC</td>
+
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>Dem-Con Landfill LLC</td>
+                    <td>98</td>
+                    <td>Brian J Colvin</td>
+                    <td>98</td>
+                    <td>Brian J Colvin</td>
+                </tr>
+                <tr>
+                    <td>98</td>
+                    <td>Brian J Colvin</td>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                    <td>125</td>
+                    <td>Valleyfair LLC</td>
+                </tr>
+                <tr>
+                    <td>95</td>
+                    <td>Valleyfair LLC</td>
+                    <td>92</td>
+                    <td>Riverbend Industrial LLC</td>
+                    <td>92</td>
+                    <td>Riverbend Industrial LLC</td>
+                </tr>
+                <tr>
+                    <td>92</td>
+                    <td>Riverbend Industrial LLC</td>
+                    <td>92</td>
+                    <td>Merriam Properties LLC</td>
+                    <td>92</td>
+                    <td>Merriam Properties LLC</td>
+                </tr>
+                <tr>
+                    <td>92</td>
+                    <td>Merriam Properties LLC</td>
+                    <td>85</td>
+                    <td>Mid America Festivals Corp</td>
+                    <td>85</td>
+                    <td>Mid America Festivals Corp</td>
+                </tr>
+                
+            </table>
+
+            <details>
+                <summary>SQL Query</summary>
+                <p><code>
+                    SELECT *<br>
+                    FROM input1<br>
+                    WHERE<br>
+                    [Zonal Statistics majority/mean/median field] > 4 AND<br>
+                    (tax_name NOT LIKE '%north oaks%' AND tax_name NOT LIKE '%wildlife%' AND tax_name NOT LIKE '%natural resources%' AND tax_name NOT LIKE '%park district%' AND tax_name NOT LIKE '%city of%' AND tax_name NOT LIKE '%united states%' AND tax_name NOT LIKE '%state of%' AND tax_name NOT LIKE '%university%' AND tax_name NOT LIKE '%county%' AND tax_name NOT LIKE '%hennepin park%') AND<br>
+                    (useclass1 NOT LIKE '%ag%' AND useclass1 NOT LIKE '%farm%') -- removes taxpayers whose names indicate they're agriculturally-related in some way<br>
+                    ORDER BY acres_poly DESC LIMIT 10</code></p>
+            </details><br>
+
+
+
+            
+        </section>
+        <footer>
+        <p><small>Theme from <a href="https://github.com/orderedlist/minimal">Minimal</a></small></p>
+        </footer>
+        
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+    </body>
+</html>
