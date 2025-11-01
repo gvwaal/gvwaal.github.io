@@ -200,6 +200,10 @@ var publicBookcases = {
 { "type": "Feature", "properties": { "fid": 196, "amenity": "public_bookcase", "brand": "Little Free Library", "Address": "3152 34th Ave S", "lon": -93.223339, "lat": 44.9450736 }, "geometry": { "type": "Point", "coordinates": [ -93.223339, 44.9450736 ] } },
 { "type": "Feature", "properties": { "fid": 197, "amenity": "public_bookcase", "brand": "Little Free Library", "Address": "3040 31st Ave S", "lon": -93.2272429, "lat": 44.9469488 }, "geometry": { "type": "Point", "coordinates": [ -93.2272429, 44.9469488 ] } },
 { "type": "Feature", "properties": { "fid": 198, "amenity": "public_bookcase", "brand": "Little Free Library", "Address": "3702 Lake St E", "lon": -93.2187788, "lat": 44.9484933 }, "geometry": { "type": "Point", "coordinates": [ -93.2187788, 44.9484933 ] } },
-{ "type": "Feature", "properties": { "fid": 199, "amenity": "public_bookcase", "brand": null, "Address": "3319 Snelling Ave", "lon": -93.2315457, "lat": 44.9423668 }, "geometry": { "type": "Point", "coordinates": [ -93.2315457, 44.942366799999988 ] } }
+{ "type": "Feature", "properties": { "fid": 199, "amenity": "public_bookcase", "brand": null, "Address": "3319 Snelling Ave", "lon": -93.2315457, "lat": 44.9423668 }, "geometry": { "type": "Point", "coordinates": [ -93.2315457, 44.942366799999988 ] } },
+{ "type": "Feature", "properties": { "fid": 199, "amenity": "public_bookcase", "brand": null, "Address": "4031 37th Ave S", "lon": -93.2190282, "lat": 44.929561 }, "geometry": { "type": "Point", "coordinates": [ -93.2190282, 44.929561 ] } },
+{ "type": "Feature", "properties": { "fid": 199, "amenity": "public_bookcase", "brand": null, "Address": "3936 37th Ave S", "lon": -93.2192673, "lat": 44.9313665 }, "geometry": { "type": "Point", "coordinates": [ -93.2192673, 44.9313665 ] } },
+{ "type": "Feature", "properties": { "fid": 199, "amenity": "public_bookcase", "brand": null, "Address": "3317 35th Ave S", "lon": -93.2215728, "lat": 44.9426416 }, "geometry": { "type": "Point", "coordinates": [ -93.2215728, 44.9426416 ] } },
+{ "type": "Feature", "properties": { "fid": 199, "amenity": "public_bookcase", "brand": null, "Address": "3027 40th Ave S", "lon": -93.215181, "lat": 44.9474694 }, "geometry": { "type": "Point", "coordinates": [ -93.215181, 44.9474694 ] } }
 ]
 }
