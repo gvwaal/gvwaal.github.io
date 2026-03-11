@@ -41,7 +41,6 @@
 			// Adds layers to map
 			const geojson2 = L.geoJson(boundary, {
 				style: style,
-				onEachFeature: onEachFeature
 			}).addTo(map);
 
 			const geojson = L.geoJson(parks20min, {
