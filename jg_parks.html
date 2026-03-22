@@ -49,6 +49,7 @@
 			}).addTo(map);
 
 			const parks = L.geoJson(parks20min, {
+				style: style_parks,
 				onEachFeature: onEachFeature_parks
 			}).addTo(map);
 
@@ -71,9 +72,6 @@
 			}
 
 			function onEachFeature_paths(feature, layer) {
-				layer.on({
-					click: zoomToFeature
-				});
 				let popupContent = `<p>${feature.properties.j_comments}</p>`;
 
 				if (feature.properties && feature.properties.popupContent) {
@@ -86,6 +84,14 @@
 			function style_isochrone(feature) {
 				return {
 					color: 'red',
+					weight: 3,
+					fillOpacity: 0,
+				}
+			}
+
+			function style_parks(feature) {
+				return {
+					color: 'blue',
 					weight: 3,
 					fillOpacity: 0,
 				}
