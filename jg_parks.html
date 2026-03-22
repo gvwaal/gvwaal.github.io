@@ -45,19 +45,20 @@
 
 			// Adds layers to map
 			const isochrone = L.geoJson(boundary, {
-				style: style,
+				style: style_isochrone
 			}).addTo(map);
 
 			const parks = L.geoJson(parks20min, {
-				onEachFeature: onEachFeature
+				onEachFeature: onEachFeature_parks
 			}).addTo(map);
 
 			const paths = L.geoJson(where_we_walked, {
-				onEachFeature: onEachFeature
+				style: style_paths,
+				onEachFeature: onEachFeature_paths
 			}).addTo(map);
 
 			// Adds behavior relating to layers (popups and zooming to feature on click)
-			function onEachFeature(feature, layer) {
+			function onEachFeature_parks(feature, layer) {
 				layer.on({
 					click: zoomToFeature
 				});
@@ -69,10 +70,30 @@
 				layer.bindPopup(popupContent);
 			}
 
-			// Adds styling for the 20 minute isochrone
-			function style(feature) {
+			function onEachFeature_paths(feature, layer) {
+				layer.on({
+					click: zoomToFeature
+				});
+				let popupContent = `<p>${feature.properties.j_comments}</p>`;
+
+				if (feature.properties && feature.properties.popupContent) {
+					popupContent += feature.properties.popupContent;
+				}
+				layer.bindPopup(popupContent);
+			}
+
+			// Adds styling for the layers
+			function style_isochrone(feature) {
 				return {
 					color: 'red',
+					weight: 3,
+					fillOpacity: 0,
+				}
+			}
+
+			function style_paths(feature) {
+				return {
+					color: 'green',
 					weight: 3,
 					fillOpacity: 0,
 				}
