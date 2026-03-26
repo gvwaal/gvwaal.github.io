@@ -27,7 +27,6 @@
 		<div id='map'></div>
 		<script type="text/javascript" src="plugins/leaflet/parks_20min.js"></script>
 		<script type="text/javascript" src="plugins/leaflet/boundary_20min.js"></script>
-		<script type="text/javascript" src="plugins/leaflet/parks_where_we_walked.js"></script>
 
 		<script type="text/javascript">
 			const map = L.map('map').setView([44.946488868731905, -93.21985018893679], 11);
@@ -39,27 +38,21 @@
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			}).addTo(map);
 
+			// Adds layers to map
+			const geojson2 = L.geoJson(boundary, {
+				style: style,
+			}).addTo(map);
+
+			const geojson = L.geoJson(parks20min, {
+				onEachFeature: onEachFeature
+			}).addTo(map);
+
 			function zoomToFeature(e) {
     			map.fitBounds(e.target.getBounds());
 			};
 
-			// Adds layers to map
-			const isochrone = L.geoJson(boundary, {
-				style: style_isochrone
-			}).addTo(map);
-
-			const parks = L.geoJson(parks20min, {
-				style: style_parks,
-				onEachFeature: onEachFeature_parks
-			}).addTo(map);
-
-			const paths = L.geoJson(where_we_walked, {
-				style: style_paths,
-				onEachFeature: onEachFeature_paths
-			}).addTo(map);
-
 			// Adds behavior relating to layers (popups and zooming to feature on click)
-			function onEachFeature_parks(feature, layer) {
+			function onEachFeature(feature, layer) {
 				layer.on({
 					click: zoomToFeature
 				});
@@ -71,35 +64,10 @@
 				layer.bindPopup(popupContent);
 			}
 
-			function onEachFeature_paths(feature, layer) {
-				let popupContent = `<p>${feature.properties.j_comments}</p>`;
-
-				if (feature.properties && feature.properties.popupContent) {
-					popupContent += feature.properties.popupContent;
-				}
-				layer.bindPopup(popupContent);
-			}
-
-			// Adds styling for the layers
-			function style_isochrone(feature) {
+			// Adds styling for the 20 minute isochrone
+			function style(feature) {
 				return {
 					color: 'red',
-					weight: 3,
-					fillOpacity: 0,
-				}
-			}
-
-			function style_parks(feature) {
-				return {
-					color: 'blue',
-					weight: 3,
-					fillOpacity: 0,
-				}
-			}
-
-			function style_paths(feature) {
-				return {
-					color: 'green',
 					weight: 3,
 					fillOpacity: 0,
 				}
